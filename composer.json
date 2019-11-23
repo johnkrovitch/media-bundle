@@ -18,7 +18,7 @@
         "pagerfanta/pagerfanta": "^2.1",
         "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/config": "^3.0 || ^4.0",
-        "symfony/dependency-injection": "^3.4.26 || ^4.1.12",
+        "symfony/dependency-injection": "^3.4.35 || ^4.1.12",
         "symfony/form": "^3.0 || ^4.0",
         "symfony/validator": "^3.0 || ^4.0",
         "symfony/yaml": "^3.0 || ^4.0"
