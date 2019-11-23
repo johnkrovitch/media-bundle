@@ -1,0 +1,3 @@
+services:
+    JK\MediaBundle\Factory\MediaFactory:
+        class: JK\MediaBundle\Factory\MediaFactory

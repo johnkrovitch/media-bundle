@@ -1,0 +1,24 @@
+<div class="cms-media-gallery">
+    <div class="card-group">
+        {% for media in medias %}
+        <div class="card">
+            <a href="#"
+               class="cms-media-image"
+               data-toggle="modal"
+               data-media-id="{{ media.id }}">
+                <img class="card-img-top"
+                     src="{{ cms_media_path(media) }}"
+                     alt="{{ media.name }} - {{ media.description }}"
+                     title="{{ media.name }} - {{ media.description }}"
+                     width="300"
+                     height="100"/>
+            </a>
+        </div>
+
+        {% if loop.index is divisible by (3) %}
+    </div>
+    <div class="card-group">
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>

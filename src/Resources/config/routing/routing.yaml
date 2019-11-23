@@ -1,0 +1,11 @@
+cms.media.add_image_modal:
+    path: /cms/media/add-image
+    defaults: {_controller: JK\MediaBundle\Controller\Media\GetTinyMceImageInsertModal}
+
+cms.media.edit_image_modal:
+    path: /cms/media/edit-image
+    defaults: {_controller: JK\MediaBundle\Controller\Media\GetTinyMceImageEditModal}
+
+cms.media.upload_ajax:
+    path: /cms/media/upload-ajax
+    defaults: {_controller: JK\MediaBundle\Controller\Media\UploadMediaAjax}

@@ -1,0 +1,9 @@
+services:
+    JK\MediaBundle\Upload\Uploader\Uploader:
+        class: JK\MediaBundle\Upload\Uploader\Uploader
+        arguments:
+            - '%jk_cms.article.thumbnail_path%'
+            - '@JK\MediaBundle\Factory\MediaFactory'
+            - '@Doctrine\ORM\EntityManagerInterface'
+
+    JK\MediaBundle\Upload\Uploader\UploaderInterface: '@JK\MediaBundle\Upload\Uploader\Uploader'

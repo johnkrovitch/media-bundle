@@ -1,0 +1,31 @@
+services:
+    JK\MediaBundle\Controller\Media\GetTinyMceImageEditModal:
+        class: JK\MediaBundle\Controller\Media\GetTinyMceImageEditModal
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            - '@twig'
+            - '@form.factory'
+
+    JK\MediaBundle\Controller\Media\GetTinyMceImageInsertModal:
+        class: JK\MediaBundle\Controller\Media\GetTinyMceImageInsertModal
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            - '@twig'
+            - '@form.factory'
+
+    JK\MediaBundle\Controller\Media\UploadMediaAjax:
+        class: JK\MediaBundle\Controller\Media\UploadMediaAjax
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            - '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
+
+    JK\MediaBundle\Controller\Media\Gallery:
+        class: JK\MediaBundle\Controller\Media\Gallery
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            - '@twig'
+            - '@JK\MediaBundle\Repository\MediaRepository'
