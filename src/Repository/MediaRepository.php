@@ -2,19 +2,19 @@
 
 namespace JK\MediaBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
-use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Exception;
+use JK\Repository\AbstractRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
-class MediaRepository extends ServiceEntityRepository
+class MediaRepository extends AbstractRepository
 {
-    public function __construct(Registry $registry)
+    public function getEntityClass(): string
     {
-        parent::__construct($registry, Media::class);
+        return Media::class;
     }
 
     /**
@@ -37,10 +37,9 @@ class MediaRepository extends ServiceEntityRepository
         return $media;
     }
 
-    public function findAll()
+    public function findAll(): Collection
     {
-        return $this
-            ->findBy([], [
+        return parent::findBy([], [
                 'updatedAt' => 'DESC',
             ])
         ;
@@ -59,11 +58,5 @@ class MediaRepository extends ServiceEntityRepository
         $pager->setCurrentPage($page);
 
         return $pager;
-    }
-
-    public function save(MediaInterface $media): void
-    {
-        $this->_em->persist($media);
-        $this->_em->flush();
     }
 }

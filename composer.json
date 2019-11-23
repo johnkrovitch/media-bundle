@@ -14,6 +14,7 @@
         "php": "^7.2",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/orm": "^2.7",
+        "johnkrovitch/repository": "^0.1.0",
         "oneup/uploader-bundle": "^2.1",
         "pagerfanta/pagerfanta": "^2.1",
         "stof/doctrine-extensions-bundle": "^1.3",
