@@ -2,10 +2,11 @@
 
 namespace JK\MediaBundle\Upload\Uploader;
 
-use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Factory\MediaFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use JK\MediaBundle\Repository\MediaRepositoryInterface;
+use LAG\Component\StringUtils\StringUtils;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -14,7 +15,7 @@ class Uploader implements UploaderInterface
     /**
      * @var string
      */
-    private $thumbnailUploadDirectory;
+    private $uploadDirectory;
 
     /**
      * @var Filesystem
@@ -24,22 +25,34 @@ class Uploader implements UploaderInterface
     /**
      * @var MediaFactoryInterface
      */
-    private $mediaFactory;
+    private $factory;
 
     /**
      * @var EntityManagerInterface
      */
     private $entityManager;
 
+    /**
+     * @var array
+     */
+    private $mapping;
+
+    /**
+     * @var MediaRepositoryInterface
+     */
+    private $repository;
+
     public function __construct(
-        string $thumbnailUploadDirectory,
-        MediaFactoryInterface $mediaFactory,
-        EntityManagerInterface $entityManager
+        string $uploadDirectory,
+        MediaFactoryInterface $factory,
+        MediaRepositoryInterface $repository,
+        array $mapping = []
     ) {
-        $this->thumbnailUploadDirectory = $thumbnailUploadDirectory;
+        $this->uploadDirectory = $uploadDirectory;
         $this->fileSystem = new Filesystem();
-        $this->mediaFactory = $mediaFactory;
-        $this->entityManager = $entityManager;
+        $this->factory = $factory;
+        $this->mapping = $mapping;
+        $this->repository = $repository;
     }
 
     public function upload(UploadedFile $uploadedFile, string $type): void
@@ -54,8 +67,8 @@ class Uploader implements UploaderInterface
         $file = $uploadedFile->move($uploadDirectory, uniqid().'.'.$uploadedFile->guessExtension());
 
         // Create the associated media
-        $media = $this->mediaFactory->create($file, $type);
-        $this->entityManager->persist($media);
+        $media = $this->factory->create($file, $type);
+        $this->repository->save($media);
         $this->entityManager->flush();
     }
 
@@ -68,10 +81,15 @@ class Uploader implements UploaderInterface
      */
     private function getUploadDirectory(string $type): string
     {
-        if (MediaInterface::TYPE_ARTICLE_THUMBNAIL === $type) {
-            return $this->thumbnailUploadDirectory;
+        if (!key_exists($type, $this->mapping)) {
+            throw new Exception('The media type "'.$type.'" is not valid : no mapping available');
+        }
+        $directory = $this->uploadDirectory;
+
+        if (!StringUtils::endsWith($directory, '/')) {
+            $directory .= '/';
         }
 
-        throw new Exception('The media type "'.$type.'" is not valid');
+        return $directory.$this->mapping[$type];
     }
 }

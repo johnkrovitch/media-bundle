@@ -1,3 +1,5 @@
 services:
     JK\MediaBundle\Factory\MediaFactory:
         class: JK\MediaBundle\Factory\MediaFactory
+
+    JK\MediaBundle\Factory\MediaFactoryInterface: '@JK\MediaBundle\Factory\MediaFactory'
