@@ -12,15 +12,15 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('jk_media');
+        $treeBuilder = new TreeBuilder('jk_media');
 
-        $rootNode
+        $treeBuilder
+            ->getRootNode()
             ->children()
-                ->arrayNode('article')
-                    ->children()
-                        ->scalarNode('thumbnail_path')
-                        ->end()
+                ->scalarNode('upload_path')->defaultValue('%kernel.project_dir%/public/uploads')->end()
+                ->arrayNode('mapping')
+                    ->defaultValue([])
+                    ->scalarPrototype()
                     ->end()
                 ->end()
             ->end()

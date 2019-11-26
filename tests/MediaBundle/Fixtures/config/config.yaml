@@ -1,0 +1,43 @@
+framework:
+    secret: secret
+    test: ~
+    router:
+        resource: '%kernel.root_dir%/routing.yml'
+    form: true
+    csrf_protection: false
+    validation:
+      enable_annotations: false
+    session:
+        storage_id: session.storage.filesystem
+
+twig: ~
+
+oneup_uploader:
+    mappings:
+        media_gallery:
+            frontend: blueimp
+            storage:
+                directory: '%kernel.root_dir%/../web/uploads/gallery'
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        server_version: '5.7'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+        url: '%env(DATABASE_URL)%'
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App

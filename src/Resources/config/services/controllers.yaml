@@ -1,31 +1,31 @@
 services:
-    JK\MediaBundle\Controller\Media\GetTinyMceImageEditModal:
-        class: JK\MediaBundle\Controller\Media\GetTinyMceImageEditModal
+    JK\MediaBundle\Action\TinyMce\GetUpdateModal:
+        class: JK\MediaBundle\Action\TinyMce\GetUpdateModal
         tags:
             - 'controller.service_arguments'
         arguments:
-            - '@twig'
-            - '@form.factory'
+            $environment: '@twig'
+            $formFactory: '@form.factory'
 
-    JK\MediaBundle\Controller\Media\GetTinyMceImageInsertModal:
-        class: JK\MediaBundle\Controller\Media\GetTinyMceImageInsertModal
+    JK\MediaBundle\Action\TinyMce\GetImageModal:
+        class: JK\MediaBundle\Action\TinyMce\GetImageModal
         tags:
             - 'controller.service_arguments'
         arguments:
-            - '@twig'
-            - '@form.factory'
+            $environment: '@twig'
+            $formFactory: '@form.factory'
 
-    JK\MediaBundle\Controller\Media\UploadMediaAjax:
-        class: JK\MediaBundle\Controller\Media\UploadMediaAjax
+    JK\MediaBundle\Action\Media\UploadMediaAjaxAction:
+        class: JK\MediaBundle\Action\Media\UploadMediaAjaxAction
         tags:
             - 'controller.service_arguments'
         arguments:
-            - '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
+            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
 
-    JK\MediaBundle\Controller\Media\Gallery:
-        class: JK\MediaBundle\Controller\Media\Gallery
+    JK\MediaBundle\Action\Gallery\ShowGalleryAction:
+        class: JK\MediaBundle\Action\Gallery\ShowGalleryAction
         tags:
             - 'controller.service_arguments'
         arguments:
-            - '@twig'
-            - '@JK\MediaBundle\Repository\MediaRepository'
+            $environment: '@twig'
+            $repository: '@JK\MediaBundle\Repository\MediaRepository'

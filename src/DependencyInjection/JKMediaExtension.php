@@ -17,6 +17,9 @@ class JKMediaExtension extends Extension
         $loader->load('services.yaml');
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('jk_media.upload_path', $config['upload_path']);
+        $container->setParameter('jk_media.mapping', $config['mapping']);
     }
 
     public function getAlias()

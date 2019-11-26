@@ -10,7 +10,7 @@ use JK\Repository\AbstractRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
-class MediaRepository extends AbstractRepository
+class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
 {
     public function getEntityClass(): string
     {
@@ -24,7 +24,7 @@ class MediaRepository extends AbstractRepository
      *
      * @throws Exception
      */
-    public function create()
+    public function create(): MediaInterface
     {
         $className = $this->getClassName();
 
@@ -45,7 +45,7 @@ class MediaRepository extends AbstractRepository
         ;
     }
 
-    public function findPagination($page = 1, $maxPerPage = 9)
+    public function findPagination($page = 1, $maxPerPage = 9): Pagerfanta
     {
         $queryBuilder = $this
             ->createQueryBuilder('media')

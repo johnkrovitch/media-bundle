@@ -1,0 +1,6 @@
+services:
+    JK\MediaBundle\Repository\MediaRepository:
+        arguments:
+            $registry: '@doctrine'
+
+    JK\MediaBundle\Repository\MediaRepositoryInterface: '@JK\MediaBundle\Repository\MediaRepository'
