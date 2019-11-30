@@ -33,6 +33,7 @@ class JKMediaBundleTest extends TestCase
                 continue;
             }
             $this->assertTrue($container->has($id), 'The service "'.$id.'" is not found');
+            $container->get($id);
         }
     }
 }
