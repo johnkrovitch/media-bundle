@@ -2,8 +2,8 @@
 
 namespace JK\MediaBundle\Form\Type;
 
-use JK\MediaBundle\Entity\Media;
 use Doctrine\ORM\EntityRepository;
+use JK\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,7 +22,7 @@ class GalleryType extends AbstractType
                         ->createQueryBuilder('media')
                         ->orderBy('media.updatedAt', 'desc')
                     ;
-                }
+                },
             ])
         ;
     }

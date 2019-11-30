@@ -2,9 +2,9 @@
 
 namespace JK\MediaBundle\Upload\Uploader;
 
-use JK\MediaBundle\Factory\MediaFactoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use JK\MediaBundle\Factory\MediaFactoryInterface;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use LAG\Component\StringUtils\StringUtils;
 use Symfony\Component\Filesystem\Filesystem;
@@ -73,10 +73,6 @@ class Uploader implements UploaderInterface
     }
 
     /**
-     * @param string $type
-     *
-     * @return string
-     *
      * @throws Exception
      */
     private function getUploadDirectory(string $type): string

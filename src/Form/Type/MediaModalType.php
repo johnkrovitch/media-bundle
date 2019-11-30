@@ -18,10 +18,6 @@ class MediaModalType extends AbstractType
     const ALIGNMENT_NONE = 'none';
     const ALIGNMENT_FIT_TO_WIDTH = 'fit_to_width';
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

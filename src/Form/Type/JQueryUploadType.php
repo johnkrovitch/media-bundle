@@ -36,9 +36,6 @@ class JQueryUploadType extends AbstractType
 
     /**
      * JQueryUploadType constructor.
-     *
-     * @param UploaderHelper          $uploaderHelper
-     * @param JQueryUploadTransformer $mediaUploadTransformer
      */
     public function __construct(
         UploaderHelper $uploaderHelper,
@@ -48,10 +45,6 @@ class JQueryUploadType extends AbstractType
         $this->mediaUploadTransformer = $mediaUploadTransformer;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

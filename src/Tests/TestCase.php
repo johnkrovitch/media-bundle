@@ -9,9 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
-     * Assert that the given service class is configured in the services.yaml
-     *
-     * @param string $serviceClass
+     * Assert that the given service class is configured in the services.yaml.
      */
     protected function assertServiceExists(string $serviceClass)
     {
