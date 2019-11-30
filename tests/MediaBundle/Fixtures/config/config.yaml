@@ -10,6 +10,7 @@ framework:
     session:
         storage_id: session.storage.filesystem
 
+
 twig: ~
 
 oneup_uploader:
@@ -29,7 +30,7 @@ doctrine:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
 
-        url: '%env(DATABASE_URL)%'
+        url: url
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -41,3 +42,10 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+
+services:
+    serializer:
+        synthetic: true
+
+    translator.logging.inner:
+        synthetic: true
