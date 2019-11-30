@@ -10,6 +10,7 @@ tests.integration:
 # PHPUnit
 phpunit.run:
 	bin/phpunit
+	@echo "Results file generated file://$(shell pwd)/var/phpunit/coverage/index.html"
 
 .PHONY: php-cs-fixer.install php-cs-fixer.run phpstan.run
 # php-cs-fixer

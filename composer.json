@@ -14,7 +14,6 @@
         "php": "^7.2",
         "johnkrovitch/orm-pack": "^0.1",
         "lag/string-utils": "^1.2",
-        "oneup/uploader-bundle": "^2.1",
         "symfony/form": "^3.0|^4.0",
         "symfony/validator": "^3.0|^4.0",
         "symfony/yaml": "^3.0|^4.0"

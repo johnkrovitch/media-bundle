@@ -24,12 +24,11 @@ class TestKernel extends Kernel
         $bundles = [
             // Dependencies
             new FrameworkBundle(),
-
             new DoctrineBundle(),
             new TwigBundle(),
+
             // My Bundle to test
             new JKMediaBundle(),
-            new OneupUploaderBundle(),
         ];
 
         return $bundles;
