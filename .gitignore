@@ -3,3 +3,4 @@ composer.lock
 /bin/
 /.phpunit.result.cache
 /var
+.php_cs.cache

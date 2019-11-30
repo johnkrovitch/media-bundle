@@ -9,6 +9,5 @@ class MediaEmbedded extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
     }
 }

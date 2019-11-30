@@ -3,9 +3,9 @@
 namespace JK\MediaBundle\Repository;
 
 use Doctrine\Common\Collections\Collection;
+use Exception;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
-use Exception;
 use JK\Repository\AbstractRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -19,8 +19,6 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
 
     /**
      * Return a new instance of the configured Media class.
-     *
-     * @return MediaInterface
      *
      * @throws Exception
      */

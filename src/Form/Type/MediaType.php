@@ -56,7 +56,7 @@ class MediaType extends AbstractType
             ->add('file', FileType::class, [
                 'attr' => [
                     'class' => 'fileupload-input',
-                    'data-upload-url' => $this->router->generate('cms.media.upload_ajax')
+                    'data-upload-url' => $this->router->generate('cms.media.upload_ajax'),
                 ],
                 'label' => false,
                 'mapped' => false,

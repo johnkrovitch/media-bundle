@@ -18,8 +18,6 @@ class JQueryUploadTransformer implements DataTransformerInterface
 
     /**
      * JQueryUploadTransformer constructor.
-     *
-     * @param MediaRepository $mediaRepository
      */
     public function __construct(MediaRepository $mediaRepository)
     {

@@ -2,9 +2,9 @@
 
 namespace JK\MediaBundle\Form\Transformer;
 
+use InvalidArgumentException;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Repository\MediaRepository;
-use InvalidArgumentException;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -33,17 +33,14 @@ class MediaTransformer implements DataTransformerInterface
                 $type = get_class($value);
             }
 
-            throw new InvalidArgumentException(
-                'The value should be an instance of '.MediaInterface::class.', given '.$type
-            );
+            throw new InvalidArgumentException('The value should be an instance of '.MediaInterface::class.', given '.$type);
         }
 
         if (0 === $value->getId()) {
             return null;
         }
 
-       return $value;
-
+        return $value;
     }
 
     public function reverseTransform($value)
