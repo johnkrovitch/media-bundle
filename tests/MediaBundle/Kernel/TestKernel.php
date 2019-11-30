@@ -29,7 +29,6 @@ class TestKernel extends Kernel
 
             // My Bundle to test
             new JKMediaBundle(),
-            new OneupUploaderBundle(),
         ];
 
         return $bundles;

@@ -13,13 +13,6 @@ framework:
 
 twig: ~
 
-oneup_uploader:
-    mappings:
-        media_gallery:
-            frontend: blueimp
-            storage:
-                directory: '%kernel.root_dir%/../web/uploads/gallery'
-
 doctrine:
     dbal:
         # configure these for your database server
