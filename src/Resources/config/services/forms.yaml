@@ -16,6 +16,10 @@ services:
         tags:
             - {name: form.type}
 
+    JK\MediaBundle\Form\Type\TinyMceType:
+        tags:
+            - {name: form.type}
+
     ### Form Transformers ###
     JK\MediaBundle\Form\Transformer\JQueryUploadTransformer:
         class: JK\MediaBundle\Form\Transformer\JQueryUploadTransformer
