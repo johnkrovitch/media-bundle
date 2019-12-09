@@ -2,12 +2,15 @@
 
 namespace JK\MediaBundle\Form\Type;
 
+use JK\MediaBundle\Validation\Constraints\UploadTypeConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TinyMceImageInsertType extends AbstractType
+class UploadModalType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,19 +22,28 @@ class TinyMceImageInsertType extends AbstractType
                     'class' => 'media-choice',
                 ],
             ])
-            ->add('upload', JQueryUploadType::class, [
+            ->add('upload', FileType::class, [
                 'attr' => [
                     'class' => MediaType::UPLOAD_FROM_COMPUTER,
                 ],
                 'label' => false,
-                'end_point' => 'article_content',
+                //'end_point' => 'article_content',
                 'required' => false,
-                'media_target' => 'modal-media-hidden-target',
+                //'media_target' => 'modal-media-hidden-target',
             ])
             ->add('gallery', HiddenType::class, [
-                'attr' => [
-                    'class' => 'gallery-hidden-input',
+            ])
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'constraints' => [
+                    new UploadTypeConstraint(),
                 ],
+                'label' => false,
             ])
         ;
     }

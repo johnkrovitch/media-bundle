@@ -3,7 +3,6 @@
 namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\Form\Transformer\JQueryUploadTransformer;
-use Oneup\UploaderBundle\Templating\Helper\UploaderHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -20,11 +19,6 @@ class JQueryUploadType extends AbstractType
     const UPLOAD_TYPE_FROM_URL = 'upload.from_url';
 
     /**
-     * @var UploaderHelper
-     */
-    protected $uploaderHelper;
-
-    /**
      * @var JQueryUploadTransformer
      */
     protected $mediaUploadTransformer;
@@ -34,26 +28,12 @@ class JQueryUploadType extends AbstractType
      */
     protected $useMediaLibrary;
 
-//    /**
-//     * JQueryUploadType constructor.
-//     */
-//    public function __construct(
-//        UploaderHelper $uploaderHelper,
-//        JQueryUploadTransformer $mediaUploadTransformer
-//    ) {
-//        $this->uploaderHelper = $uploaderHelper;
-//        $this->mediaUploadTransformer = $mediaUploadTransformer;
-//    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('upload', FileType::class, [
                 'attr' => [
-                    'class' => 'cms-fileupload',
-                    'data-url' => $this
-                        ->uploaderHelper
-                        ->endpoint($options['end_point']),
+                    'class' => 'media-file-upload',
                     'data-target' => '.'.$options['media_target'],
                 ],
                 'label' => 'cms.media.upload_from_computer',

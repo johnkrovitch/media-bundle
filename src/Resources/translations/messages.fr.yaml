@@ -1,0 +1,20 @@
+media:
+    gallery_modal:
+        title: Choisir une ou plusieurs images
+        cancel: Annuler
+        submit: Ajouter la gallerie
+        help: Vous pouvez sélectionner jusqu'à trois images. Cliquez sur une image pour la selectionner ou la déselectionner.
+
+    gallery:
+        add: Ajouter une gallerie
+        loading_in_progress: Chargement en cours...
+        open: Ouvrir
+
+    image:
+        add: Ajouter une image
+        add_thumbnail: Ajouter une miniature
+        restore_thumbnail: Restaurer la miniature
+        remove_thumbnail: Supprimer la miniature
+        upload_from_computer:  Uploader un fichier de l'ordinateur
+        upload_from_url: Télécharger depuis une url
+        choose_from_collection: Choisir dans la gallerie

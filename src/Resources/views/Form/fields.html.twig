@@ -2,8 +2,8 @@
     <div class="media-form-container">
         <div class="media-form-preview">
             {% if form.vars.data and form.vars.data.id and form.vars.data.type is defined %}
-                {% set mediaUrl = cms_media_directory('media_gallery') %}
-                {% set mediaUrl = cms_media_directory(form.vars.data.type) ~ '/' ~ form.vars.data.filename %}
+                {% set mediaUrl = media_directory('media_gallery') %}
+                {% set mediaUrl = media_directory(form.vars.data.type) ~ '/' ~ form.vars.data.filename %}
 
                 <img src="{{ mediaUrl | imagine_filter('media_gallery') }}" class="media-target" alt="Uploaded image" />
                 <br/>
@@ -36,7 +36,7 @@
         <span class="upload-message d-none"></span>
 
         {% if media and media.id != 0 %}
-            {% set url = cms_media_path(media) %}
+            {% set url = media_path(media) %}
         {% endif %}
 
             <a href="#"
@@ -52,18 +52,18 @@
 
             <a href="#"
                class="cms-media-clear{% if not hasValidMedia %} d-none{% endif %}">
-                {{ 'cms.article.remove_thumbnail' | trans }}
+                {{ 'media.image.remove_thumbnail' | trans }}
             </a>
 
             <a href="#"
                class="cms-media-restore d-none"
                data-media-id="{{ media.id | default('') }}">
-                {{ 'cms.article.restore_thumbnail' | trans }}
+                {{ 'media.image.restore_thumbnail' | trans }}
             </a>
 
             <a href="#"
                class="cms-add-media{% if hasValidMedia %} d-none{% endif %}">
-                {{ 'cms.article.add_thumbnail' | trans }}
+                {{ 'media.image.add_thumbnail' | trans }}
             </a>
 
             {# Image in huge size #}
@@ -96,7 +96,7 @@
                        href="#home"
                        role="tab" aria-controls="home"
                        aria-selected="true">
-                        {{ 'cms.media.upload_from_computer' | trans }}
+                        {{ 'media.image.upload_from_computer' | trans }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -107,7 +107,7 @@
                        role="tab"
                        aria-controls="profile"
                        aria-selected="false">
-                        {{ 'cms.media.upload_from_url' | trans }}
+                        {{ 'media.image.upload_from_url' | trans }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -118,7 +118,7 @@
                        role="tab"
                        aria-controls="contact"
                        aria-selected="false">
-                        {{ 'cms.media.choose_from_collection' | trans }}
+                        {{ 'media.image.choose_from_collection' | trans }}
                     </a>
                 </li>
             </ul>
@@ -143,9 +143,9 @@
                     <a href="#"
                        class="cms-media-modal-link"
                        data-toggle="modal"
-                       data-url="{{ path('cms.media.gallery.content') }}"
+                       data-url="{{ path('media.gallery.content') }}"
                        data-target="#cms-modal">
-                        {{ 'cms.media.open_gallery' | trans }}
+                        {{ 'media.gallery.open' | trans }}
                     </a>
                 </div>
             </div>

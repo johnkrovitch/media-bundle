@@ -43,7 +43,7 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
         ;
     }
 
-    public function findPagination($page = 1, $maxPerPage = 9): Pagerfanta
+    public function paginate($page = 1, $maxPerPage = 9): Pagerfanta
     {
         $queryBuilder = $this
             ->createQueryBuilder('media')

@@ -12,16 +12,19 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^7.2",
-        "johnkrovitch/orm-pack": "^0.1",
+        "johnkrovitch/orm-pack": "^0.2",
         "lag/string-utils": "^1.2",
+        "liip/imagine-bundle": "^2.2",
         "symfony/form": "^3.0|^4.0",
+        "symfony/framework-bundle": "^3.0|^4.0",
         "symfony/validator": "^3.0|^4.0",
         "symfony/yaml": "^3.0|^4.0"
     },
     "require-dev": {
         "phpstan/phpstan-shim": "^0.11.19",
         "phpunit/phpunit": "^8.4",
-        "symfony/phpunit-bridge": "^3.0|^4.0|^5.0"
+        "symfony/phpunit-bridge": "^3.0|^4.0|^5.0",
+        "symfony/webpack-encore-bundle": "^1.7"
     },
     "autoload": {
         "psr-4": {

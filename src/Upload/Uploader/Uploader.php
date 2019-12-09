@@ -2,8 +2,8 @@
 
 namespace JK\MediaBundle\Upload\Uploader;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Factory\MediaFactoryInterface;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use LAG\Component\StringUtils\StringUtils;
@@ -28,11 +28,6 @@ class Uploader implements UploaderInterface
     private $factory;
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
      * @var array
      */
     private $mapping;
@@ -55,7 +50,7 @@ class Uploader implements UploaderInterface
         $this->repository = $repository;
     }
 
-    public function upload(UploadedFile $uploadedFile, string $type): void
+    public function upload(UploadedFile $uploadedFile, string $type): MediaInterface
     {
         // Get the upload directory according to the wanted media type
         $uploadDirectory = $this->getUploadDirectory($type);
@@ -69,7 +64,8 @@ class Uploader implements UploaderInterface
         // Create the associated media
         $media = $this->factory->create($file, $type);
         $this->repository->save($media);
-        $this->entityManager->flush();
+
+        return $media;
     }
 
     /**

@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">{{ 'cms.gallery.add_image' | trans }}</h4>
+        <h4 class="modal-title">{{ 'media.gallery.add' | trans }}</h4>
         <button type="button"
                 class="close"
                 data-dismiss="modal"
@@ -8,9 +8,10 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form action="{{ path('cms.media.add_image_modal') }}"
+    <form action="{{ path('media.add_image_modal') }}"
           method="post"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+          class="media-upload-form">
         <div class="modal-body">
             <div class="row">
                 <div id="image-form-container" class="col-lg-12">
@@ -20,17 +21,15 @@
                         {{ form_row(form.uploadType) }}
                     </div>
 
-                    <div class="form-group hidden media-choice-item">
-                        {#{{ form_row(form.url) }}#}
-                    </div>
-
-                    <div class="form-group hidden media-choice-item">
+                    <div class="form-group hidden media-choice-item"
+                         data-src="upload_from_computer">
                         {{ form_row(form.upload) }}
                     </div>
 
-                    <div class="form-group hidden media-choice-item media-gallery-item"
-                         data-target="{{ path('cms.media.gallery.ajax') }}">
-                        {{ 'cms.main.loading_in_progress' | trans }}
+                    <div class="form-group hidden media-choice-item media-gallery-container"
+                         data-url="{{ path('media.gallery.content') }}"
+                         data-src="choose_from_collection">
+                        {{ 'media.gallery.loading_in_progress' | trans }}
                     </div>
                 </div>
             </div>
@@ -40,10 +39,10 @@
 
             <button type="button"
                     class="btn btn-default"
-                    data-dismiss="modal">{{ 'cms.main.cancel' | trans }}</button>
+                    data-dismiss="modal">{{ 'media.gallery_modal.cancel' | trans }}</button>
             <input type="submit"
                    id="add-image-btn"
-                   value="{{ 'cms.gallery.add_image' | trans }}"
+                   value="{{ 'media.image.add' | trans }}"
                    class="btn btn-primary"/>
         </div>
     </form>

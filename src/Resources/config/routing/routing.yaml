@@ -1,11 +1,22 @@
-cms.media.add_image_modal:
-    path: /cms/media/add-image
-    defaults: {_controller: JK\MediaBundle\Controller\Media\GetTinyMceImageInsertModal}
+# Media Modal
+media.add_image_modal:
+    path: /media/add-image
+    controller: JK\MediaBundle\Action\TinyMce\GetImageModal
 
-cms.media.edit_image_modal:
-    path: /cms/media/edit-image
-    defaults: {_controller: JK\MediaBundle\Controller\Media\GetTinyMceImageEditModal}
+media.edit_image_modal:
+    path: /media/edit-image
+    controller: JK\MediaBundle\Action\TinyMce\GetImageModal
 
-cms.media.upload_ajax:
-    path: /cms/media/upload-ajax
-    defaults: {_controller: JK\MediaBundle\Controller\Media\UploadMediaAjax}
+# Media Upload
+media.upload_ajax:
+    path: /media/upload-ajax
+    controller: JK\MediaBundle\Action\Media\UploadMediaAjaxAction
+
+# Media Gallery
+media.gallery_modal:
+    path: /media/gallery/modal
+    controller: JK\MediaBundle\Action\Gallery\ModalAction
+
+media.gallery.content:
+    path: /media/gallery/content
+    controller: JK\MediaBundle\Action\Gallery\ShowGalleryAction

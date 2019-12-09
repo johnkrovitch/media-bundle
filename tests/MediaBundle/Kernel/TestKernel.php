@@ -5,7 +5,7 @@ namespace JK\MediaBundle\Tests\Kernel;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use JK\MediaBundle\JKMediaBundle;
 use JK\MediaBundle\Tests\DependencyInjection\PublicServicePass;
-use Oneup\UploaderBundle\OneupUploaderBundle;
+use Liip\ImagineBundle\LiipImagineBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -26,6 +26,7 @@ class TestKernel extends Kernel
             new FrameworkBundle(),
             new DoctrineBundle(),
             new TwigBundle(),
+            new LiipImagineBundle(),
 
             // My Bundle to test
             new JKMediaBundle(),

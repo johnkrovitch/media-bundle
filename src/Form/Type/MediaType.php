@@ -31,7 +31,6 @@ class MediaType extends AbstractType
     public static function getUploadChoices(): array
     {
         return [
-            'cms.media.upload_from_url' => MediaType::UPLOAD_FROM_URL,
             'cms.media.upload_from_computer' => MediaType::UPLOAD_FROM_COMPUTER,
             'cms.media.choose_from_collection' => MediaType::CHOOSE_FROM_COLLECTION,
         ];
@@ -56,7 +55,7 @@ class MediaType extends AbstractType
             ->add('file', FileType::class, [
                 'attr' => [
                     'class' => 'fileupload-input',
-                    'data-upload-url' => $this->router->generate('cms.media.upload_ajax'),
+                    'data-upload-url' => $this->router->generate('media.upload_ajax'),
                 ],
                 'label' => false,
                 'mapped' => false,
