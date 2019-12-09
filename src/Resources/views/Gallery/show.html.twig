@@ -1,24 +1,34 @@
-<div class="cms-media-gallery">
-    <div class="card-group">
-        {% for media in medias %}
-        <div class="card">
-            <a href="#"
-               class="cms-media-image"
-               data-toggle="modal"
-               data-media-id="{{ media.id }}">
-                <img class="card-img-top"
-                     src="{{ cms_media_path(media) }}"
-                     alt="{{ media.name }} - {{ media.description }}"
-                     title="{{ media.name }} - {{ media.description }}"
-                     width="300"
-                     height="100"/>
-            </a>
-        </div>
+<div class="media-gallery">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-group">
+                {% for media in medias %}
+                <div class="card">
+                    <a href="#"
+                       class="cms-media-image"
+                       data-toggle="modal"
+                       data-media-id="{{ media.id }}">
+                        <img class="card-img-top"
+                             src="{{ media_path(media) }}"
+                             alt="{{ media.name }} - {{ media.description }}"
+                             title="{{ media.name }} - {{ media.description }}"
+                             width="300"
+                             height="100"/>
+                    </a>
+                </div>
 
-        {% if loop.index is divisible by (3) %}
+                {% if loop.index is divisible by (3) %}
+            </div>
+            <div class="card-group">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="card-group">
-        {% endif %}
-        {% endfor %}
+
+    <div class="row">
+        <div class="col-md-12 mt-2 pagination">
+            {{ pagerfanta(medias, 'twitter_bootstrap4_translated') }}
+        </div>
     </div>
 </div>

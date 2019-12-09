@@ -14,6 +14,7 @@ services:
         arguments:
             $environment: '@twig'
             $formFactory: '@form.factory'
+            $handler: '@JK\MediaBundle\Handler\Form\AddImageHandler'
 
     JK\MediaBundle\Action\Media\UploadMediaAjaxAction:
         class: JK\MediaBundle\Action\Media\UploadMediaAjaxAction
@@ -29,3 +30,12 @@ services:
         arguments:
             $environment: '@twig'
             $repository: '@JK\MediaBundle\Repository\MediaRepository'
+
+    JK\MediaBundle\Action\Gallery\ModalAction:
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            $environment: '@Twig\Environment'
+            $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
+            $repository: '@JK\MediaBundle\Repository\MediaRepository'
+            $handler: '@JK\MediaBundle\Handler\Form\Tinymce\AddGalleryHandler'

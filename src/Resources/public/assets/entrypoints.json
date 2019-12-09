@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "media": {
+      "css": [
+        "/bundles/jkmedia/assets/media.css"
+      ],
+      "js": [
+        "/bundles/jkmedia/assets/media.js"
+      ]
+    }
+  }
+}

@@ -2,28 +2,27 @@
 
 namespace JK\MediaBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
-use JK\MediaBundle\Entity\Media;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GalleryType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $builder
-            ->add('media', EntityType::class, [
-                'class' => Media::class,
-                'choice_label' => 'name',
-                'expanded' => true,
-                'query_builder' => function (EntityRepository $repository) {
-                    return $repository
-                        ->createQueryBuilder('media')
-                        ->orderBy('media.updatedAt', 'desc')
-                    ;
-                },
+        $resolver
+            ->setDefaults([
+                'attr' => [
+                    'class' => 'media-gallery-input',
+                ],
+                'multiple' => false,
             ])
+            ->setAllowedTypes('multiple', 'boolean')
         ;
+    }
+
+    public function getParent()
+    {
+        return HiddenType::class;
     }
 }

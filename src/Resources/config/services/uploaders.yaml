@@ -5,6 +5,6 @@ services:
             $uploadDirectory: '%jk_media.upload_path%'
             $factory: '@JK\MediaBundle\Factory\MediaFactoryInterface'
             $repository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-            $mapping: []
+            $mapping: '%jk_media.mapping%'
 
     JK\MediaBundle\Upload\Uploader\UploaderInterface: '@JK\MediaBundle\Upload\Uploader\Uploader'
