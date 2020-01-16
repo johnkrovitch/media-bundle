@@ -2,6 +2,8 @@
 
 namespace JK\MediaBundle\Entity;
 
+use DateTime;
+
 interface MediaInterface
 {
     const TYPE_ARTICLE_THUMBNAIL = 'article_thumbnail';
@@ -40,4 +42,26 @@ interface MediaInterface
      * Return the Media description.
      */
     public function getDescription(): string;
+
+    public function setId(?int $id): void;
+
+    public function setName(string $name): void;
+
+    public function setDescription(string $description): void;
+
+    public function setFileName(string $fileName): void;
+
+    public function setFileType(string $fileType): void;
+
+    public function setType(string $type): void;
+
+    public function setSize(int $size): void;
+
+    public function getCreatedAt(): DateTime;
+
+    public function setCreatedAt(DateTime $createdAt): void;
+
+    public function getUpdatedAt(): DateTime;
+
+    public function setUpdatedAt(DateTime $updatedAt): void;
 }

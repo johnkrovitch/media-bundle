@@ -75,12 +75,12 @@ class MediaType extends AbstractType
         $resolver
             ->setDefaults([
                 'attr' => [
-                    'cms-media-form',
+                    'class' => 'media-embed-form cms-media-form',
                 ],
                 'by_reference' => true,
                 'data_class' => Media::class,
-                'label' => 'cms.article.thumbnail',
-                'help' => 'cms.article.thumbnail_help',
+                'label' => 'media.form.label',
+                'help' => 'media.form.help',
             ]);
     }
 }

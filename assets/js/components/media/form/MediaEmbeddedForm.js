@@ -1,0 +1,47 @@
+import OptionsHelper from "../../helpers/OptionsHelper";
+import MediaGallery from "../../gallery/MediaGallery";
+
+export default class MediaEmbeddedForm {
+    constructor(options) {
+        this.options = OptionsHelper.initializeOptions({
+            selector: '.media-embed-form',
+        }, options);
+        console.log('bite', this.options);
+        this.element = OptionsHelper.getDOMElement(this.options.selector);
+    }
+    
+    bind() {
+        // Bind media radio buttons to display and hide form parts according to the selected value.
+        let choices = this.element.querySelectorAll('.media-choice');
+    
+        choices.forEach((choice) => {
+            choice.addEventListener('change', (event) => {
+                this.displayFormParts(event.target.value);
+            });
+        });
+    }
+    
+    displayFormParts (value) {
+        this
+            .element
+            .querySelectorAll('.media-choice-item')
+            .forEach((element) => {
+                if (element.dataset.src === value) {
+                    element.classList.remove('hidden');
+                    
+                    if (value === 'choose_from_collection') {
+                        this.createMediaGallery();
+                    }
+                } else {
+                    element.classList.add('hidden');
+                }
+            })
+        ;
+    }
+    
+    createMediaGallery() {
+        this.gallery = new MediaGallery();
+        this.gallery.bind();
+        this.gallery.load();
+    }
+};
