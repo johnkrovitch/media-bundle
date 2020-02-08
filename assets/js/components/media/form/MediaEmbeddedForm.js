@@ -6,7 +6,6 @@ export default class MediaEmbeddedForm {
         this.options = OptionsHelper.initializeOptions({
             selector: '.media-embed-form',
         }, options);
-        console.log('bite', this.options);
         this.element = OptionsHelper.getDOMElement(this.options.selector);
     }
     

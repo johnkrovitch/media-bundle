@@ -4,7 +4,7 @@ import MediaGallery from "./components/gallery/MediaGallery";
 import UploadModal from "./components/upload/modal/UploadModal";
 import GalleryModal from "./components/gallery/modal/GalleryModal";
 import MediaEmbeddedForm from "./components/media/form/MediaEmbeddedForm";
-import MediaTabs from "./components/tabs/MediaTabs";
+//import MediaTabs from "./components/tabs/MediaTabs";
 
 const Events = {
     UPLOAD_MODAL_SHOW: 'jk_media.upload-modal.show',
@@ -38,6 +38,6 @@ document.addEventListener(Events.GALLERY_MODAL_SHOW, (event) => {
 let form = new MediaEmbeddedForm();
 form.bind();
 
-let tabs = new MediaTabs();
-tabs.bind();
+// let tabs = new MediaTabs();
+// tabs.bind();
 
