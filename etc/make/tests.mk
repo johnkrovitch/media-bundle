@@ -27,5 +27,5 @@ php-cs-fixer.ci:
 
 # PHPStan
 phpstan.run:
-	bin/phpstan analyse --level=1 src tests
+	bin/phpstan analyse --level=2 src tests
 

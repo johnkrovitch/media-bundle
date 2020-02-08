@@ -53,7 +53,6 @@ export default class UploadModalForm {
      * Display form parts according to the selected value.
      */
     displayFormParts (value) {
-    
         this
             .element
             .querySelectorAll('.media-choice-item')

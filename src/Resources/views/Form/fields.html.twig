@@ -5,15 +5,23 @@
                 {% set mediaUrl = media_directory('media_gallery') %}
                 {% set mediaUrl = media_directory(form.vars.data.type) ~ '/' ~ form.vars.data.filename %}
 
-                <img src="{{ mediaUrl | imagine_filter('media_gallery') }}" class="media-target" alt="Uploaded image" />
+                <img src="{{ mediaUrl | imagine_filter('media_gallery') }}"
+                     class="media-target"
+                     alt="Uploaded image"/>
                 <br/>
-                <a href="#" class="remove-media" data-target="{{ form.vars.media_target }}">
+                <a href="#"
+                   class="remove-media"
+                   data-target="{{ form.vars.media_target }}">
                     <i class="fa fa-remove"></i>
                     {{ form.vars.remove_label | trans }}
                 </a>
             {% else %}
-                <img src="" class="media-target" alt="Uploaded image" />
-                <a href="#" class="remove-media hide" data-target="{{ form.vars.media_target }}">
+                <img src=""
+                     class="media-target"
+                     alt="Uploaded image"/>
+                <a href="#"
+                   class="remove-media hide"
+                   data-target="{{ form.vars.media_target }}">
                     <i class="fa fa-remove"></i>
                     Remove Media
                 </a>
@@ -39,52 +47,52 @@
             {% set url = media_path(media) %}
         {% endif %}
 
-            <a href="#"
-               class="media-item cms-media-image-container"
-               data-toggle="modal"
-               data-target="#image-modal-{{ media.id | default('') }}">
-                <img src="{{ url | default('') }}"
-                     alt="{{ media.name | default('') }}"
-                     width="50"
-                     height="50"
-                     class="media-target {% if not hasValidMedia %} d-none{% endif %}"/>
-            </a>
+        <a href="#"
+           class="media-item cms-media-image-container"
+           data-toggle="modal"
+           data-target="#image-modal-{{ media.id | default('') }}">
+            <img src="{{ url | default('') }}"
+                 alt="{{ media.name | default('') }}"
+                 width="50"
+                 height="50"
+                 class="media-target {% if not hasValidMedia %} d-none{% endif %}"/>
+        </a>
 
-            <a href="#"
-               class="cms-media-clear{% if not hasValidMedia %} d-none{% endif %}">
-                {{ 'media.image.remove_thumbnail' | trans }}
-            </a>
+        <a href="#"
+           class="cms-media-clear{% if not hasValidMedia %} d-none{% endif %}">
+            {{ 'media.image.remove_thumbnail' | trans }}
+        </a>
 
-            <a href="#"
-               class="cms-media-restore d-none"
-               data-media-id="{{ media.id | default('') }}">
-                {{ 'media.image.restore_thumbnail' | trans }}
-            </a>
+        <a href="#"
+           class="cms-media-restore d-none"
+           data-media-id="{{ media.id | default('') }}">
+            {{ 'media.image.restore_thumbnail' | trans }}
+        </a>
 
-            <a href="#"
-               class="cms-add-media{% if hasValidMedia %} d-none{% endif %}">
-                {{ 'media.image.add_thumbnail' | trans }}
-            </a>
+        <a href="#"
+           class="cms-add-media{% if hasValidMedia %} d-none{% endif %}">
+            {{ 'media.image.add_thumbnail' | trans }}
+        </a>
 
-            {# Image in huge size #}
-            <div id="image-modal-{{ media.id | default('') }}"
-                 class="modal fade"
-                 tabindex="-1"
-                 role="dialog"
-                 aria-hidden="true">
+        {# Image in huge size #}
+        <div id="image-modal-{{ media.id | default('') }}"
+             class="modal fade"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
 
-                <div class="modal-dialog modal-sm modal-dialog-centered"
-                     role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <img src="{{ url | default('') }}"
-                                 alt="{{ media.name | default('') }}"
-                                 style="width: 100%"
-                                 class="media-target {% if hasValidMedia %} d-none{% endif %}"/>
-                        </div>
+            <div class="modal-dialog modal-sm modal-dialog-centered"
+                 role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="{{ url | default('') }}"
+                             alt="{{ media.name | default('') }}"
+                             style="width: 100%"
+                             class="media-target {% if hasValidMedia %} d-none{% endif %}"/>
                     </div>
                 </div>
             </div>
+        </div>
 
         <div class="cms-media-choice d-none">
             <ul class="nav nav-tabs"
@@ -94,7 +102,8 @@
                        id="cms-upload-from-computer-tab"
                        data-toggle="tab"
                        href="#home"
-                       role="tab" aria-controls="home"
+                       role="tab"
+                       aria-controls="home"
                        aria-selected="true">
                         {{ 'media.image.upload_from_computer' | trans }}
                     </a>

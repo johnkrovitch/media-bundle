@@ -18,3 +18,10 @@ media:
         upload_from_computer:  Uploader un fichier de l'ordinateur
         upload_from_url: Télécharger depuis une url
         choose_from_collection: Choisir dans la gallerie
+
+    form:
+        label: Media
+        help: Télécharger un fichier depuis votre ordinateur ou depuis la gallerie
+        upload_help: Télécharger un fichier de votre ordinateur
+        thumbnail: Minitature de l'article
+        thumbnail_help: Minitature affichée sur la page d'accueil ou dans les catégories

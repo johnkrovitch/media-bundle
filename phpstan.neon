@@ -1,0 +1,4 @@
+# phpstan.neon
+parameters:
+    excludes_analyse:
+        - 'src/DependencyInjection/Configuration.php'
