@@ -2,11 +2,8 @@ import OptionsHelper from "../../helpers/OptionsHelper";
 import MediaGallery from "../../gallery/MediaGallery";
 
 export default class MediaEmbeddedForm {
-    constructor(options) {
-        this.options = OptionsHelper.initializeOptions({
-            selector: '.media-embed-form',
-        }, options);
-        this.element = OptionsHelper.getDOMElement(this.options.selector);
+    constructor(element) {
+        this.element = element;
     }
     
     bind() {
