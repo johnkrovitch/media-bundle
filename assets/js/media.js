@@ -35,8 +35,9 @@ document.addEventListener(Events.GALLERY_MODAL_SHOW, (event) => {
     modal.load();
 });
 
-let form = new MediaEmbeddedForm();
-form.bind();
+document.querySelectorAll('.media-embed-form').forEach((element) => {
+    (new MediaEmbeddedForm(element)).bind();
+});
 
 // let tabs = new MediaTabs();
 // tabs.bind();
