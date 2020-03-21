@@ -56,7 +56,7 @@ class AddImageHandler
             $media = $this->uploader->upload($data['upload'], MediaInterface::TYPE_ARTICLE_THUMBNAIL);
         }
 
-        if ($media instanceof MediaInterface) {
+        if (!$media instanceof MediaInterface) {
             throw new Exception('Unable to handle the form media form. The upload type "'.$data['uploadType'].'" is not handled.');
         }
 

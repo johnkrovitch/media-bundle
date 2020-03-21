@@ -27,8 +27,12 @@ class UploadMediaAjaxAction
         $file = $request->files->get('file');
         $type = $request->request->get('type');
 
-        $this->uploader->upload($file, $type);
+        $media = $this->uploader->upload($file, $type);
 
-        return new JsonResponse();
+        return new JsonResponse([
+            'id' => $media->getId(),
+            'name' => $media->getName(),
+            'path' => $this->uploader->getUploadDirectory($media->getType()).'/'.$media->getName(),
+        ]);
     }
 }

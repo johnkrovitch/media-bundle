@@ -1,3 +1,6 @@
+parameters:
+    media.upload_directory: '%kernel.project_dir%/public/uploads'
+
 services:
     JK\MediaBundle\Action\TinyMce\GetUpdateModal:
         class: JK\MediaBundle\Action\TinyMce\GetUpdateModal
