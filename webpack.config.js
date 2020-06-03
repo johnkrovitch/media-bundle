@@ -14,6 +14,7 @@ Encore
     .setPublicPath('/bundles/jkmedia/assets')
 
     .addEntry('media', './assets/js/media.js')
+    .addStyleEntry('media-editor', './assets/scss/media-editor.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     //.splitEntryChunks()
