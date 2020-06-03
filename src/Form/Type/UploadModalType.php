@@ -29,7 +29,11 @@ class UploadModalType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-            ->add('gallery', HiddenType::class)
+            ->add('gallery', HiddenType::class, [
+                'attr' => [
+                    'class' => 'media-gallery-input',
+                ],
+            ])
         ;
     }
 

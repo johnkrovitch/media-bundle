@@ -1,0 +1,20 @@
+.media-gallery {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  figure {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      flex-grow: 100;
+    }
+
+    figcaption {
+      color: dimgrey;
+      font-style: italic;
+      text-align: center;
+    }
+  }
+}

@@ -68,13 +68,10 @@ class Uploader implements UploaderInterface
         return $media;
     }
 
-    /**
-     * @throws Exception
-     */
-    private function getUploadDirectory(string $type): string
+    public function getUploadDirectory(string $type): string
     {
         if (!key_exists($type, $this->mapping)) {
-            throw new Exception('The media type "'.$type.'" is not valid : no mapping available');
+            throw new Exception('The media type "'.$type.'" is not valid: no mapping available');
         }
         $directory = $this->uploadDirectory;
 

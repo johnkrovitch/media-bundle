@@ -40,7 +40,6 @@ export default class MediaGallery {
                     } else {
                         this.unselect();
                         element.classList.add('selected');
-    
                         this.setInputValue(element.dataset.mediaId);
                     }
                 } else {
