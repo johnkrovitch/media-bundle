@@ -23,6 +23,4 @@ after_script:
 
 env:
     - SYMFONY_VERSION=3.4.*
-    - SYMFONY_VERSION=4.1.*
-    - SYMFONY_VERSION=4.2.*
-    - SYMFONY_VERSION=4.3.*
+    - SYMFONY_VERSION=4.4.*
