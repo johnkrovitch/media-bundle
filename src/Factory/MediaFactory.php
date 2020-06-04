@@ -13,6 +13,7 @@ class MediaFactory implements MediaFactoryInterface
         $media = new Media();
         $media->setName($file->getFilename());
         $media->setFileName($file->getFilename());
+        $media->setSize($file->getSize());
         $media->setType($type);
 
         return $media;

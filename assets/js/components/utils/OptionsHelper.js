@@ -1,8 +1,9 @@
 export default class OptionsHelper {
-    static initializeOptions(defaults, options) {
+    static merge(defaults, options) {
         if (!options) {
             options = {};
         }
+        
         return Object.assign(defaults, options);
     }
     

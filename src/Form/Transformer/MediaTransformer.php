@@ -2,11 +2,12 @@
 
 namespace JK\MediaBundle\Form\Transformer;
 
-use InvalidArgumentException;
+use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Repository\MediaRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class MediaTransformer implements DataTransformerInterface
 {
@@ -23,21 +24,11 @@ class MediaTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if (null === $value) {
-            return null;
+            return new Media();
         }
 
         if (!$value instanceof MediaInterface) {
-            $type = gettype($value);
-
-            if (is_object($value)) {
-                $type = get_class($value);
-            }
-
-            throw new InvalidArgumentException('The value should be an instance of '.MediaInterface::class.', given '.$type);
-        }
-
-        if (0 === $value->getId()) {
-            return null;
+            throw new UnexpectedTypeException($value, MediaInterface::class);
         }
 
         return $value;

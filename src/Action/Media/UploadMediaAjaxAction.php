@@ -2,6 +2,7 @@
 
 namespace JK\MediaBundle\Action\Media;
 
+use JK\MediaBundle\Assets\Helper\AssetsHelper;
 use JK\MediaBundle\Upload\Uploader\UploaderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +15,15 @@ class UploadMediaAjaxAction
      */
     private $uploader;
 
-    public function __construct(UploaderInterface $uploader)
+    /**
+     * @var AssetsHelper
+     */
+    private $helper;
+
+    public function __construct(UploaderInterface $uploader, AssetsHelper $helper)
     {
         $this->uploader = $uploader;
+        $this->helper = $helper;
     }
 
     public function __invoke(Request $request)
@@ -26,13 +33,13 @@ class UploadMediaAjaxAction
         }
         $file = $request->files->get('file');
         $type = $request->request->get('type');
-
         $media = $this->uploader->upload($file, $type);
+        $path = $this->helper->getMediaPath($media);
 
         return new JsonResponse([
             'id' => $media->getId(),
             'name' => $media->getName(),
-            'path' => $this->uploader->getUploadDirectory($media->getType()).'/'.$media->getName(),
+            'path' => $path,
         ]);
     }
 }

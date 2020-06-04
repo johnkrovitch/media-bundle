@@ -50,7 +50,6 @@ class MediaType extends AbstractType
                     'class' => 'cms-media-id',
                 ],
                 'required' => false,
-                'constraints' => [],
             ])
             ->add('file', FileType::class, [
                 'attr' => [
@@ -65,9 +64,8 @@ class MediaType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
+            ->addModelTransformer($this->mediaTransformer)
         ;
-
-        $builder->addModelTransformer($this->mediaTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

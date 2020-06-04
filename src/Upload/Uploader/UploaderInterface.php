@@ -9,5 +9,7 @@ interface UploaderInterface
 {
     public function upload(UploadedFile $uploadedFile, string $type): MediaInterface;
 
-    public function getUploadDirectory(string $type): string;
+    public function getAbsoluteUploadDirectory(string $type): string;
+
+    public function getRelativeUploadDirectory(string $type): string;
 }
