@@ -1,27 +1,18 @@
 import $ from "axios";
+import OptionsHelper from "../utils/OptionsHelper";
 
 export default class Modal {
-    constructor(options) {
+    constructor(element, options) {
         if (!options) {
             options = {};
         }
-        this.options = Object.assign({
+        this.element = element;
+        this.options = OptionsHelper.merge({
             selector: '#media-modal',
             closeOnBackdropClick: true,
             url: false,
-            bind: true,
             load: (options.hasOwnProperty('url')),
         }, options);
-        
-        this.element = document.querySelector(this.options.selector);
-        
-        if (!this.element) {
-            throw new Error('No DOM element found for modal with the selector "' + this.options.selector + '"');
-        }
-    
-        if (this.options.bind) {
-            this.bind();
-        }
     }
     
     /**
@@ -77,6 +68,14 @@ export default class Modal {
     
     setContent(content) {
         this.element.querySelector('.modal-content').innerHTML = content;
+    }
+    
+    getContent() {
+        return this.element.querySelector('.modal-content').innerHTML;
+    }
+    
+    getElement() {
+        return this.element;
     }
     
     loadSuccess(response) {

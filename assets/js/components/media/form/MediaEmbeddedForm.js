@@ -1,4 +1,3 @@
-import OptionsHelper from "../../helpers/OptionsHelper";
 import MediaGallery from "../../gallery/MediaGallery";
 
 export default class MediaEmbeddedForm {
