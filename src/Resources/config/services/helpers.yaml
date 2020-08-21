@@ -2,7 +2,7 @@ services:
     JK\MediaBundle\Assets\Helper\AssetsHelper:
         arguments:
             $kernelEnvironment: '%kernel.environment%'
-            $rootDirectory: '%kernel.root_dir%'
+            $rootDirectory: '%kernel.project_dir%'
             $assetsMapping: '%jk_media.mapping%'
             $router: '@Symfony\Component\Routing\RouterInterface'
             $assetsManager: '@liip_imagine.cache.manager'
