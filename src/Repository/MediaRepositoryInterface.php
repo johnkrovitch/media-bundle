@@ -2,7 +2,7 @@
 
 namespace JK\MediaBundle\Repository;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\Repository\RepositoryInterface;
 use Pagerfanta\Pagerfanta;
