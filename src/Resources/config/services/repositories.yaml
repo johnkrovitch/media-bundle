@@ -1,5 +1,6 @@
 services:
     JK\MediaBundle\Repository\MediaRepository:
+        autoconfigure: true
         arguments:
             $registry: '@doctrine'
 
