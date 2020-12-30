@@ -1,4 +1,4 @@
-media:
+jk_media:
     gallery_modal:
         title: Choisir une ou plusieurs images
         cancel: Annuler
@@ -15,9 +15,18 @@ media:
         add_thumbnail: Ajouter une miniature
         restore_thumbnail: Restaurer la miniature
         remove_thumbnail: Supprimer la miniature
-        upload_from_computer:  Uploader un fichier de l'ordinateur
+        upload_from_computer:  Télécharger un media de l'ordinateur
         upload_from_url: Télécharger depuis une url
         choose_from_collection: Choisir dans la gallerie
+        
+    media:
+        add: Ajouter un media
+        update: Modifier le media
+        add_media_gallery: Ajouter une gallerie de media
+        upload_from_computer: Télécharger depuis l'ordinateur
+        choose_from_gallery: Choisir dans la gallerie
+        choose: Télécharger un média depuis l'ordinateur ou choisir un média dans la gallerie
+        choose_media: Choisir le media
 
     form:
         label: Media
@@ -25,3 +34,6 @@ media:
         upload_help: Télécharger un fichier de votre ordinateur
         thumbnail: Minitature de l'article
         thumbnail_help: Minitature affichée sur la page d'accueil ou dans les catégories
+    
+    loading: Chargement en cours...
+    close: Fermer

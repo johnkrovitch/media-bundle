@@ -1,3 +1,17 @@
+jk_media.tinymce.add_media:
+    path: /media/tinymce/add
+    controller: JK\MediaBundle\Action\Media\TinyMceAddAction
+
+jk_media.tinymce.update_media:
+    path: /media/tinymce/add
+    controller: JK\MediaBundle\Action\Media\TinyMceUpdateAction
+
+jk_media.tinymce.gallery:
+    path: /media/tinymce/gallery
+    controller: JK\MediaBundle\Action\Media\GalleryAction
+
+
+## TODO to remove ?
 # Media Modal
 media.add_image_modal:
     path: /media/add-image

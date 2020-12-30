@@ -1,3 +1,9 @@
+{% block gallery_widget %}
+    {{ form_row(form) }}
+    {% set attr = form.vars.container_attr %}
+    <div {{ block('attributes') }}></div>
+{% endblock %}
+
 {% block jquery_upload_widget %}
     <div class="media-form-container">
         <div class="media-form-preview">

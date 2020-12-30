@@ -7,11 +7,6 @@
       "js": [
         "/bundles/jkmedia/assets/media.js"
       ]
-    },
-    "media-editor": {
-      "css": [
-        "/bundles/jkmedia/assets/media-editor.css"
-      ]
     }
   }
 }

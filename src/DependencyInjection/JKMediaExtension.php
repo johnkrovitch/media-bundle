@@ -15,11 +15,18 @@ class JKMediaExtension extends Extension
             __DIR__.'/../Resources/config',
         ]));
         $loader->load('services.yaml');
+        $adminBundle = false;
+    
+        if (key_exists('LAGAdminBundle', $container->getParameter('kernel.bundles'))) {
+            $adminBundle = true;
+            $loader->load('admin/admin.yaml');
+        }
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+    
         $container->setParameter('jk_media.upload_path', $config['upload_path']);
         $container->setParameter('jk_media.mapping', $config['mapping']);
+        $container->setParameter('jk_media.admin_enabled', $adminBundle);
     }
 
     public function getAlias()

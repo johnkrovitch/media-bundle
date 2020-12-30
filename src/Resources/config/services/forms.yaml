@@ -1,4 +1,13 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    JK\MediaBundle\Form\Type\AddMediaType:
+        tags:
+            - {name: form.type}
+        
+    
     ### Form Types ###
 #    JK\MediaBundle\Form\Type\JQueryUploadType:
 #        class: JK\MediaBundle\Form\Type\JQueryUploadType

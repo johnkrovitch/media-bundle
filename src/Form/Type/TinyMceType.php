@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @deprecated  */
 class TinyMceType extends AbstractType
 {
     const ALLOWED_PLUGINS = [

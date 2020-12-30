@@ -11,7 +11,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
+        "ext-json": "*",
         "johnkrovitch/orm-pack": "^2.0",
         "lag/string-utils": "^1.2",
         "liip/imagine-bundle": "^2.2",

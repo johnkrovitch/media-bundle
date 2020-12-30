@@ -15,8 +15,10 @@
     },
     "dependencies": {
         "axios": "^0.19.0",
+        "micromodal": "^0.4.6",
         "node-sass": "^4.13.0",
         "popper.js": "^1.16.0",
-        "sass-loader": "^8.0.2"
+        "sass-loader": "^8.0.2",
+        "stimulus": "^2.0.0"
     }
 }

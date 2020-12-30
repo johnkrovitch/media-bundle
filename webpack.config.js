@@ -14,7 +14,7 @@ Encore
     .setPublicPath('/bundles/jkmedia/assets')
 
     .addEntry('media', './assets/js/media.js')
-    .addStyleEntry('media-editor', './assets/scss/media-editor.scss')
+    //.addStyleEntry('media-editor', './assets/scss/media-editor.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     //.splitEntryChunks()
@@ -45,6 +45,11 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+
+    .copyFiles({
+        from: 'assets/img',
+        to: 'img/[path][name].[ext]'
+    })
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

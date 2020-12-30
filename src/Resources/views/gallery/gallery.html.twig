@@ -1,0 +1,40 @@
+<div class="media-gallery"
+     data-controller="gallery-modal"
+     data-target="{{ target|default('') }}">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-group">
+                {% for media in medias %}
+                {% set media_text = media.name ~ (media.description ? ' - ' ~ media.description : '') %}
+                <div class="card">
+                    <a href="#"
+                       class="cms-media-image"
+                       data-action="gallery-modal#select">
+                        <img class="card-img-top"
+                             src="{{ media_path(media) }}"
+                             alt="{{ media_text }}"
+                             title="{{ media_text }}"
+                             data-media-id="{{ media.id }}"
+                             onerror="this.src='{{ asset('/bundles/jkmedia/assets/img/default.png') }}'"
+                             width="300"
+                             height="100"/>
+                    </a>
+                </div>
+                
+                {% if loop.index is divisible by (3) %}
+            </div>
+            <div class="card-group">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 mt-2 pagination">
+            {{ pagerfanta(medias, 'twitter_bootstrap4_translated', {
+                proximity: 1
+            }) }}
+        </div>
+    </div>
+</div>

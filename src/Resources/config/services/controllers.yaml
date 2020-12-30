@@ -2,6 +2,22 @@ parameters:
     media.upload_directory: '%kernel.project_dir%/public/uploads'
 
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    JK\MediaBundle\Action\Media\TinyMceAddAction:
+        tags:
+            - { name: controller.service_arguments }
+    
+    JK\MediaBundle\Action\Media\GalleryAction:
+        tags:
+            - { name: controller.service_arguments }
+
+            
+            
+            
+
     JK\MediaBundle\Action\TinyMce\GetUpdateModal:
         class: JK\MediaBundle\Action\TinyMce\GetUpdateModal
         tags:
