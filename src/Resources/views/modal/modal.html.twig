@@ -20,10 +20,4 @@
     </div>
 </div>
 
-<div class="d-none">
-    <div id="media-loader" class="text-center">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">{{ 'jk_media.loading' | trans }}</span>
-        </div>
-    </div>
-</div>
+{% include '@JKMedia/loader/loader.html.twig' %}
