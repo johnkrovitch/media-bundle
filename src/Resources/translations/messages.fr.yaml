@@ -9,6 +9,7 @@ jk_media:
         add: Ajouter une gallerie
         loading_in_progress: Chargement en cours...
         open: Ouvrir
+        choose_another_media: Choisir un autre media
 
     image:
         add: Ajouter une image

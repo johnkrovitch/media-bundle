@@ -29,13 +29,13 @@ export default class Uploader {
     upload() {
 
     }
-    
+
     FileUpload(img, file) {
         var reader = new FileReader();
         this.ctrl = createThrobber(img);
         var xhr = new XMLHttpRequest();
         this.xhr = xhr;
-        
+
         var self = this;
         this.xhr.upload.addEventListener("progress", function(e) {
             if (e.lengthComputable) {
@@ -43,7 +43,7 @@ export default class Uploader {
                 self.ctrl.update(percentage);
             }
         }, false);
-        
+
         xhr.upload.addEventListener("load", function(e){
             self.ctrl.update(100);
             var canvas = self.ctrl.ctx.canvas;
@@ -56,8 +56,8 @@ export default class Uploader {
         };
         reader.readAsBinaryString(file);
     }
-    
-    
+
+
     // fileupload.fileupload({
         //     done: function (e, data) {
         //         // ajax response
@@ -72,7 +72,7 @@ export default class Uploader {
         //         // add the new media id to the target media id field
         //         $(targetMediaIdSelector).val(result.mediaId);
         //         // display the remove media link
-        //         removeMediaLink.show();
+        //         removeMediaLink.open();
         //     }
         // });
 //         removeMediaLink.on('click', function () {

@@ -1,0 +1,24 @@
+{{ form_start(form, {attr: {
+    'action': app.request.uri,
+    'data-controller': 'choose-media',
+    'data-action': 'choose-media#submit'
+}}) }}
+    <header class="modal__header">
+        <h2 class="modal__title" id="modal-1-title">
+            {{ 'jk_media.media.add'|trans }}
+        </h2>
+        <button class="modal__close" aria-label="{{ 'jk_media.close'|trans }}" data-micromodal-close></button>
+    </header>
+    <main class="modal__content" id="modal-1-content">
+        {{ form_row(form) }}
+    </main>
+    <footer class="modal__footer">
+        <button class="modal__btn"
+                data-micromodal-close
+                data-action="choose-media#submit"
+                aria-label="{{ 'jk_media.close'|trans }}">
+            {{ 'jk_media.close'|trans }}
+        </button>
+        <button class="modal__btn modal__btn-primary">{{ 'jk_media.media.choose_media'|trans }}</button>
+    </footer>
+{{ form_end(form) }}

@@ -1,6 +1,6 @@
 jk_media.tinymce.add_media:
     path: /media/tinymce/add
-    controller: JK\MediaBundle\Action\Media\TinyMceAddAction
+    controller: JK\MediaBundle\Action\TinyMce\ChooseMediaAction
 
 jk_media.tinymce.update_media:
     path: /media/tinymce/add
@@ -9,6 +9,17 @@ jk_media.tinymce.update_media:
 jk_media.tinymce.gallery:
     path: /media/tinymce/gallery
     controller: JK\MediaBundle\Action\Media\GalleryAction
+
+jk_media.media.upload:
+    path: /media/upload
+    controller: JK\MediaBundle\Action\Media\UploadAction
+
+
+
+
+
+
+
 
 
 ## TODO to remove ?

@@ -17,51 +17,32 @@ export default class Modal {
         }
 
         if (this.options.show) {
-            this.show();
+            this.open();
         }
-        // MicroModal.init();
-        // options = options || {};
-        // options.show = false;
-        //
-        // this.element = document.querySelector(selector);
-        // this.modal = $(selector).modal(options);
-        // this.loader = document.querySelector('#admin-loader');
-        //
-        // if (contentUrl) {
-        //     const modal = this.modal;
-        //     this.element.querySelector('div.modal-body').innerHTML = this.loader.outerHTML;
-        //     this
-        //         .modal
-        //         .off('show.bs.modal')
-        //         .on('show.bs.modal', function () {
-        //             client
-        //                 .get(contentUrl)
-        //                 .then(response => {
-        //                     modal.html(response.data);
-        //                 })
-        //                 .catch(error => alert(error))
-        //             ;
-        //         })
-        //     ;
-        // }
-        // this.modal.modal('show');
     }
 
-    show() {
-        if (this.options.contentUrl) {
-            if (this.options.loaderSelector && this.options.contentSelector) {
-                const loader = document.querySelector(this.options.loaderSelector);
-                const loaderTarget = this.element.querySelector(this.options.contentSelector);
+    load() {
+        if (this.options.loaderSelector && this.options.contentSelector) {
+            const loader = document.querySelector(this.options.loaderSelector);
+            const loaderTarget = this.element.querySelector(this.options.contentSelector);
 
-                if (loader && loaderTarget) {
-                    loaderTarget.innerHTML = loader.outerHTML;
-                }
+            if (loader && loaderTarget) {
+                loaderTarget.innerHTML = loader.outerHTML;
             }
-            client.get(this.options.contentUrl).then(response => {
-                this.element.querySelector(this.options.contentSelector).innerHTML = response.data;
-            });
-        } else {
+        }
+        client.get(this.options.contentUrl).then(response => {
+            this.element.querySelector(this.options.contentSelector).innerHTML = response.data;
+        });
+    }
+
+    open() {
+        if (this.options.contentUrl) {
+            this.load();
         }
         MicroModal.show(this.selector, this.options);
+    }
+
+    close() {
+        MicroModal.close(this.selector);
     }
 }

@@ -7,9 +7,9 @@ import MediaEmbeddedForm from "./components/media/form/MediaEmbeddedForm";
 import MediaForm from "./components/media/form/MediaForm";
 
 const Events = {
-    UPLOAD_MODAL_SHOW: 'jk_media.upload-modal.show',
-    GALLERY_SHOW: 'jk_media.gallery.show',
-    GALLERY_MODAL_SHOW: 'jk_media.gallery-modal.show'
+    UPLOAD_MODAL_SHOW: 'jk_media.upload-modal.open',
+    GALLERY_SHOW: 'jk_media.gallery.open',
+    GALLERY_MODAL_SHOW: 'jk_media.gallery-modal.open'
 };
 
 document.addEventListener(Events.GALLERY_SHOW, () => {

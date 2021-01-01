@@ -2,6 +2,7 @@
 
 namespace JK\MediaBundle\Form\Type;
 
+use JK\MediaBundle\Form\Constraint\ChooseMedia;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -9,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 
-class AddMediaType extends AbstractType
+class ChooseMediaType extends AbstractType
 {
     private RouterInterface $router;
     
@@ -24,6 +25,9 @@ class AddMediaType extends AbstractType
             ->setDefaults([
                 'attr' => [
                     'data-controller' => 'add-media',
+                ],
+                'constraints' => [
+                    new ChooseMedia(),
                 ],
                 'label' => false,
             ])
@@ -43,13 +47,12 @@ class AddMediaType extends AbstractType
                 ],
                 'choice_attr' => function ($choiceValue) {
                     $attr = [
-                        'data-action' => 'add-media#display',
+                        'data-action' => 'choose-media#display',
                         'data-target-container' => '.media-'.$choiceValue.'-container',
                     ];
     
                     if ($choiceValue === 'gallery') {
                         $attr['data-target-content-container'] = '.media-gallery-content-container';
-                        $attr['data-action'] .= ' add-media#gallery';
                         $attr['data-url'] =  $this->router->generate('jk_media.tinymce.gallery', [
                             'target' => '.gallery-input',
                         ]);

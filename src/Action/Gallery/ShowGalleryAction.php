@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/** @deprecated  */
 class ShowGalleryAction
 {
     /**
@@ -29,7 +30,7 @@ class ShowGalleryAction
     {
         $medias = $this->repository->paginate((int) $request->get('page', 1));
 
-        return new Response($this->environment->render('@JKMedia/Gallery/show.html.twig', [
+        return new Response($this->environment->render('@JKMedia/Gallery/open.html.twig', [
             'medias' => $medias,
         ]));
     }

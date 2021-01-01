@@ -14,27 +14,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediaType extends AbstractType
 {
-    const UPLOAD_FROM_URL = 'upload_from_url';
-    const UPLOAD_FROM_COMPUTER = 'upload_from_computer';
-    const CHOOSE_FROM_COLLECTION = 'choose_from_collection';
-
-    /**
-     * @var MediaTransformer
-     */
-    private $mediaTransformer;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    public static function getUploadChoices(): array
-    {
-        return [
-            'cms.media.upload_from_computer' => MediaType::UPLOAD_FROM_COMPUTER,
-            'cms.media.choose_from_collection' => MediaType::CHOOSE_FROM_COLLECTION,
-        ];
-    }
+    private MediaTransformer $mediaTransformer;
+    private RouterInterface $router;
 
     public function __construct(MediaTransformer $mediaTransformer, RouterInterface $router)
     {
@@ -51,10 +32,10 @@ class MediaType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('file', FileType::class, [
+            ->add('file', DropzoneType::class, [
                 'attr' => [
-                    'class' => 'fileupload-input',
-                    'data-upload-url' => $this->router->generate('media.upload_ajax'),
+                    //'class' => 'fileupload-input',
+                    //'data-upload-url' => $this->router->generate('media.upload_ajax'),
                 ],
                 'label' => false,
                 'mapped' => false,

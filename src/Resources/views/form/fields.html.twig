@@ -1,5 +1,5 @@
 {% block gallery_widget %}
-    {{ form_row(form) }}
+    {{ form_widget(form) }}
     {% set attr = form.vars.container_attr %}
     <div {{ block('attributes') }}></div>
 {% endblock %}
@@ -19,7 +19,7 @@
                    class="remove-media"
                    data-target="{{ form.vars.media_target }}">
                     <i class="fa fa-remove"></i>
-                    {{ form.vars.remove_label | trans }}
+                    {{ form.vars.remove_label|trans }}
                 </a>
             {% else %}
                 <img src=""
@@ -39,7 +39,7 @@
     </div>
 {% endblock %}
 
-{% block media_widget %}
+{% block media_widget_old %}
     <div class="cms-media-form">
         {% set media = form.vars.data %}
         {% set hasValidMedia = media and media.id %}

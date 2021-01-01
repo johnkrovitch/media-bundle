@@ -1,7 +1,11 @@
-<div id="media-gallery-modal-container"
-     data-controller="gallery-modal"
+<div data-controller="gallery-modal"
      data-target-input="{{ target|default('') }}"
      data-target-container=".media-gallery">
+    <a href="#"
+       class="d-none gallery-show-link"
+       data-action="gallery-modal#show">
+        {{ 'jk_media.gallery.choose_another_media'|trans }}
+    </a>
     <div class="media-gallery">
         <div class="row">
             <div class="col-md-12">

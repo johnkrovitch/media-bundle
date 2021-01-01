@@ -4,9 +4,9 @@ import Client from '../components/client';
 export default class extends Controller {
     connect() {
         const containerSelector = this.element.dataset.targetContainer;
-        const container = document.querySelector(containerSelector);
+        this.container = document.querySelector(containerSelector);
 
-        if (!container) {
+        if (!this.container) {
             throw new Error('The media gallery container ' + containerSelector + ' does not exists');
         }
         this.element.querySelectorAll('.pagination a').forEach(element => {
@@ -29,5 +29,20 @@ export default class extends Controller {
             element.value = mediaId;
         });
         event.preventDefault();
+        this.hide();
+    }
+
+    show() {
+        this.container.classList.remove('d-none');
+        this.element.querySelectorAll('.gallery-show-link').forEach(element => {
+            element.classList.add('d-none');
+        });
+    }
+
+    hide() {
+        this.container.classList.add('d-none');
+        this.element.querySelectorAll('.gallery-show-link').forEach(element => {
+            element.classList.remove('d-none');
+        });
     }
 }
