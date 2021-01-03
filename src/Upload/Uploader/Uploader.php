@@ -59,7 +59,7 @@ class Uploader implements UploaderInterface
         $this->fileSystem->mkdir($uploadDirectory);
 
         // Move the uploaded file to the dedicated upload directory
-        $extension = str_replace($uploadedFile->guessExtension(), 'jpeg', 'jpg');
+        $extension = str_replace($uploadedFile->getClientOriginalExtension(), 'jpeg', 'jpg');
         $file = $uploadedFile->move($uploadDirectory, uniqid().'.'.$extension);
 
         // Create the associated media

@@ -8,15 +8,18 @@ services:
     
     JK\MediaBundle\Action\TinyMce\ChooseMediaAction:
         tags:
-            - { name: controller.service_arguments }
+            - {name: controller.service_arguments}
     
     JK\MediaBundle\Action\Media\GalleryAction:
         tags:
+            - {name: controller.service_arguments}
+
+    JK\MediaBundle\Action\Media\UploadAction:
+        tags:
             - { name: controller.service_arguments }
 
-            
-            
-            
+
+
 
     JK\MediaBundle\Action\TinyMce\GetUpdateModal:
         class: JK\MediaBundle\Action\TinyMce\GetUpdateModal

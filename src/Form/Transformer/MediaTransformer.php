@@ -11,10 +11,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class MediaTransformer implements DataTransformerInterface
 {
-    /**
-     * @var MediaRepository
-     */
-    private $repository;
+    private MediaRepository $repository;
 
     public function __construct(MediaRepository $repository)
     {
@@ -24,14 +21,16 @@ class MediaTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if (null === $value) {
-            return new Media();
+            return ['id' => null];
         }
 
         if (!$value instanceof MediaInterface) {
             throw new UnexpectedTypeException($value, MediaInterface::class);
         }
 
-        return $value;
+        return [
+            'id' => $value->getId(),
+        ];
     }
 
     public function reverseTransform($value)
@@ -40,7 +39,6 @@ class MediaTransformer implements DataTransformerInterface
             if (!$value->getId()) {
                 return null;
             }
-            $this->repository->clear();
             $refreshedValue = $this->repository->find($value->getId());
 
             if (null === $refreshedValue) {

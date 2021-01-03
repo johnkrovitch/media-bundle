@@ -28,6 +28,8 @@ jk_media:
         choose_from_gallery: Choisir dans la gallerie
         choose: Télécharger un média depuis l'ordinateur ou choisir un média dans la gallerie
         choose_media: Choisir le media
+        upload_error: Une erreur s'est produite durant le téléchargement du media
+        choose_another_media: Choisir un autre media
 
     form:
         label: Media

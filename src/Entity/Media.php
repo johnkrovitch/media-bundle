@@ -17,73 +17,55 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Media implements MediaInterface
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", nullable=true, name="fileName")
      */
-    protected $fileName = '';
+    protected string $fileName = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", nullable=true, name="fileType")
      */
-    protected $fileType = '';
+    protected string $fileType = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
-    protected $type = MediaInterface::TYPE_ARTICLE_THUMBNAIL;
+    protected string $type = MediaInterface::TYPE_ARTICLE_THUMBNAIL;
 
     /**
-     * @var int
-     *
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $size = '';
+    protected ?string $size = '';
 
     /**
-     * @var DateTime
-     *
      * @ORM\Column(type="datetime", name="createdAt")
      *
      * @Gedmo\Timestampable(on="create")
      */
-    protected $createdAt;
+    protected DateTime $createdAt;
 
     /**
-     * @var DateTime
-     *
      * @ORM\Column(type="datetime", name="updatedAt"))
      *
      * @Gedmo\Timestampable(on="update")
      */
-    protected $updatedAt;
+    protected DateTime $updatedAt;
 
     public function getId(): ?int
     {

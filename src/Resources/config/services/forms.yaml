@@ -11,6 +11,10 @@ services:
     JK\MediaBundle\Form\Type\DropzoneType:
         tags:
             - { name: form.type }
+
+    JK\MediaBundle\Form\Type\MediaUploadType:
+        tags:
+            - { name: form.type }
     
     ### Form Handler ###
     JK\MediaBundle\Form\Handler\ChooseMediaHandler: ~

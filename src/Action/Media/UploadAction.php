@@ -22,11 +22,11 @@ class UploadAction
     
     public function __invoke(Request $request): Response
     {
-        if (!$request->files->has('file') || !$request->request->has('type')) {
+        if (!$request->files->has('file') || !$request->get('type')) {
             throw new NotFoundHttpException('File is invalid or type is not provided');
         }
         $file = $request->files->get('file');
-        $type = $request->request->get('type');
+        $type = $request->get('type');
         $media = $this->uploader->upload($file, $type);
         $path = $this->helper->getMediaPath($media);
         
