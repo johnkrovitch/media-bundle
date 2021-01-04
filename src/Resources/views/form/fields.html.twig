@@ -12,7 +12,12 @@
     <div class="progress d-none">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-    <div class="upload-image d-none"></div>
+    <div class="upload-image d-none">
+        {% set path = form.vars.data.path|default('') %}
+        {% if path %}
+            <img src="{{ path }}" alt="{{ path }}" class="media-image-thumbnail" height="100"/>
+        {% endif %}
+    </div>
     <div class="upload-remove-link d-none">
         <a href="#" data-action="media-upload#removeMedia">{{ 'jk_media.media.choose_another_media'|trans }}</a>
     </div>

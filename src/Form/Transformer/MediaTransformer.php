@@ -2,25 +2,27 @@
 
 namespace JK\MediaBundle\Form\Transformer;
 
+use JK\MediaBundle\Assets\Helper\AssetsHelper;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Repository\MediaRepository;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class MediaTransformer implements DataTransformerInterface
 {
     private MediaRepository $repository;
-
-    public function __construct(MediaRepository $repository)
+    private AssetsHelper $helper;
+    
+    public function __construct(MediaRepository $repository, AssetsHelper $helper)
     {
         $this->repository = $repository;
+        $this->helper = $helper;
     }
 
-    public function transform($value)
+    public function transform($value): array
     {
-        if (null === $value) {
+        if ($value === null) {
             return ['id' => null];
         }
 
@@ -30,23 +32,25 @@ class MediaTransformer implements DataTransformerInterface
 
         return [
             'id' => $value->getId(),
+            'path' => $this->helper->getMediaPath($value),
         ];
     }
 
     public function reverseTransform($value)
     {
-        if ($value instanceof MediaInterface) {
-            if (!$value->getId()) {
-                return null;
-            }
-            $refreshedValue = $this->repository->find($value->getId());
-
-            if (null === $refreshedValue) {
-                throw new TransformationFailedException('Unable to find an article with id "'.$value->getId().'"');
-            }
-            $value = $refreshedValue;
+        if (!is_array($value) || !key_exists('id', $value)) {
+            return $value;
         }
-
-        return $value;
+        $media = null;
+    
+        if ($value['id'] !== null) {
+            $media = $this->repository->find($value['id']);
+        }
+    
+        if ($media === null) {
+            $media = new Media();
+        }
+        
+        return $media;
     }
 }

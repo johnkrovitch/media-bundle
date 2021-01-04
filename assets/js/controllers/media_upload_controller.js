@@ -10,6 +10,12 @@ export default class extends Controller {
         this.widget = this.element.querySelector('.upload-widget');
         this.removeLink = this.element.querySelector('.upload-remove-link');
         this.change(this.input);
+
+        if (this.media.value) {
+            this.hideWidget();
+            this.showImage();
+            this.showRemoveLink();
+        }
     }
 
     change(input) {
@@ -38,7 +44,10 @@ export default class extends Controller {
 
     showImage(data) {
         this.image.classList.remove('d-none');
-        this.image.innerHTML = '<img id="media-' + data.id + '" class="media-image-thumbnail" src="' + data.path + '" alt="' + data.name +'" height="100" />';
+
+        if (data) {
+            this.image.innerHTML = '<img id="media-' + data.id + '" class="media-image-thumbnail" src="' + data.path + '" alt="' + data.name +'" height="100" />';
+        }
     }
 
     hideImage() {
@@ -62,7 +71,9 @@ export default class extends Controller {
     }
 
     setProgress(progress) {
-        this.progress.querySelector('.progress-bar').setAttribute('aria-valuenow', progress);
+        const progressBar = this.progress.querySelector('.progress-bar');
+        progressBar.setAttribute('aria-valuenow', progress);
+        progressBar.style = 'width: ' + progress + '%';
     }
 
     setMedia(value) {

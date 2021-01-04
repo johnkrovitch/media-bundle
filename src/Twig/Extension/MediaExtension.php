@@ -9,10 +9,7 @@ use Twig\TwigFunction;
 
 class MediaExtension extends AbstractExtension
 {
-    /**
-     * @var AssetsHelper
-     */
-    private $helper;
+    private AssetsHelper $helper;
 
     public function getFunctions()
     {
@@ -37,7 +34,7 @@ class MediaExtension extends AbstractExtension
      *
      * @return string
      */
-    public function getMediaPath(MediaInterface $media, $absolute = true, $cache = true, $mediaFilter = null)
+    public function getMediaPath(MediaInterface $media, $absolute = true, $cache = true, $mediaFilter = null): string
     {
         return $this->helper->getMediaPath($media, $absolute, $cache, $mediaFilter);
     }
@@ -49,7 +46,7 @@ class MediaExtension extends AbstractExtension
      *
      * @return string
      */
-    public function getMediaDirectory($mappingName)
+    public function getMediaDirectory(string $mappingName): string
     {
         return $this->helper->getMediaDirectory($mappingName);
     }
@@ -59,7 +56,7 @@ class MediaExtension extends AbstractExtension
      *
      * @return string
      */
-    public function getMediaSize(MediaInterface $media)
+    public function getMediaSize(MediaInterface $media): string
     {
         $size = $media->getSize();
         // try size in Kio

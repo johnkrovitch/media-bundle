@@ -18,14 +18,6 @@ services:
     
     ### Form Handler ###
     JK\MediaBundle\Form\Handler\ChooseMediaHandler: ~
-    
-#    JK\MediaBundle\Form\Type\JQueryUploadType:
-#        class: JK\MediaBundle\Form\Type\JQueryUploadType
-#        arguments:
-#            - '@oneup_uploader.templating.uploader_helper'
-#            - '@JK\MediaBundle\Form\Transformer\JQueryUploadTransformer'
-#        tags:
-#            - {name: form.type}
 
     JK\MediaBundle\Form\Type\MediaType:
         class: JK\MediaBundle\Form\Type\MediaType
@@ -46,9 +38,5 @@ services:
             - '@JK\MediaBundle\Repository\MediaRepository'
             - '@JK\MediaBundle\Factory\MediaFactory'
 
-    JK\MediaBundle\Form\Transformer\MediaTransformer:
-        class: JK\MediaBundle\Form\Transformer\MediaTransformer
-        arguments:
-            - '@JK\MediaBundle\Repository\MediaRepository'
-            - '@JK\MediaBundle\Factory\MediaFactory'
+    JK\MediaBundle\Form\Transformer\MediaTransformer: ~
 
