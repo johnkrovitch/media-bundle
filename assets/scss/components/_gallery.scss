@@ -1,0 +1,18 @@
+div[data-controller="media-gallery"] {
+  .card {
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &.selected {
+      border: 1px solid blue;
+    }
+
+    img {
+      max-height: 100px;
+    }
+  }
+
+  div.pagination {
+    justify-content: center;
+  }
+}

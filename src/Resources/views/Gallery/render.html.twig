@@ -1,5 +1,5 @@
 <div class="media-gallery">
-    {% for media in mediaList %}
+    {% for media in medias %}
         <figure>
             <img src="{{ media_path(media, true, true, 'media_gallery') }}"
                  alt="{{ media.description }}"
@@ -8,6 +8,6 @@
         </figure>
     {% endfor %}
 </div>
-{# add br to ensure tinymce will not append elements inside the media gallery #}
+{# add br to ensure tinymce will not append elements inside the media gallery #}
 <br/>
 <br/>

@@ -7,7 +7,7 @@ use Exception;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\Repository\AbstractRepository;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 
 class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
@@ -50,7 +50,7 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
             ->addOrderBy('media.updatedAt', 'DESC')
         ;
 
-        $adapter = new DoctrineORMAdapter($queryBuilder->getQuery(), false);
+        $adapter = new QueryAdapter($queryBuilder->getQuery(), false);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage($maxPerPage);
         $pager->setCurrentPage($page);
