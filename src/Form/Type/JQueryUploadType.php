@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @deprecated */
 class JQueryUploadType extends AbstractType
 {
     const UPLOAD_TYPE_FROM_COMPUTER = 'upload.from_computer';

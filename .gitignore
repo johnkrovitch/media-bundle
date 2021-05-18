@@ -6,3 +6,4 @@ composer.lock
 .php_cs.cache
 yarn.lock
 /node_modules
+tests/app

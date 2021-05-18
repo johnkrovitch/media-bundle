@@ -1,0 +1,79 @@
+<div data-controller="media-gallery"
+     data-render-url="{{ path('media.gallery_render') }}">
+    <div class="modal-header">
+        <h5 class="modal-title">{{ 'media.gallery_modal.title'|trans }}</h5>
+        <button type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>{{ 'media.gallery_modal.help'|trans }}</p>
+        <p><strong class="error-message text-danger d-none">{{ 'media.gallery_modal.error'|trans }}</strong></p>
+        <div class="row">
+            {% for media in medias %}
+                <div class="col-4">
+                    <div class="card"
+                         data-id="{{ media.id }}"
+                         data-action="click->media-gallery#select">
+                        <img class="card-img-top"
+                             src="{{ media_path(media) }}"
+                             alt="{{ media.name }}"
+                             title="{{ media.name }}"
+                        />
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-2 pagination">
+                {{ pagerfanta(medias, 'twitter_bootstrap4') }}
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal">{{ 'media.gallery_modal.cancel'|trans }}</button>
+        <button
+            type="button"
+            class="btn btn-primary"
+            data-action="media-gallery#insertContent">{{ 'media.gallery_modal.add_gallery'|trans }}</button>
+    </div>
+</div>
+{# <div class="media-gallery"> #}
+{# <div class="row"> #}
+{# <div class="col-md-12"> #}
+{# <div class="card-group"> #}
+{# {% for media in medias %} #}
+{# <div class="card"> #}
+{# <a href="#" #}
+{# class="cms-media-image" #}
+{# data-toggle="modal" #}
+{# data-media-id="{{ media.id }}"> #}
+{# <img class="card-img-top" #}
+{# src="{{ media_path(media) }}" #}
+{# alt="{{ media.name }} - {{ media.description }}" #}
+{# title="{{ media.name }} - {{ media.description }}" #}
+{# width="300" #}
+{# height="100"/> #}
+{# </a> #}
+{# </div> #}
+
+{# {% if loop.index is divisible by (3) %} #}
+{# </div> #}
+{# <div class="card-group"> #}
+{# {% endif %} #}
+{# {% endfor %} #}
+{# </div> #}
+{# </div> #}
+{# </div> #}
+
+{# <div class="row"> #}
+{# <div class="col-md-12 mt-2 pagination"> #}
+{# {{ pagerfanta(medias, 'twitter_bootstrap4') }} #}
+{# </div> #}
+{# </div> #}
+{# </div> #}

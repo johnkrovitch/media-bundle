@@ -26,10 +26,8 @@ services:
             $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
             $helper: '@JK\MediaBundle\Assets\Helper\AssetsHelper'
 
-    JK\MediaBundle\Action\Gallery\ShowGalleryAction:
-        class: JK\MediaBundle\Action\Gallery\ShowGalleryAction
-        tags:
-            - 'controller.service_arguments'
+    JK\MediaBundle\Action\Gallery\RenderAction:
+        tags: ['controller.service_arguments']
         arguments:
             $environment: '@twig'
             $repository: '@JK\MediaBundle\Repository\MediaRepository'
@@ -39,6 +37,4 @@ services:
             - 'controller.service_arguments'
         arguments:
             $environment: '@Twig\Environment'
-            $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
             $repository: '@JK\MediaBundle\Repository\MediaRepository'
-            $handler: '@JK\MediaBundle\Handler\Form\Tinymce\AddGalleryHandler'

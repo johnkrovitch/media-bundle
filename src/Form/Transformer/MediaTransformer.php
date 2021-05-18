@@ -5,23 +5,22 @@ namespace JK\MediaBundle\Form\Transformer;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Repository\MediaRepository;
+use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-class MediaTransformer implements DataTransformerInterface
+/** @deprecated  */
+class MediaTransformer implements MediaTransformerInterface
 {
-    /**
-     * @var MediaRepository
-     */
-    private $repository;
+    private MediaRepositoryInterface $repository;
 
-    public function __construct(MediaRepository $repository)
+    public function __construct(MediaRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
-    public function transform($value)
+    public function transform(?MediaInterface $value): MediaInterface
     {
         if (null === $value) {
             return new Media();
@@ -34,7 +33,7 @@ class MediaTransformer implements DataTransformerInterface
         return $value;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(?MediaInterface $value): ?MediaInterface
     {
         if ($value instanceof MediaInterface) {
             if (!$value->getId()) {

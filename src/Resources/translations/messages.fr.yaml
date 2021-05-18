@@ -1,9 +1,10 @@
 media:
     gallery_modal:
-        title: Choisir une ou plusieurs images
+        title: Créer une gallerie d'images
         cancel: Annuler
-        submit: Ajouter la gallerie
+        add_gallery: Ajouter la gallerie
         help: Vous pouvez sélectionner jusqu'à trois images. Cliquez sur une image pour la selectionner ou la déselectionner.
+        error: Vous devez sélectionner au moins une image
 
     gallery:
         add: Ajouter une gallerie
@@ -25,3 +26,6 @@ media:
         upload_help: Télécharger un fichier de votre ordinateur
         thumbnail: Minitature de l'article
         thumbnail_help: Minitature affichée sur la page d'accueil ou dans les catégories
+
+    modal:
+        loading: Chargemet en cours...
