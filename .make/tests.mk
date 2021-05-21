@@ -29,3 +29,10 @@ php-cs-fixer.ci:
 phpstan.run:
 	bin/phpstan analyse --level=2 src tests
 
+# Functional tests
+.PHONY: tests.functional.install
+tests.functional.install:
+	php tests/fixtures/app/install.php
+
+tests.functional.run:
+	echo "WIP"

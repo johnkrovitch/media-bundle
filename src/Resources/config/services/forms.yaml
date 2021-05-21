@@ -9,7 +9,6 @@ services:
 #            - {name: form.type}
 
     JK\MediaBundle\Form\Type\MediaType:
-        class: JK\MediaBundle\Form\Type\MediaType
         arguments:
             - '@JK\MediaBundle\Form\Transformer\MediaTransformer'
             - '@router'

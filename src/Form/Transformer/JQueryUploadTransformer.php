@@ -9,6 +9,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 /**
  * Transform an Media to an array of data and reverse transform this array into a Media using the id.
  */
+/** @deprecated  */
 class JQueryUploadTransformer implements DataTransformerInterface
 {
     /**
