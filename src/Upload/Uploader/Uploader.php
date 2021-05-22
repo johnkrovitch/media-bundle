@@ -50,7 +50,7 @@ class Uploader implements UploaderInterface
         $this->repository = $repository;
     }
 
-    public function upload(UploadedFile $uploadedFile, string $type): MediaInterface
+    public function upload(UploadedFile $uploadedFile, ?string $type): MediaInterface
     {
         // Get the upload directory according to the wanted media type
         $uploadDirectory = $this->getAbsoluteUploadDirectory($type);
@@ -69,7 +69,7 @@ class Uploader implements UploaderInterface
         return $media;
     }
 
-    public function getAbsoluteUploadDirectory(string $type): string
+    private function getAbsoluteUploadDirectory(string $type): string
     {
         if (!key_exists($type, $this->mapping)) {
             throw new Exception('The media type "'.$type.'" is not valid: no mapping available');
@@ -81,14 +81,5 @@ class Uploader implements UploaderInterface
         }
 
         return $directory.$this->mapping[$type];
-    }
-
-    public function getRelativeUploadDirectory(string $type): string
-    {
-        if (!key_exists($type, $this->mapping)) {
-            throw new Exception('The media type "'.$type.'" is not valid: no mapping available');
-        }
-
-        return $this->mapping[$type];
     }
 }

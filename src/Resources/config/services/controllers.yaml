@@ -19,8 +19,7 @@ services:
             $formFactory: '@form.factory'
             $handler: '@JK\MediaBundle\Handler\Form\AddImageHandler'
 
-    JK\MediaBundle\Action\Media\UploadMediaAjaxAction:
-        class: JK\MediaBundle\Action\Media\UploadMediaAjaxAction
+    JK\MediaBundle\Action\Media\UploadAction:
         tags:
             - 'controller.service_arguments'
         arguments:
