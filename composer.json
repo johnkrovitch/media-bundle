@@ -11,18 +11,17 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-gd": "*",
-        "johnkrovitch/orm-pack": "^2.0",
-        "lag/string-utils": "^1.2",
+        "johnkrovitch/orm-pack": "^3.0",
         "liip/imagine-bundle": "^2.2",
         "pagerfanta/doctrine-collections-adapter": "^3.1",
         "pagerfanta/doctrine-orm-adapter": "^3.1",
-        "symfony/form": "^3.4|^4.4|^5.2",
-        "symfony/framework-bundle": "^3.4|^4.4|^5.2",
-        "symfony/twig-bundle": "^3.4|^4.4|^5.2",
-        "symfony/validator": "^3.4|^4.4|^5.2",
-        "symfony/yaml": "^3.4|^4.4|^5.2"
+        "symfony/form": "^5.2",
+        "symfony/framework-bundle": "^5.2",
+        "symfony/twig-bundle": "^5.2",
+        "symfony/validator": "^5.2",
+        "symfony/yaml": "^5.2"
     },
     "require-dev": {
         "ext-json": "*",
@@ -32,7 +31,7 @@
         "phpstan/phpstan": "^0.12.2",
         "phpunit/phpunit": "^8.4",
         "robertfausk/behat-panther-extension": "^1.0",
-        "symfony/phpunit-bridge": "^3.4|^4.4|^5.2",
+        "symfony/phpunit-bridge": "^5.2",
         "symfony/webpack-encore-bundle": "^1.7"
     },
     "autoload": {
