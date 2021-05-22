@@ -4,82 +4,58 @@ namespace JK\MediaBundle\Upload\Uploader;
 
 use Exception;
 use JK\MediaBundle\Entity\MediaInterface;
-use JK\MediaBundle\Factory\MediaFactoryInterface;
+use JK\MediaBundle\Event\MediaEvents;
+use JK\MediaBundle\Event\MediaEvent;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
-use LAG\Component\StringUtils\StringUtils;
-use Symfony\Component\Filesystem\Filesystem;
+use JK\MediaBundle\Upload\Path\PathResolverInterface;
+use League\Flysystem\FilesystemOperator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use function Symfony\Component\String\u;
 
 class Uploader implements UploaderInterface
 {
-    /**
-     * @var string
-     */
-    private $uploadDirectory;
-
-    /**
-     * @var Filesystem
-     */
-    private $fileSystem;
-
-    /**
-     * @var MediaFactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var array
-     */
-    private $mapping;
-
-    /**
-     * @var MediaRepositoryInterface
-     */
-    private $repository;
+    private PathResolverInterface $pathResolver;
+    private FilesystemOperator $mediaStorage;
+    private MediaRepositoryInterface $mediaRepository;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
-        string $uploadDirectory,
-        MediaFactoryInterface $factory,
-        MediaRepositoryInterface $repository,
-        array $mapping = []
+        PathResolverInterface $pathResolver,
+//        FilesystemOperator $mediaStorage,
+        MediaRepositoryInterface $mediaRepository,
+        EventDispatcherInterface $eventDispatcher
     ) {
-        $this->uploadDirectory = $uploadDirectory;
-        $this->fileSystem = new Filesystem();
-        $this->factory = $factory;
-        $this->mapping = $mapping;
-        $this->repository = $repository;
+        $this->pathResolver = $pathResolver;
+//        $this->mediaStorage = $mediaStorage;
+        $this->mediaRepository = $mediaRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function upload(UploadedFile $uploadedFile, ?string $type): MediaInterface
     {
-        // Get the upload directory according to the wanted media type
-        $uploadDirectory = $this->getAbsoluteUploadDirectory($type);
+        // Get the upload directory according to the media type
+        $uploadDirectory = $this->pathResolver->resolve($type);
+        $fileName = u($uploadedFile->getClientOriginalName())->snake()->toString();
 
-        // Ensure the upload directory exists
-        $this->fileSystem->mkdir($uploadDirectory);
+        $path = u($uploadDirectory)
+            ->ensureEnd('/')
+            ->append($fileName)
+            ->append('_', uniqid(), '.', $uploadedFile->getClientOriginalExtension())
+            ->toString()
+        ;
+        $media = $this->mediaRepository->create();
+        $media->setType($type ?? '');
+        $media->setName($fileName);
+        $media->setFileType($uploadedFile->getClientOriginalExtension());
+        $media->setFileName($fileName);
+        $media->setPath($path);
 
-        // Move the uploaded file to the dedicated upload directory
-        $extension = str_replace($uploadedFile->guessExtension(), 'jpeg', 'jpg');
-        $file = $uploadedFile->move($uploadDirectory, uniqid().'.'.$extension);
-
-        // Create the associated media
-        $media = $this->factory->create($file, $type);
-        $this->repository->save($media);
+        $this->eventDispatcher->dispatch(new MediaEvent($path, $media), MediaEvents::MEDIA_UPLOAD);
+        $this->mediaStorage->write($path, $uploadedFile->getContent());
+        $this->mediaRepository->add($media);
+        $this->eventDispatcher->dispatch(new MediaEvent($path, $media), MediaEvents::MEDIA_UPLOADED);
 
         return $media;
-    }
-
-    private function getAbsoluteUploadDirectory(string $type): string
-    {
-        if (!key_exists($type, $this->mapping)) {
-            throw new Exception('The media type "'.$type.'" is not valid: no mapping available');
-        }
-        $directory = $this->uploadDirectory;
-
-        if (!StringUtils::endsWith($directory, '/')) {
-            $directory .= '/';
-        }
-
-        return $directory.$this->mapping[$type];
     }
 }

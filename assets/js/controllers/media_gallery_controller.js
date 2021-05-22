@@ -74,7 +74,6 @@ export default class extends Controller {
     }
     
     showError() {
-        console.log('show ?');
         this.element.querySelector('.error-message').classList.remove('d-none');
     }
     

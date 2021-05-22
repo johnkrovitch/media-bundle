@@ -30,8 +30,24 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
 
     public function prepend(ContainerBuilder $container): void
     {
+        $configs = $container->getExtensionConfig($this->getAlias());
+        $resolvingBag = $container->getParameterBag();
+        $configs = $resolvingBag->resolveValue($configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
+
         $container->prependExtensionConfig('twig', [
             'form_themes' => ['@JKMedia/Form/theme.html.twig'],
+        ]);
+
+        $container->prependExtensionConfig('flysystem', [
+            'storages' => [
+                'media.storage' => [
+                    'adapter' => 'local',
+                    'options' => [
+                        'directory' => $config['upload_path'],
+                    ],
+                ],
+            ],
         ]);
     }
 
