@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Table(name="cms_media")
@@ -17,82 +18,74 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Media implements MediaInterface
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string
-     *
+     * @ORM\Column(type="uuid", nullable=false)
+     */
+    protected string $identifier;
+
+    /**
      * @ORM\Column(type="string")
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
-     * @var string
-     *
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected string $path;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", nullable=true, name="fileName")
      */
-    protected $fileName = '';
+    protected string $fileName = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", nullable=true, name="fileType")
      */
-    protected $fileType = '';
+    protected string $fileType = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string")
      */
-    protected $type = MediaInterface::TYPE_ARTICLE_THUMBNAIL;
+    protected string $type = MediaInterface::TYPE_ARTICLE_THUMBNAIL;
 
     /**
-     * @var int
-     *
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $size = '';
+    protected ?int $size;
 
     /**
-     * @var DateTime
-     *
      * @ORM\Column(type="datetime", name="createdAt")
-     *
      * @Gedmo\Timestampable(on="create")
      */
-    protected $createdAt;
+    protected DateTime $createdAt;
 
     /**
-     * @var DateTime
-     *
      * @ORM\Column(type="datetime", name="updatedAt"))
-     *
      * @Gedmo\Timestampable(on="update")
      */
-    protected $updatedAt;
+    protected DateTime $updatedAt;
+
+    public function __construct()
+    {
+        $this->identifier = Uuid::v4()->toRfc4122();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(?int $id): void
     {
         $this->id = $id;
@@ -176,5 +169,20 @@ class Media implements MediaInterface
     public function setUpdatedAt(DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path): void
+    {
+        $this->path = $path;
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
     }
 }

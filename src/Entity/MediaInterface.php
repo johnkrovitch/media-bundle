@@ -8,54 +8,31 @@ interface MediaInterface
 {
     const TYPE_ARTICLE_THUMBNAIL = 'article_thumbnail';
 
-    /**
-     * Return the Media id.
-     */
     public function getId(): ?int;
 
-    /**
-     * Return the Media name.
-     */
-    public function getName(): string;
-
-    /**
-     * Return the Media file name.
-     */
-    public function getFileName(): string;
-
-    /**
-     * Return the Media file type.
-     */
-    public function getFileType(): string;
-
-    /**
-     * Return the Media file type.
-     */
-    public function getType(): string;
-
-    /**
-     * Return the Media file size.
-     */
-    public function getSize(): int;
-
-    /**
-     * Return the Media description.
-     */
     public function getDescription(): string;
-
-    public function setId(?int $id): void;
-
-    public function setName(string $name): void;
 
     public function setDescription(string $description): void;
 
+    public function getName(): string;
+
     public function setFileName(string $fileName): void;
+
+    public function getFileName(): string;
+
+    public function getFileType(): string;
 
     public function setFileType(string $fileType): void;
 
+    public function getType(): string;
+
     public function setType(string $type): void;
 
+    public function getSize(): int;
+
     public function setSize(int $size): void;
+
+    public function setName(string $name): void;
 
     public function getCreatedAt(): DateTime;
 
@@ -64,4 +41,10 @@ interface MediaInterface
     public function getUpdatedAt(): DateTime;
 
     public function setUpdatedAt(DateTime $updatedAt): void;
+
+    public function getPath(): string;
+
+    public function setPath(string $path): void;
+
+    public function getIdentifier(): string;
 }
