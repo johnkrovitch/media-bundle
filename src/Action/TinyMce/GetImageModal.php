@@ -2,7 +2,7 @@
 
 namespace JK\MediaBundle\Action\TinyMce;
 
-use JK\MediaBundle\Form\Type\UploadModalType;
+use JK\MediaBundle\Form\Type\UploadType;
 use JK\MediaBundle\Handler\Form\AddImageHandler;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,16 +26,16 @@ class GetImageModal
      */
     private $handler;
 
-    public function __construct(Environment $environment, FormFactoryInterface $formFactory, AddImageHandler $handler)
-    {
-        $this->environment = $environment;
-        $this->formFactory = $formFactory;
-        $this->handler = $handler;
-    }
+//    public function __construct(Environment $environment, FormFactoryInterface $formFactory, AddImageHandler $handler)
+//    {
+//        $this->environment = $environment;
+//        $this->formFactory = $formFactory;
+//        $this->handler = $handler;
+//    }
 
     public function __invoke(Request $request): Response
     {
-        $form = $this->formFactory->create(UploadModalType::class);
+        $form = $this->formFactory->create(UploadType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -43,30 +43,30 @@ class AssetsHelper
      */
     private $uploader;
 
-    /**
-     * AssetsHelper constructor.
-     */
-    public function __construct(
-        string $kernelEnvironment,
-        string $rootDirectory,
-        array $assetsMapping,
-        RouterInterface $router,
-        CacheManager $assetsManager,
-        UploaderInterface $uploader
-    ) {
-        $this->assetsMapping = $assetsMapping;
-
-        if ([] === $this->assetsMapping) {
-            $this->assetsMapping = [
-                'gallery' => '/uploads/gallery',
-            ];
-        }
-        $this->router = $router;
-        $this->environment = $kernelEnvironment;
-        $this->assetsManager = $assetsManager;
-        $this->rootDir = $rootDirectory;
-        $this->uploader = $uploader;
-    }
+//    /**
+//     * AssetsHelper constructor.
+//     */
+//    public function __construct(
+//        string $kernelEnvironment,
+//        string $rootDirectory,
+//        array $assetsMapping,
+//        RouterInterface $router,
+//        CacheManager $assetsManager,
+//        UploaderInterface $uploader
+//    ) {
+//        $this->assetsMapping = $assetsMapping;
+//
+//        if ([] === $this->assetsMapping) {
+//            $this->assetsMapping = [
+//                'gallery' => '/uploads/gallery',
+//            ];
+//        }
+//        $this->router = $router;
+//        $this->environment = $kernelEnvironment;
+//        $this->assetsManager = $assetsManager;
+//        $this->rootDir = $rootDirectory;
+//        $this->uploader = $uploader;
+//    }
 
     /**
      * Return the web path to a Media. If $cache is true, it returns the web path to the cached version.

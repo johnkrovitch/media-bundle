@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UploadModalType extends AbstractType
+class UploadType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +19,7 @@ class UploadModalType extends AbstractType
                 'choices' => MediaType::getUploadChoices(),
                 'expanded' => true,
                 'attr' => [
-                    'class' => 'media-choice',
+                    'class' => 'media-upload-type',
                 ],
             ])
             ->add('upload', FileType::class, [
@@ -34,6 +34,7 @@ class UploadModalType extends AbstractType
                     'class' => 'media-gallery-input',
                 ],
             ])
+            ->add('mediaType', HiddenType::class)
         ;
     }
 

@@ -1,0 +1,121 @@
+parameters:
+    file_cache_dir: 'var/cache'
+
+framework:
+    secret: '%env(APP_SECRET)%'
+    default_locale: fr
+    csrf_protection: true
+    http_method_override: true
+    ide: 'phpstorm://open?url=file://%%f&line=%%l'
+
+    session:
+        storage_id: session.storage.filesystem
+
+    esi: false
+    fragments: true
+    php_errors:
+        log: true
+
+    cache:
+        prefix_seed: test/admin-bundle
+
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+
+    form: ~
+
+    translator:
+        paths:
+            - tests
+        fallbacks:
+            - en
+    annotations:
+        cache: file
+
+sensio_framework_extra:
+    router:
+        annotations: false
+
+security:
+    encoders:
+        App\Entity\User: sha512
+    providers:
+        backend:
+            memory:
+                users:
+                    john_admin: { password: '$2y$13$jxGxc ... IuqDju', roles: ['ROLE_ADMIN'] }
+    access_control:
+        - {path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY}
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            anonymous: ~
+        main:
+            anonymous: ~
+            form_login: ~
+            logout:
+                path: cms.logout
+
+twig: ~
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        server_version: '5.7'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+        url: url
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings: []
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ["!event"]
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build'
+
+#services:
+#    translator.logging.inner:
+#        synthetic: true
+#
+##    annotations.filesystem_cache:
+##        synthetic: true
+##        arguments:
+##            - cache
+##
+#    security.authentication.listener.anonymous:
+#        class: Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener
+#        abstract: true
+#        synthetic: true
+#        arguments:
+#            - test
+#            - test
+#
+#    security.authentication.provider.anonymous:
+#        class: Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider
+#        abstract: true
+#        synthetic: true
+#        arguments:
+#            - test
+#
+#    security.context_listener:
+#        abstract: true
+#        class: Symfony\Component\Security\Http\Firewall\ContextListener
+#        arguments:
+#            - test
+#            - test
+#

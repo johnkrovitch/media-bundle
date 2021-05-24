@@ -14,17 +14,19 @@ services:
         class: JK\MediaBundle\Action\TinyMce\GetImageModal
         tags:
             - 'controller.service_arguments'
-        arguments:
-            $environment: '@twig'
-            $formFactory: '@form.factory'
-            $handler: '@JK\MediaBundle\Handler\Form\AddImageHandler'
+#        arguments:
+#            $environment: '@twig'
+#            $formFactory: '@form.factory'
+#            $handler: '@JK\MediaBundle\Handler\Form\AddImageHandler'
 
-    JK\MediaBundle\Action\Media\UploadAction:
+    JK\MediaBundle\Action\Media\Modal\UploadAction:
         tags:
             - 'controller.service_arguments'
         arguments:
             $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
-            $helper: '@JK\MediaBundle\Assets\Helper\AssetsHelper'
+            $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
+            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+            $environment: '@Twig\Environment'
 
     JK\MediaBundle\Action\Gallery\RenderAction:
         tags: ['controller.service_arguments']

@@ -23,10 +23,10 @@ class MediaExtension extends AbstractExtension
         ];
     }
 
-    public function __construct(AssetsHelper $helper)
-    {
-        $this->helper = $helper;
-    }
+//    public function __construct(AssetsHelper $helper)
+//    {
+//        $this->helper = $helper;
+//    }
 
     /**
      * Return the path to an media according to its type.

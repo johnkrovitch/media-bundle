@@ -7,5 +7,5 @@ interface PathResolverInterface
     /**
      * Return the path configured for the given media type. If none is provided, return the upload directory root.
      */
-    public function resolve(?string $type): string;
+    public function resolve(string $originalFileName, ?string $type): string;
 }

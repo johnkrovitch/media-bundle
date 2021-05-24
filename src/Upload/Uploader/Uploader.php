@@ -22,39 +22,34 @@ class Uploader implements UploaderInterface
 
     public function __construct(
         PathResolverInterface $pathResolver,
-//        FilesystemOperator $mediaStorage,
+        FilesystemOperator $mediaStorage,
         MediaRepositoryInterface $mediaRepository,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->pathResolver = $pathResolver;
-//        $this->mediaStorage = $mediaStorage;
+        $this->mediaStorage = $mediaStorage;
         $this->mediaRepository = $mediaRepository;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     public function upload(UploadedFile $uploadedFile, ?string $type): MediaInterface
     {
-        // Get the upload directory according to the media type
-        $uploadDirectory = $this->pathResolver->resolve($type);
-        $fileName = u($uploadedFile->getClientOriginalName())->snake()->toString();
-
-        $path = u($uploadDirectory)
-            ->ensureEnd('/')
-            ->append($fileName)
-            ->append('_', uniqid(), '.', $uploadedFile->getClientOriginalExtension())
-            ->toString()
-        ;
+        // Get the upload path according to the media type
+        $path = $this->pathResolver->resolve(
+            $uploadedFile->getClientOriginalName(),
+            $type
+        );
         $media = $this->mediaRepository->create();
         $media->setType($type ?? '');
-        $media->setName($fileName);
+        $media->setName(u($uploadedFile->getClientOriginalName())->beforeLast('.')->toString());
         $media->setFileType($uploadedFile->getClientOriginalExtension());
-        $media->setFileName($fileName);
+        $media->setFileName(u($path)->afterLast('/'));
         $media->setPath($path);
 
-        $this->eventDispatcher->dispatch(new MediaEvent($path, $media), MediaEvents::MEDIA_UPLOAD);
+        $this->eventDispatcher->dispatch(new MediaEvent($media), MediaEvents::MEDIA_UPLOAD);
         $this->mediaStorage->write($path, $uploadedFile->getContent());
         $this->mediaRepository->add($media);
-        $this->eventDispatcher->dispatch(new MediaEvent($path, $media), MediaEvents::MEDIA_UPLOADED);
+        $this->eventDispatcher->dispatch(new MediaEvent($media), MediaEvents::MEDIA_UPLOADED);
 
         return $media;
     }

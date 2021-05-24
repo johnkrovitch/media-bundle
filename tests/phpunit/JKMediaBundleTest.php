@@ -37,7 +37,7 @@ class JKMediaBundleTest extends TestCase
 
         foreach ($finder as $file) {
             $data = Yaml::parseFile($file->getRealPath());
-            $services = array_merge($services, $data['services']);
+            $services = array_merge($services, $data['services'] ?? []);
         }
 
         foreach ($services as $id => $service) {

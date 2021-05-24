@@ -1,15 +1,46 @@
 framework:
-    secret: secret
-    test: ~
-    router:
-        resource: '%kernel.project_dir%/routing.yml'
-    form: true
-    csrf_protection: false
-    validation:
-      enable_annotations: false
-    session:
-        storage_id: session.storage.filesystem
+    secret: '%env(APP_SECRET)%'
+    #csrf_protection: true
+    #http_method_override: true
+#    cache:
+    test: true
+    # Enables session support. Note that the session will ONLY be started if you read or write from it.
+    # Remove or comment this section to explicitly disable session support.
+#    session:
+#        handler_id: null
+#        storage_id: session.storage.mock_file
+#        cookie_secure: auto
+#        cookie_samesite: lax
 
+    #esi: true
+    #fragments: true
+    php_errors:
+        log: true
+    router:
+        utf8: true
+        resource: '%kernel.project_dir%%/config/routing_dev.yml'
+    annotations:
+        cache: file
+        file_cache_dir: '%kernel.cache_dir%/annotations'
+
+
+
+#framework:
+#    secret: secret
+#    test: ~
+#    router:
+#        resource: '%kernel.project_dir%/routing.yml'
+#    form: true
+#    csrf_protection: false
+#    validation:
+#      enable_annotations: false
+#    session:
+#        handler_id: null
+#        cookie_secure: auto
+#        cookie_samesite: lax
+#    annotations:
+#        cache: file
+#        file_cache_dir: cache
 
 twig: ~
 

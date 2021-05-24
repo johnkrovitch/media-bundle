@@ -32,7 +32,7 @@ $appComposerContent = json_decode(file_get_contents($appDirectory.'/composer.jso
 
 $appComposerContent['require'] = array_merge($appComposerContent['require'], $composerContent['require']);
 $appComposerContent['require-dev'] = array_merge($appComposerContent['require-dev'], $composerContent['require-dev']);
-$appComposerContent['autoload']['psr-4']['JK\\MediaBundle\\'] = 'bundle/';
+$appComposerContent['autoload']['psr-4']['JK\\MediaBundle\\'] = 'bundle/src';
 
 file_put_contents($appDirectory.'/composer.json', json_encode($appComposerContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 logMessage('The app composer.json updated');
@@ -43,7 +43,7 @@ logMessage('Composer dependencies updated');
 
 logMessage('Copying bundles data');
 exec($appCommand.'mkdir -p bundle');
-exec('cp -r -f '.$bundleDirectory.'/src/* '.$appDirectory.'/bundle/');
+exec('ln -s '.$bundleDirectory.'/src/ '.$appDirectory.'/bundle/');
 
 $content = file_get_contents($appDirectory.'/config/bundles.php');
 
@@ -58,10 +58,10 @@ if (strpos($content, 'JK\MediaBundle\JKMediaBundle::class') === false) {
 }
 
 logMessage('Copying fixtures...');
-exec('cp '.$bundleDirectory.'/tests/fixtures/app/jk_media.yaml '.$appDirectory.'/config/packages');
-exec('cp '.$bundleDirectory.'/tests/fixtures/app/behat.yml '.$appDirectory);
-exec('cp '.$bundleDirectory.'/tests/fixtures/app/Controller/* '.$appDirectory.'/src/Controller');
-exec('cp -r '.$bundleDirectory.'/tests/fixtures/app/Form '.$appDirectory.'/src/Form');
+removeAndLink($bundleDirectory.'/tests/fixtures/app/jk_media.yaml', $appDirectory.'/config/packages');
+removeAndLink($bundleDirectory.'/tests/fixtures/app/behat.yml', $appDirectory);
+removeAndLink($bundleDirectory.'/tests/fixtures/app/src/', $appDirectory);
+
 
 logMessage('Clear the cache');
 exec($appCommand.'bin/console ca:cl');
@@ -69,4 +69,10 @@ exec($appCommand.'bin/console ca:cl');
 function logMessage(string $message): void
 {
     echo $message.PHP_EOL;
+}
+
+function removeAndLink(string $source, string $target): void
+{
+    exec('rm -rf '.$target);
+    exec('ln -s '.$source.' '.$target);
 }

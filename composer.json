@@ -20,6 +20,7 @@
         "pagerfanta/doctrine-orm-adapter": "^3.1",
         "symfony/form": "^5.2",
         "symfony/framework-bundle": "^5.2",
+        "symfony/orm-pack": "^2.1",
         "symfony/string": "^5.2",
         "symfony/twig-bundle": "^5.2",
         "symfony/uid": "^5.2",
@@ -30,12 +31,12 @@
         "ext-json": "*",
         "behat/behat": "^3.8",
         "behat/mink-extension": "^2.3",
-        "doctrine/doctrine-bundle": "^2.3",
         "friendsofphp/php-cs-fixer": "^3.0",
         "nyholm/symfony-bundle-test": "^1.7",
         "phpstan/phpstan": "^0.12.2",
         "phpunit/phpunit": "^9.5",
         "robertfausk/behat-panther-extension": "^1.0",
+        "sensio/framework-extra-bundle": "^6.1",
         "symfony/phpunit-bridge": "^5.2"
     },
     "autoload": {
