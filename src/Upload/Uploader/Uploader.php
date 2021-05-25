@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Upload\Uploader;
 
-use Exception;
 use JK\MediaBundle\Entity\MediaInterface;
-use JK\MediaBundle\Event\MediaEvents;
 use JK\MediaBundle\Event\MediaEvent;
+use JK\MediaBundle\Event\MediaEvents;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use JK\MediaBundle\Upload\Path\PathResolverInterface;
 use League\Flysystem\FilesystemOperator;
@@ -43,7 +44,7 @@ class Uploader implements UploaderInterface
         $media->setType($type ?? '');
         $media->setName(u($uploadedFile->getClientOriginalName())->beforeLast('.')->toString());
         $media->setFileType($uploadedFile->getClientOriginalExtension());
-        $media->setFileName(u($path)->afterLast('/'));
+        $media->setFileName(u($path)->afterLast('/')->toString());
         $media->setPath($path);
 
         $this->eventDispatcher->dispatch(new MediaEvent($media), MediaEvents::MEDIA_UPLOAD);

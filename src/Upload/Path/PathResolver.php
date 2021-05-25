@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Upload\Path;
 
 use JK\MediaBundle\Exception\MediaException;
@@ -23,7 +25,7 @@ class PathResolver implements PathResolverInterface
         $uploadDirectory = u($this->directory)->ensureEnd('/');
 
         if ($type !== null) {
-            if (!array_key_exists($type, $this->mapping)) {
+            if (!\array_key_exists($type, $this->mapping)) {
                 throw new MediaException(sprintf('Unable to find a directory mapping for media type "%s"', $type));
             }
             $uploadDirectory->append($this->mapping[$type]);

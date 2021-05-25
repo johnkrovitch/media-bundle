@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Extension;
 
 use LAG\AdminBundle\Form\Type\TinyMce\TinyMceType;
@@ -34,7 +36,7 @@ class TinyMceExtension extends AbstractTypeExtension
     {
         $resolver
             ->addNormalizer('tinymce_options', function (Options $options, $value) {
-                if (!array_key_exists('toolbar2', $value)) {
+                if (!\array_key_exists('toolbar2', $value)) {
                     return $value;
                 }
                 $value['toolbar2'] .= ' | add_gallery add_image edit_image';
@@ -43,7 +45,7 @@ class TinyMceExtension extends AbstractTypeExtension
                 return $value;
             })
             ->addNormalizer('custom_buttons', function (Options $options, $value) {
-                $value = is_array($value) ? $value : [];
+                $value = \is_array($value) ? $value : [];
                 $value['add_gallery'] = [
                     'event' => 'tinymce-add-gallery',
                     'text' => $this

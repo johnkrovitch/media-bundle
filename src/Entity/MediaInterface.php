@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Entity;
 
 use DateTime;
 
 interface MediaInterface
 {
-    const TYPE_ARTICLE_THUMBNAIL = 'article_thumbnail';
+    public const TYPE_ARTICLE_THUMBNAIL = 'article_thumbnail';
 
     public function getId(): ?int;
 

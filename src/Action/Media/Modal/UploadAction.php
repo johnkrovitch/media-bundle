@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Action\Media\Modal;
 
 use JK\MediaBundle\Form\Type\MediaType;
@@ -53,7 +55,7 @@ class UploadAction
         }
 
         return new Response($this->environment->render('@JKMedia/media/modal/upload.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]), $form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
     }
 }

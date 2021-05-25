@@ -9,8 +9,17 @@ foreach ($argv as $argument) {
 }
 
 $currentDirectory = __DIR__;
+exec('mkdir -p '.__DIR__.'/../../app');
 $appDirectory = realpath(__DIR__.'/../../app');
-$bundleDirectory = realpath(__DIR__.'/../../..');
+$bundleDirectory = realpath(__DIR__.'/../../../../media-bundle');
+
+if (!$appDirectory) {
+    throw new Exception('The app directory is invalid');
+}
+
+if (!$bundleDirectory) {
+    throw new Exception('The bundle directory is invalid');
+}
 
 $appCommand = 'cd '.$appDirectory.' && ';
 
@@ -21,7 +30,7 @@ if ($useCache && is_dir($appDirectory)) {
 } else {
     logMessage('No Symfony application was found or the --no-cache argument has been provided');
     exec('rm -rf '.$appDirectory);
-    exec('mkdir '.$appDirectory);
+    exec('mkdir -p '.$appDirectory);
     exec('symfony new --dir='.$appDirectory);
     logMessage('Symfony application installed');
 }
@@ -58,10 +67,23 @@ if (strpos($content, 'JK\MediaBundle\JKMediaBundle::class') === false) {
 }
 
 logMessage('Copying fixtures...');
-removeAndLink($bundleDirectory.'/tests/fixtures/app/jk_media.yaml', $appDirectory.'/config/packages');
-removeAndLink($bundleDirectory.'/tests/fixtures/app/behat.yml', $appDirectory);
-removeAndLink($bundleDirectory.'/tests/fixtures/app/src/', $appDirectory);
+exec('rm -rf '.$appDirectory.'/config/packages/jk_media.yaml');
+createLink($bundleDirectory.'/tests/fixtures/app/config/packages/jk_media.yaml', $appDirectory.'/config/packages');
 
+exec('rm -rf '.$appDirectory.'/behat.yml');
+createLink($bundleDirectory.'/tests/fixtures/app/behat.yml', $appDirectory.'/behat.yml');
+
+exec('rm -rf '.$appDirectory.'/src/Controller');
+createLink($bundleDirectory.'/tests/fixtures/app/src/Controller', $appDirectory.'/src/Controller');
+
+exec('rm -rf '.$appDirectory.'/src/Form');
+createLink($bundleDirectory.'/tests/fixtures/app/src/Form', $appDirectory.'/src/Form');
+
+exec('rm -f '.$appDirectory.'/config/routes.yaml');
+createLink($bundleDirectory.'/tests/fixtures/app/config/routes.yaml', $appDirectory.'/config/routes.yaml');
+
+exec('rm -rf '.$appDirectory.'/templates');
+createLink($bundleDirectory.'/tests/fixtures/app/templates', $appDirectory);
 
 logMessage('Clear the cache');
 exec($appCommand.'bin/console ca:cl');
@@ -71,8 +93,7 @@ function logMessage(string $message): void
     echo $message.PHP_EOL;
 }
 
-function removeAndLink(string $source, string $target): void
+function createLink(string $source, string $target): void
 {
-    exec('rm -rf '.$target);
     exec('ln -s '.$source.' '.$target);
 }

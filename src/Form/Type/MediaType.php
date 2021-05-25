@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\Entity\Media;
@@ -14,16 +16,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediaType extends AbstractType
 {
-    const UPLOAD_FROM_COMPUTER = 'upload_from_computer';
-    const CHOOSE_FROM_COLLECTION = 'choose_from_collection';
+    public const UPLOAD_FROM_COMPUTER = 'upload_from_computer';
+    public const CHOOSE_FROM_COLLECTION = 'choose_from_collection';
 
     private RouterInterface $router;
 
     public static function getUploadChoices(): array
     {
         return [
-            'cms.media.upload_from_computer' => MediaType::UPLOAD_FROM_COMPUTER,
-            'cms.media.choose_from_collection' => MediaType::CHOOSE_FROM_COLLECTION,
+            'cms.media.upload_from_computer' => self::UPLOAD_FROM_COMPUTER,
+            'cms.media.choose_from_collection' => self::CHOOSE_FROM_COLLECTION,
         ];
     }
 
@@ -66,7 +68,7 @@ class MediaType extends AbstractType
                 'row_attr' => [
                     'data-controller' => 'media-form',
                     'data-target' => '.media-identifier',
-                    'data-url' => $this->router->generate('media.upload_ajax'),
+                    'data-url' => $this->router->generate('media.upload'),
                 ],
                 'by_reference' => true,
                 'data_class' => Media::class,

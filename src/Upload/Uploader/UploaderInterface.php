@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Upload\Uploader;
 
 use JK\MediaBundle\Entity\MediaInterface;

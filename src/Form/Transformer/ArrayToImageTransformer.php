@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Transformer;
 
 use JK\MediaBundle\Form\Type\MediaModalType;
@@ -13,7 +15,7 @@ class ArrayToImageTransformer implements DataTransformerInterface
 
     public function transform($data)
     {
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             throw new TransformationFailedException('Data should an array');
         }
         $excludedAttributes = [
@@ -26,16 +28,16 @@ class ArrayToImageTransformer implements DataTransformerInterface
             'width' => 150,
         ];
 
-        if (!key_exists('height', $data) || !key_exists('width', $data)) {
+        if (!\array_key_exists('height', $data) || !\array_key_exists('width', $data)) {
             $webDirectory = __DIR__.'/../../../../../web';
             $webDirectory = realpath($webDirectory);
 
             $position = strpos($data['src'], 'cache/resolve/raw/');
-            $delta = strlen('cache/resolve/raw/');
+            $delta = \strlen('cache/resolve/raw/');
 
             if (false === $position) {
                 $position = strpos($data['src'], 'cache/raw/');
-                $delta = strlen('cache/raw/');
+                $delta = \strlen('cache/raw/');
             }
             $relativePathPosition = $position + $delta;
             $relativePath = substr($data['src'], $relativePathPosition);
@@ -49,7 +51,7 @@ class ArrayToImageTransformer implements DataTransformerInterface
             }
         }
 
-        if (key_exists('class', $data)) {
+        if (\array_key_exists('class', $data)) {
             if ('pull-'.MediaModalType::ALIGNMENT_FIT_TO_WIDTH === $data['class']) {
                 $data['alignment'] = MediaModalType::ALIGNMENT_FIT_TO_WIDTH;
             } elseif ('pull-'.MediaModalType::ALIGNMENT_LEFT === $data['class']) {
@@ -63,12 +65,12 @@ class ArrayToImageTransformer implements DataTransformerInterface
             }
         }
 
-        if (!key_exists('alignment', $data)) {
+        if (!\array_key_exists('alignment', $data)) {
             $data['alignment'] = TinyMceImageEditType::ALIGNMENT_NONE;
         }
 
         foreach ($data as $name => $value) {
-            if (in_array(strtolower($name), $excludedAttributes)) {
+            if (\in_array(strtolower($name), $excludedAttributes)) {
                 unset($data[$name]);
             }
         }
@@ -79,14 +81,14 @@ class ArrayToImageTransformer implements DataTransformerInterface
 
     public function reverseTransform($data)
     {
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             throw new TransformationFailedException('Data should an array');
         }
         unset($data['fit_to_width']);
 
         $data['style'] = '';
 
-        if (key_exists('alignment', $data)) {
+        if (\array_key_exists('alignment', $data)) {
             $data['class'] = 'pull-'.$data['alignment'];
 
             unset($data['alignment']);

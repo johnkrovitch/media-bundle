@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Validation\Constraints;
 
 use JK\MediaBundle\Validation\Validator\UploadValidator;

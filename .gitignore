@@ -7,3 +7,4 @@ composer.lock
 yarn.lock
 /node_modules
 tests/app
+.php-cs-fixer.cache

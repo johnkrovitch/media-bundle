@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DependencyInjection;
 
 use JK\MediaBundle\Form\Extension\TinyMceExtension;
@@ -39,7 +41,7 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('jk_media.admin_bundle_enabled', \array_key_exists('LAGAdminBundle', $container->getParameter('kernel.bundles')));
 
         $container->prependExtensionConfig('twig', [
-            'form_themes' => ['@JKMedia/Form/theme.html.twig'],
+            'form_themes' => ['@JKMedia/form/theme.html.twig'],
         ]);
         $container->prependExtensionConfig('flysystem', [
             'storages' => [
@@ -72,6 +74,5 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
                     ->setAutowired(true)
             )
         ;
-
     }
 }

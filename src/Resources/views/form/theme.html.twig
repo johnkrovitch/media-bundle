@@ -1,37 +1,37 @@
-{% block jquery_upload_widget %}
-    <div class="media-form-container">
-        <div class="media-form-preview">
-            {% if form.vars.data and form.vars.data.id and form.vars.data.type is defined %}
-                {% set mediaUrl = media_directory('media_gallery') %}
-                {% set mediaUrl = media_directory(form.vars.data.type) ~ '/' ~ form.vars.data.filename %}
+{#{% block jquery_upload_widget %}#}
+{#    <div class="media-form-container">#}
+{#        <div class="media-form-preview">#}
+{#            {% if form.vars.data and form.vars.data.id and form.vars.data.type is defined %}#}
+{#                {% set mediaUrl = media_directory('media_gallery') %}#}
+{#                {% set mediaUrl = media_directory(form.vars.data.type) ~ '/' ~ form.vars.data.filename %}#}
 
-                <img src="{{ mediaUrl | imagine_filter('media_gallery') }}"
-                     class="media-target"
-                     alt="Uploaded image"/>
-                <br/>
-                <a href="#"
-                   class="remove-media"
-                   data-target="{{ form.vars.media_target }}">
-                    <i class="fa fa-remove"></i>
-                    {{ form.vars.remove_label | trans }}
-                </a>
-            {% else %}
-                <img src=""
-                     class="media-target"
-                     alt="Uploaded image"/>
-                <a href="#"
-                   class="remove-media hide"
-                   data-target="{{ form.vars.media_target }}">
-                    <i class="fa fa-remove"></i>
-                    Remove Media
-                </a>
-            {% endif %}
-        </div>
-        {{ block('form_widget') }}
+{#                <img src="{{ mediaUrl | imagine_filter('media_gallery') }}"#}
+{#                     class="media-target"#}
+{#                     alt="Uploaded image"/>#}
+{#                <br/>#}
+{#                <a href="#"#}
+{#                   class="remove-media"#}
+{#                   data-target="{{ form.vars.media_target }}">#}
+{#                    <i class="fa fa-remove"></i>#}
+{#                    {{ form.vars.remove_label | trans }}#}
+{#                </a>#}
+{#            {% else %}#}
+{#                <img src=""#}
+{#                     class="media-target"#}
+{#                     alt="Uploaded image"/>#}
+{#                <a href="#"#}
+{#                   class="remove-media hide"#}
+{#                   data-target="{{ form.vars.media_target }}">#}
+{#                    <i class="fa fa-remove"></i>#}
+{#                    Remove Media#}
+{#                </a>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#        {{ block('form_widget') }}#}
 
-        {{ form_widget(form.upload_type) }}
-    </div>
-{% endblock %}
+{#        {{ form_widget(form.upload_type) }}#}
+{#    </div>#}
+{#{% endblock %}#}
 
 {% block media_widget %}
     <div class="media-form">
