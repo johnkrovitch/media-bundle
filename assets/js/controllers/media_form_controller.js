@@ -1,9 +1,21 @@
 import { Controller } from 'stimulus';
-import client from "axios";
+import events from "../events/events";
 
 export default class extends Controller {
-    addMedia() {
+    connect() {
+        const value = this.getValue();
     
+        if (!value) {
+            this.hideRemoveLink();
+            this.hideRestoreLink();
+            this.showAddLink();
+        }
+    }
+    
+    addMedia() {
+        window.dispatchEvent(new CustomEvent(events.MODAL_OPEN, {
+            detail: {url: this.element.dataset.targetUrl}
+        }));
     }
     
     removeMedia() {
@@ -27,8 +39,8 @@ export default class extends Controller {
         target.value = value;
     }
     
-    getAddLink() {
-        return this.element.querySelector('[data-action="media-form#addMedia"]');
+    getValue() {
+        return this.getTarget().value;
     }
     
     getRemoveLink() {
@@ -38,7 +50,32 @@ export default class extends Controller {
     showRemoveLink() {
         this.getRemoveLink().classList.remove('hide');
     }
+    
     hideRemoveLink() {
         this.getRemoveLink().classList.add('hide');
+    }
+    
+    getRestoreLink() {
+        return this.element.querySelector('[data-action="media-form#restoreMedia"]');
+    }
+    
+    showRestoreLink() {
+        this.getRestoreLink().classList.remove('hide');
+    }
+    
+    hideRestoreLink() {
+        this.getRestoreLink().classList.add('hide');
+    }
+    
+    getAddLink() {
+        return this.element.querySelector('[data-action="media-form#addMedia"]');
+    }
+    
+    showAddLink() {
+        this.getAddLink().classList.remove('hide');
+    }
+    
+    hideAddLink() {
+        this.getAddLink().classList.add('hide');
     }
 }

@@ -51,7 +51,7 @@ exec($appCommand.'composer update --ignore-platform-reqs');
 logMessage('Composer dependencies updated');
 
 logMessage('Copying bundles data');
-exec($appCommand.'mkdir -p bundle');
+exec('rm '.$appDirectory.'/bundle/src');
 exec('ln -s '.$bundleDirectory.'/src/ '.$appDirectory.'/bundle/');
 
 $content = file_get_contents($appDirectory.'/config/bundles.php');
@@ -86,6 +86,7 @@ exec('rm -rf '.$appDirectory.'/templates');
 createLink($bundleDirectory.'/tests/fixtures/app/templates', $appDirectory);
 
 logMessage('Clear the cache');
+exec($appCommand.'bin/console assets:install --symlink');
 exec($appCommand.'bin/console ca:cl');
 
 function logMessage(string $message): void

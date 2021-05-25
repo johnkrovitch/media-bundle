@@ -7,8 +7,12 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
-            <link rel="stylesheet"
-                  href="{{ asset('/bundles/jkmedia/assets/media.css') }}"/>
+            <link href="{{ asset('/bundles/jkmedia/assets/media.css') }}"
+                  rel="stylesheet"/>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+                  rel="stylesheet"
+                  integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+                  crossorigin="anonymous"/>
         {% endblock %}
 
         {% block javascripts %}

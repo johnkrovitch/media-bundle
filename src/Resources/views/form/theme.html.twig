@@ -64,14 +64,12 @@
         </a>
 
         <a href="#"
-           class="cms-media-restore d-none"
-           data-media-id="{{ media.id | default('') }}">
+           data-action="media-form#restoreMedia">
             {{ 'media.image.restore_thumbnail' | trans }}
         </a>
 
         <a href="#"
-           data-action="media-form#addMedia"
-           class="cms-add-media{% if hasValidMedia %} d-none{% endif %}">
+           data-action="media-form#addMedia">
             {{ 'media.image.add_thumbnail' | trans }}
         </a>
 

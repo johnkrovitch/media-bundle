@@ -33,20 +33,20 @@ export default class extends Controller {
     
     open(event) {
         if (event.detail.url) {
-            this.load(event.detail.url);
+            this.load(event.detail.url, this.openModal);
         } else {
             this.openModal();
         }
     }
     
-    load(url) {
+    load(url, callback) {
         client
             .get(url)
             .then(response => {
                 this.element.querySelectorAll('.modal-content').forEach(element => {
                     element.innerHTML = response.data;
                 });
-                this.openModal();
+                callback();
             })
         ;
     }

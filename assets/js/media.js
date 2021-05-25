@@ -7,7 +7,6 @@ const application = Application.start();
 const context = require.context("./controllers", true, /\.js$/);
 application.load(definitionsFromContext(context));
 
-
 //
 // import MediaGallery from "./components/gallery/MediaGallery";
 // import UploadModal from "./components/upload/modal/UploadModal";
