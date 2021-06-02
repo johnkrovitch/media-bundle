@@ -10,4 +10,4 @@ media_form:
 
 jk_media:
     resource: '@JKMediaBundle/Resources/config/routing/routing.yaml'
-    prefix: /media
+    prefix: /

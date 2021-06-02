@@ -33,15 +33,13 @@ class Uploader implements UploaderInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function upload(UploadedFile $uploadedFile, ?string $type): MediaInterface
+    public function upload(UploadedFile $uploadedFile, MediaInterface $media): void
     {
         // Get the upload path according to the media type
         $path = $this->pathResolver->resolve(
             $uploadedFile->getClientOriginalName(),
-            $type
+            $media->getType()
         );
-        $media = $this->mediaRepository->create();
-        $media->setType($type ?? '');
         $media->setName(u($uploadedFile->getClientOriginalName())->beforeLast('.')->toString());
         $media->setFileType($uploadedFile->getClientOriginalExtension());
         $media->setFileName(u($path)->afterLast('/')->toString());
@@ -51,7 +49,5 @@ class Uploader implements UploaderInterface
         $this->mediaStorage->write($path, $uploadedFile->getContent());
         $this->mediaRepository->add($media);
         $this->eventDispatcher->dispatch(new MediaEvent($media), MediaEvents::MEDIA_UPLOADED);
-
-        return $media;
     }
 }

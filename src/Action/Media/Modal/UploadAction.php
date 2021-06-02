@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Action\Media\Modal;
 
-use JK\MediaBundle\Form\Type\MediaType;
 use JK\MediaBundle\Form\Type\UploadType;
-use JK\MediaBundle\Repository\MediaRepositoryInterface;
-use JK\MediaBundle\Upload\Uploader\UploaderInterface;
+use JK\MediaBundle\Media\Handler\MediaHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,36 +14,34 @@ use Twig\Environment;
 
 class UploadAction
 {
-    private UploaderInterface $uploader;
     private FormFactoryInterface $formFactory;
-    private MediaRepositoryInterface $mediaRepository;
+    private MediaHandlerInterface $mediaHandler;
     private Environment $environment;
 
     public function __construct(
-        UploaderInterface $uploader,
         FormFactoryInterface $formFactory,
-        MediaRepositoryInterface $mediaRepository,
+        MediaHandlerInterface $mediaHandler,
         Environment $environment
     ) {
-        $this->uploader = $uploader;
         $this->formFactory = $formFactory;
-        $this->mediaRepository = $mediaRepository;
         $this->environment = $environment;
+        $this->mediaHandler = $mediaHandler;
     }
 
     public function __invoke(Request $request): Response
     {
-        $form = $this->formFactory->create(UploadType::class, ['mediaType' => $request->get('type')]);
+        $mediaType = $request->get('type');
+        $form = $this->formFactory->create(UploadType::class, ['mediaType' => $mediaType]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-
-            if ($data['uploadType'] === MediaType::UPLOAD_FROM_COMPUTER) {
-                $media = $this->uploader->upload($data['file'], $data['mediaType']);
-            } else {
-                $media = $this->mediaRepository->get($data['gallery']);
-            }
+            $media = $this->mediaHandler->handle([
+                'uploaded_file' => $data['file'] ?? null,
+                'upload_type' => $data['uploadType'],
+                'gallery_media_id' => $data['gallery'] ?? null,
+                'media_type' => $mediaType,
+            ]);
 
             return new JsonResponse([
                 'id' => $media->getId(),

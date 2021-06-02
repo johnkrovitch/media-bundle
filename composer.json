@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-gd": "*",
         "johnkrovitch/orm-pack": "^3.0",
         "league/flysystem-bundle": "^2.0",

@@ -17,12 +17,17 @@ class UploadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uploadType', ChoiceType::class, [
-                'choices' => MediaType::getUploadChoices(),
-                'expanded' => true,
+            ->add('upload_type', ChoiceType::class, [
                 'attr' => [
                     'class' => 'media-upload-type',
                 ],
+                'choices' => MediaType::getUploadChoices(),
+                'choice_attr' =>  function($choice, $key, $value) {
+                    return [
+                        'class' => 'form-check-input',
+                    ];
+                },
+                'expanded' => true,
             ])
             ->add('upload', FileType::class, [
                 'attr' => [
@@ -36,19 +41,20 @@ class UploadType extends AbstractType
                     'class' => 'media-gallery-input',
                 ],
             ])
-            ->add('mediaType', HiddenType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults([
-                'constraints' => [
-                    new UploadTypeConstraint(),
-                ],
-                'label' => false,
-            ])
+            ->define('constraints')
+            ->default(new UploadTypeConstraint())
+
+            ->define('label')
+            ->default(false)
+
+            ->define('media_type')
+            ->allowedTypes('string', 'null')
         ;
     }
 }

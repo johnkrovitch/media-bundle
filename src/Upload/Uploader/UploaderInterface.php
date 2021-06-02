@@ -9,5 +9,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface UploaderInterface
 {
-    public function upload(UploadedFile $uploadedFile, ?string $type): MediaInterface;
+    /**
+     * Upload a file and update the media data according to the uploaded file.
+     */
+    public function upload(UploadedFile $uploadedFile, MediaInterface $media): void;
 }

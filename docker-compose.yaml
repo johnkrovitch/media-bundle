@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+    db:
+        image: mariadb:10.5
+        volumes:
+            - ./var/data:/var/lib/mysql
+        environment:
+            MARIADB_ROOT_PASSWORD: 'password'
+            MARIADB_DATABASE: media
+            MARIADB_USER: media
+            MARIADB_PASSWORD: media
+        ports:
+            - 3306:3306

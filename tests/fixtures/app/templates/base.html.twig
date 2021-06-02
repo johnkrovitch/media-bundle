@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
@@ -19,8 +21,29 @@
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+
+    <body id="page-top">
+        <div id="wrapper">
+                <div id="content-wrapper" class="d-flex flex-column">
+                    <div id="content">
+                            <div class="container-fluid">
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                </div>
+                                {% block flash_messages %}
+                                    {% include '@JKMedia/flashes/flash_messages.html.twig' %}
+                                {% endblock %}
+                                {% block menu %}
+                                    <a href="{{ path('homepage') }}">Homepage</a>
+                                    <a href="{{ path('media_form') }}">Media Form</a>
+                                {% endblock %}
+                                {% block content %}{% endblock %}
+                            </div>
+                    </div>
+                </div>
+        </div>
+
+        {% include '@JKMedia/modal/modal.html.twig' %}
     </body>
+
     <script src="{{ asset('/bundles/jkmedia/assets/media.js') }}"></script>
 </html>

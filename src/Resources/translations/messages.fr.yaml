@@ -29,3 +29,11 @@ media:
 
     modal:
         loading: Chargemet en cours...
+
+    media:
+        choose: Choisir un média
+        add: Ajouter un média
+        remove: Supprimer le média
+        restore: Restaurer le média supprimé
+        upload_from_computer: Uploader un fichier de l'ordinateur
+        choose_from_gallery: Choisir dans la gallerie

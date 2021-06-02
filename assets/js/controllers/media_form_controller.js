@@ -12,10 +12,11 @@ export default class extends Controller {
         }
     }
     
-    addMedia() {
+    addMedia(event) {
         window.dispatchEvent(new CustomEvent(events.MODAL_OPEN, {
-            detail: {url: this.element.dataset.targetUrl}
+            detail: {url: this.element.dataset.url}
         }));
+        event.stopPropagation();
     }
     
     removeMedia() {

@@ -33,7 +33,9 @@ export default class extends Controller {
     
     open(event) {
         if (event.detail.url) {
-            this.load(event.detail.url, this.openModal);
+            this.load(event.detail.url, () => {
+                this.openModal();
+            });
         } else {
             this.openModal();
         }

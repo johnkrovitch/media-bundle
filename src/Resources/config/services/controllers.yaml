@@ -23,10 +23,9 @@ services:
         tags:
             - 'controller.service_arguments'
         arguments:
-            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
             $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
-            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
             $environment: '@Twig\Environment'
+            $mediaHandler: 'Media'
 
     JK\MediaBundle\Action\Gallery\RenderAction:
         tags: ['controller.service_arguments']
