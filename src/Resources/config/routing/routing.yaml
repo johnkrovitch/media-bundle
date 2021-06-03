@@ -7,10 +7,9 @@ media.edit_image_modal:
     path: /media/edit-image
     controller: JK\MediaBundle\Action\TinyMce\GetImageModal
 
-# Media Upload
-media.upload:
-    path: /media/upload/ajax
-    controller: JK\MediaBundle\Action\Media\Modal\UploadAction
+jk_media.media.select:
+    path: /media/select
+    controller: JK\MediaBundle\Action\Media\SelectAction
 
 # Media Gallery
 media.gallery_modal:

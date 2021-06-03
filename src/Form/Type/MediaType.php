@@ -21,6 +21,7 @@ class MediaType extends AbstractType
 
     private RouterInterface $router;
 
+    /** @deprecated  */
     public static function getUploadChoices(): array
     {
         return [
@@ -68,7 +69,7 @@ class MediaType extends AbstractType
                 'row_attr' => [
                     'data-controller' => 'media-form',
                     'data-target' => '.media-identifier',
-                    'data-url' => $this->router->generate('media.upload'),
+                    'data-url' => $this->router->generate('jk_media.media.select'),
                 ],
                 'by_reference' => true,
                 'data_class' => Media::class,

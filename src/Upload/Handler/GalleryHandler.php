@@ -1,6 +1,6 @@
 <?php
 
-namespace JK\MediaBundle\Media\Handler;
+namespace JK\MediaBundle\Upload\Handler;
 
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
@@ -16,7 +16,9 @@ class GalleryHandler implements MediaHandlerInterface, NamedMediaHandlerInterfac
 
     public function supports(array $data = []): bool
     {
-        return $data['gallery_media_id'] ?? false;
+        return ($data['gallery_media_id'] ?? false)
+            && ($data['upload_type'] ?? null) === MediaInterface::DATASOURCE_GALLERY
+        ;
     }
 
     public function handle(array $data = []): MediaInterface

@@ -21,7 +21,6 @@ class UploaderTest extends TestCase
 {
     private MockObject $pathResolver;
     private MockObject $mediaStorage;
-    private MockObject $mediaRepository;
     private MockObject $eventDispatcher;
     private Uploader $uploader;
 
@@ -43,12 +42,6 @@ class UploaderTest extends TestCase
         $media = new Media();
 
         $this
-            ->mediaRepository
-            ->expects($this->once())
-            ->method('create')
-            ->willReturn($media)
-        ;
-        $this
             ->eventDispatcher
             ->expects($this->exactly(2))
             ->method('dispatch')
@@ -63,20 +56,26 @@ class UploaderTest extends TestCase
             })
         ;
 
+        $this
+            ->mediaStorage
+            ->expects($this->once())
+            ->method('write')
+            ->with('/custom/upload/path/my_media.jpg')
+        ;
+
         $uploadedFile = new UploadedFile(__DIR__.'/../../../fixtures/My Media.jpg', 'My Media.jpg');
-        $this->uploader->upload($uploadedFile, 'my_type');
+        $media->setType('my_type');
+        $this->uploader->upload($uploadedFile, $media);
     }
 
     protected function setUp(): void
     {
         $this->pathResolver = $this->createMock(PathResolverInterface::class);
         $this->mediaStorage = $this->createMock(FilesystemOperator::class);
-        $this->mediaRepository = $this->createMock(MediaRepositoryInterface::class);
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->uploader = new Uploader(
             $this->pathResolver,
             $this->mediaStorage,
-            $this->mediaRepository,
             $this->eventDispatcher
         );
     }

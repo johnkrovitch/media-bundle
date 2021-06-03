@@ -12,5 +12,4 @@ services:
         arguments:
             $pathResolver: '@JK\MediaBundle\Upload\Path\PathResolverInterface'
             $mediaStorage: '@media.storage'
-            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
             $eventDispatcher: '@event_dispatcher'

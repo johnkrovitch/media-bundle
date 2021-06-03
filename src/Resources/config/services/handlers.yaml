@@ -1,11 +1,11 @@
-services:
-    JK\MediaBundle\Media\Handler\MediaHandlerInterface: '@JK\MediaBundle\Media\Handler\CompositeHandler'
-    JK\MediaBundle\Media\Handler\CompositeHandler:
-        arguments:
-            $handlers: !tagged_iterator media.handler
-
-    JK\MediaBundle\Media\Handler\GalleryHandler:
-        arguments:
-            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-        tags:
-            - {name: media.handler, priority: 0}
+#services:
+#    JK\MediaBundle\Upload\Handler\MediaHandlerInterface: '@JK\MediaBundle\Upload\Handler\CompositeHandler'
+#    JK\MediaBundle\Upload\Handler\CompositeHandler:
+#        arguments:
+#            $handlers: !tagged_iterator media.handler
+#
+#    JK\MediaBundle\Upload\Handler\GalleryHandler:
+#        arguments:
+#            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+#        tags:
+#            - {name: media.handler, priority: 0}

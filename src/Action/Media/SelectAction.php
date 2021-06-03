@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace JK\MediaBundle\Action\Media\Modal;
+namespace JK\MediaBundle\Action\Media;
 
 use JK\MediaBundle\Form\Type\UploadType;
-use JK\MediaBundle\Media\Handler\MediaHandlerInterface;
+use JK\MediaBundle\Upload\Handler\MediaHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class UploadAction
+class SelectAction
 {
     private FormFactoryInterface $formFactory;
     private MediaHandlerInterface $mediaHandler;

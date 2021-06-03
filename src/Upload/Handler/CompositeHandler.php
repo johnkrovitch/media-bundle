@@ -1,6 +1,6 @@
 <?php
 
-namespace JK\MediaBundle\Media\Handler;
+namespace JK\MediaBundle\Upload\Handler;
 
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Exception\MediaException;
@@ -15,16 +15,6 @@ class CompositeHandler implements MediaHandlerInterface
     public function __construct(iterable $handlers)
     {
         $this->handlers = $handlers;
-    }
-
-    public function getName(): string
-    {
-        return 'composite';
-    }
-
-    public function getLabel(): string
-    {
-        return '';
     }
 
     public function supports(array $data = []): bool
@@ -47,5 +37,10 @@ class CompositeHandler implements MediaHandlerInterface
         }
 
         throw new MediaException('The media is not supported by any persisters');
+    }
+
+    public function getHandlers(): iterable
+    {
+        return $this->handlers;
     }
 }

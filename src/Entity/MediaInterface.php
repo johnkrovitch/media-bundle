@@ -9,8 +9,8 @@ use DateTime;
 interface MediaInterface
 {
     public const TYPE_ARTICLE_THUMBNAIL = 'article_thumbnail';
-    public const UPLOAD_FROM_COMPUTER = 'upload_from_computer';
-    public const CHOOSE_FROM_COLLECTION = 'choose_from_collection';
+    public const DATASOURCE_COMPUTER = 'datasource.computer';
+    public const DATASOURCE_GALLERY = 'datasource.gallery';
 
     public function getId(): ?int;
 

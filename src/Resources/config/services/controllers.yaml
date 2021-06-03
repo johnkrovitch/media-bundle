@@ -2,6 +2,22 @@ parameters:
     media.upload_directory: '%kernel.project_dir%/public/uploads'
 
 services:
+    JK\MediaBundle\Action\Media\SelectAction:
+        tags: ['controller.service_arguments']
+        arguments:
+            $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
+            $environment: '@Twig\Environment'
+            $mediaHandler: 'Media'
+
+
+
+
+
+
+
+
+
+
     JK\MediaBundle\Action\TinyMce\GetUpdateModal:
         class: JK\MediaBundle\Action\TinyMce\GetUpdateModal
         tags:
@@ -19,13 +35,7 @@ services:
 #            $formFactory: '@form.factory'
 #            $handler: '@JK\MediaBundle\Handler\Form\AddImageHandler'
 
-    JK\MediaBundle\Action\Media\Modal\UploadAction:
-        tags:
-            - 'controller.service_arguments'
-        arguments:
-            $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
-            $environment: '@Twig\Environment'
-            $mediaHandler: 'Media'
+
 
     JK\MediaBundle\Action\Gallery\RenderAction:
         tags: ['controller.service_arguments']

@@ -1,6 +1,6 @@
 <?php
 
-namespace JK\MediaBundle\Media\Handler;
+namespace JK\MediaBundle\Upload\Handler;
 
 interface NamedMediaHandlerInterface
 {
