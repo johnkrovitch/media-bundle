@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Form\Type;
 
+use JK\MediaBundle\DataSource\DataSourceInterface;
+use JK\MediaBundle\DataSource\DataSourceRegistryInterface;
 use JK\MediaBundle\Upload\Handler\CompositeHandler;
-use JK\MediaBundle\Upload\Handler\MediaHandlerInterface;
 use JK\MediaBundle\Validation\Constraints\UploadTypeConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,13 +15,13 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UploadType extends AbstractType
+class MediaSelectType extends AbstractType
 {
-    private CompositeHandler $mediaHandler;
+    private DataSourceRegistryInterface $dataSources;
 
-    public function __construct(CompositeHandler $mediaHandler)
+    public function __construct(DataSourceRegistryInterface $dataSources)
     {
-        $this->mediaHandler = $mediaHandler;
+        $this->dataSources = $dataSources;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -71,8 +72,8 @@ class UploadType extends AbstractType
     {
         $choices = [];
 
-        foreach ($this->mediaHandler->getHandlers() as $handler) {
-            $choices[$handler->getName()] = $handler->getLabel();
+        foreach ($this->dataSources->getDataSources() as $name => $dataSource) {
+            $choices[$name] = 'jk_media.datasource.'.$name;
         }
 
         return $choices;

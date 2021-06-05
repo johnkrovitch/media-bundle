@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Action\Media;
 
-use JK\MediaBundle\Form\Type\UploadType;
+use JK\MediaBundle\Form\Type\MediaSelectType;
 use JK\MediaBundle\Upload\Handler\MediaHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +31,7 @@ class SelectAction
     public function __invoke(Request $request): Response
     {
         $mediaType = $request->get('type');
-        $form = $this->formFactory->create(UploadType::class, ['mediaType' => $mediaType]);
+        $form = $this->formFactory->create(MediaSelectType::class, ['mediaType' => $mediaType]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\DependencyInjection;
 
+use JK\MediaBundle\DependencyInjection\CompilerPass\DataSourcePass;
 use JK\MediaBundle\Form\Extension\TinyMceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

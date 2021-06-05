@@ -23,8 +23,8 @@ framework:
         cache: file
         file_cache_dir: '%kernel.cache_dir%/annotations'
 
-
-
+    uid:
+        name_based_uuid_namespace: true
 #framework:
 #    secret: secret
 #    test: ~

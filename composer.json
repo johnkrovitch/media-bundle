@@ -13,6 +13,7 @@
     "require": {
         "php": ">=8.0",
         "ext-gd": "*",
+        "johnkrovitch/configuration": "^2.1",
         "johnkrovitch/orm-pack": "^3.0",
         "league/flysystem-bundle": "^2.0",
         "liip/imagine-bundle": "^2.2",

@@ -6,14 +6,14 @@ use JK\MediaBundle\DataSource\Context\DataSourceContext;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Exception\MediaException;
 
-class CompositeDataSource implements DataSourceInterface
+class CompositeDataSource implements DataSourceInterface, DataSourceRegistryInterface
 {
     /**
-     * @var iterable<DataSourceInterface>
+     * @var DataSourceInterface[]
      */
-    private iterable $dataSources;
+    private array $dataSources;
 
-    public function __construct(iterable $dataSources)
+    public function __construct(array $dataSources)
     {
         $this->dataSources = $dataSources;
     }
@@ -49,5 +49,24 @@ class CompositeDataSource implements DataSourceInterface
         }
 
         throw new MediaException('The media context is not supported by any datasource');
+    }
+
+    public function getDataSource(string $name): DataSourceInterface
+    {
+        if (!$this->hasDataSource($name)) {
+            throw new MediaException(sprintf('The datasource "%s" does not exists', $name));
+        }
+
+
+    }
+
+    public function hasDataSource(string $name): bool
+    {
+        // TODO: Implement hasDataSource() method.
+    }
+
+    public function getDataSources(): iterable
+    {
+        // TODO: Implement getDataSources() method.
     }
 }

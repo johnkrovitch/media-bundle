@@ -18,7 +18,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * Assert that the given service class is configured in the services.yaml.
      */
-    protected function assertServiceExists(string $serviceId)
+    protected function assertServiceExists(string $serviceId): void
     {
         $kernel = $this->createKernel();
         $container = $kernel->getContainer();
