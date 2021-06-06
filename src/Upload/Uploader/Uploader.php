@@ -7,7 +7,6 @@ namespace JK\MediaBundle\Upload\Uploader;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Event\MediaEvent;
 use JK\MediaBundle\Event\MediaEvents;
-use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use JK\MediaBundle\Upload\Path\PathResolverInterface;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

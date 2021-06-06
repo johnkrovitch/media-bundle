@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DataSource;
 
 use JK\MediaBundle\DataSource\Context\DataSourceContext;
@@ -57,16 +59,16 @@ class CompositeDataSource implements DataSourceInterface, DataSourceRegistryInte
             throw new MediaException(sprintf('The datasource "%s" does not exists', $name));
         }
 
-
+        return $this->dataSources[$name];
     }
 
     public function hasDataSource(string $name): bool
     {
-        // TODO: Implement hasDataSource() method.
+        return \array_key_exists($name, $this->dataSources);
     }
 
     public function getDataSources(): iterable
     {
-        // TODO: Implement getDataSources() method.
+        return $this->dataSources;
     }
 }

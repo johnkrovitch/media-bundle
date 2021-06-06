@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Action\Media;
 
+use JK\MediaBundle\DataSource\Context\FormContext;
+use JK\MediaBundle\DataSource\DataSourceInterface;
 use JK\MediaBundle\Form\Type\MediaSelectType;
-use JK\MediaBundle\Upload\Handler\MediaHandlerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,17 +16,17 @@ use Twig\Environment;
 class SelectAction
 {
     private FormFactoryInterface $formFactory;
-    private MediaHandlerInterface $mediaHandler;
     private Environment $environment;
+    private DataSourceInterface $dataSource;
 
     public function __construct(
         FormFactoryInterface $formFactory,
-        MediaHandlerInterface $mediaHandler,
+        DataSourceInterface $dataSource,
         Environment $environment
     ) {
         $this->formFactory = $formFactory;
         $this->environment = $environment;
-        $this->mediaHandler = $mediaHandler;
+        $this->dataSource = $dataSource;
     }
 
     public function __invoke(Request $request): Response
@@ -36,12 +37,16 @@ class SelectAction
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $media = $this->mediaHandler->handle([
+            $context = new FormContext($data['uploadType'], [
                 'uploaded_file' => $data['file'] ?? null,
-                'upload_type' => $data['uploadType'],
                 'gallery_media_id' => $data['gallery'] ?? null,
                 'media_type' => $mediaType,
             ]);
+
+            if (!$this->dataSource->supports($context)) {
+                return new JsonResponse(['error' => 'The upload type is not supported'], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            $media = $this->dataSource->get($context);
 
             return new JsonResponse([
                 'id' => $media->getId(),
@@ -50,7 +55,7 @@ class SelectAction
             ]);
         }
 
-        return new Response($this->environment->render('@JKMedia/media/modal/upload.html.twig', [
+        return new Response($this->environment->render('@JKMedia/media/select.twig', [
             'form' => $form->createView(),
         ]), $form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
     }

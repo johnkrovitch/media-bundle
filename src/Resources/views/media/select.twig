@@ -1,6 +1,6 @@
 <div class="modal-content" data-controller="media-upload-modal">
     <div class="modal-header">
-        <h4 class="modal-title">{{ 'media.media.choose'|trans }}</h4>
+        <h4 class="modal-title">{{ 'jk_media.media.choose'|trans }}</h4>
         <button type="button"
                 class="btn close"
                 data-dismiss="modal"
@@ -18,7 +18,7 @@
                     {{ form_errors(form) }}
 
                     <div class="form-group">
-                        {% for child in form.uploadType.children %}
+                        {% for child in form.datasource.children %}
                             <div class="form-check">
                                 {{ form_row(child) }}
                             </div>

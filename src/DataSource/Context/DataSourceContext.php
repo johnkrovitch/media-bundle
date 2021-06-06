@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DataSource\Context;
 
 interface DataSourceContext
@@ -12,10 +14,10 @@ interface DataSourceContext
     /**
      * Return the value associated to the given name. An exception is thrown if the name does not exists.
      */
-    public function getValue(string $name);
+    public function getData(string $name);
 
     /**
      * Return true if the given name is associated to a value.
      */
-    public function hasValue(string $name): bool;
+    public function hasData(string $name): bool;
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DependencyInjection\CompilerPass;
 
 use JK\MediaBundle\DataSource\DataSourceInterface;
@@ -13,15 +15,13 @@ class DataSourcePass implements CompilerPassInterface
     {
         $taggedServices = $container->findTaggedServiceIds('jk_media.datasource');
         $registryDefinition = $container->getDefinition(DataSourceInterface::class);
-        $ids = [];
+        $dataSources = [];
 
         foreach ($taggedServices as $id => $tags) {
             foreach ($tags as $attributes) {
-                $ids[$attributes['datasource_name']] = $id;
+                $dataSources[$attributes['datasource_name']] = new Reference($id);
             }
         }
-        $registryDefinition->replaceArgument('$dataSources', array_map(function ($id) {
-            return new Reference($id);
-        }, $ids));
+        $registryDefinition->replaceArgument('$dataSources', $dataSources);
     }
 }

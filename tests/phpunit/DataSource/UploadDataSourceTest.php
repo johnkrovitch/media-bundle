@@ -2,7 +2,7 @@
 
 namespace JK\MediaBundle\Tests\DataSource;
 
-use JK\MediaBundle\DataSource\Context\ArrayContext;
+use JK\MediaBundle\DataSource\Context\FormContext;
 use JK\MediaBundle\DataSource\Context\DataSourceContext;
 use JK\MediaBundle\DataSource\UploadDataSource;
 use JK\MediaBundle\Entity\Media;
@@ -22,14 +22,14 @@ class UploadDataSourceTest extends TestCase
 
     public function testSupports(): void
     {
-        $context = new ArrayContext(MediaInterface::DATASOURCE_COMPUTER);
+        $context = new FormContext(MediaInterface::DATASOURCE_COMPUTER);
         $this->assertTrue($this->dataSource->supports($context));
     }
 
     public function testGet(): void
     {
         $file = new UploadedFile(__DIR__.'/../../fixtures/My Media.jpg', 'My Media.jpg');
-        $context = new ArrayContext(MediaInterface::DATASOURCE_COMPUTER, [
+        $context = new FormContext(MediaInterface::DATASOURCE_COMPUTER, [
             'uploaded_file' => $file,
             'media_type' => 'my_thumbnail_type',
         ]);
@@ -60,14 +60,14 @@ class UploadDataSourceTest extends TestCase
 
     public function testGetWithoutSupports(): void
     {
-        $context = new ArrayContext('wrong_name');
+        $context = new FormContext('wrong_name');
         $this->expectException(MediaException::class);
         $this->dataSource->get($context);
     }
 
     public function testGetWithWrongContext(): void
     {
-        $context = new ArrayContext(MediaInterface::DATASOURCE_COMPUTER);
+        $context = new FormContext(MediaInterface::DATASOURCE_COMPUTER);
         $this->expectException(MediaException::class);
         $this->dataSource->get($context);
     }
@@ -75,7 +75,7 @@ class UploadDataSourceTest extends TestCase
     public function testGetCollection(): void
     {
         $file = new UploadedFile(__DIR__.'/../../fixtures/My Media.jpg', 'My Media.jpg');
-        $context = new ArrayContext(MediaInterface::DATASOURCE_COMPUTER, [
+        $context = new FormContext(MediaInterface::DATASOURCE_COMPUTER, [
             'uploaded_files' => [$file],
             'media_type' => 'my_thumbnail_type',
         ]);
@@ -108,14 +108,14 @@ class UploadDataSourceTest extends TestCase
 
     public function testGetCollectionWithoutSupports(): void
     {
-        $context = new ArrayContext('wrong_name');
+        $context = new FormContext('wrong_name');
         $this->expectException(MediaException::class);
         $this->dataSource->getCollection($context);
     }
 
     public function testGetCollectionWithWrongContext(): void
     {
-        $context = new ArrayContext(MediaInterface::DATASOURCE_COMPUTER);
+        $context = new FormContext(MediaInterface::DATASOURCE_COMPUTER);
         $this->expectException(MediaException::class);
         $this->dataSource->getCollection($context);
     }

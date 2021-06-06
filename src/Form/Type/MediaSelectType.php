@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Form\Type;
 
-use JK\MediaBundle\DataSource\DataSourceInterface;
 use JK\MediaBundle\DataSource\DataSourceRegistryInterface;
-use JK\MediaBundle\Upload\Handler\CompositeHandler;
 use JK\MediaBundle\Validation\Constraints\UploadTypeConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -27,17 +25,19 @@ class MediaSelectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('upload_type', ChoiceType::class, [
+            ->add('datasource', ChoiceType::class, [
                 'attr' => [
                     'class' => 'media-upload-type',
                 ],
                 'choices' => $this->buildChoices(),
-                'choice_attr' =>  function($choice, $key, $value) {
+                'choice_attr' => function ($choice, $key, $value) {
                     return [
                         'class' => 'form-check-input',
                     ];
                 },
                 'expanded' => true,
+                'label' => 'jk_media.media.datasource',
+                'help' => 'jk_media.media.datasource_help'
             ])
             ->add('upload', FileType::class, [
                 'attr' => [
@@ -57,11 +57,8 @@ class MediaSelectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->define('constraints')
-            ->default(new UploadTypeConstraint())
-
-            ->define('label')
-            ->default(false)
+            ->setDefault('constraints', [new UploadTypeConstraint()])
+            ->setDefault('label', false)
 
             ->define('media_type')
             ->allowedTypes('string', 'null')
@@ -73,7 +70,7 @@ class MediaSelectType extends AbstractType
         $choices = [];
 
         foreach ($this->dataSources->getDataSources() as $name => $dataSource) {
-            $choices[$name] = 'jk_media.datasource.'.$name;
+            $choices['jk_media.datasource.'.$name] = $name;
         }
 
         return $choices;

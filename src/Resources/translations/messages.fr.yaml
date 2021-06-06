@@ -37,3 +37,9 @@ jk_media:
         restore: Restaurer le média supprimé
         upload_from_computer: Uploader un fichier de l'ordinateur
         choose_from_gallery: Choisir dans la gallerie
+        datasource: Choisir la source de votre média
+        datasource_help: Choisisez un média depuis la gallerie ou depuis votre ordinateur...
+
+    datasource:
+        computer: Choisir un média sur l'ordinateur
+        gallery: Choisr un média dans la gallerie

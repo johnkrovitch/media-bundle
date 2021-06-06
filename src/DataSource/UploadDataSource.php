@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DataSource;
 
 use JK\MediaBundle\DataSource\Context\DataSourceContext;
@@ -31,14 +33,14 @@ class UploadDataSource implements DataSourceInterface
             throw new MediaException('The context is not supported by the datasource');
         }
 
-        if (!$context->hasValue('uploaded_file') || !$context->getValue('uploaded_file') instanceof UploadedFile) {
+        if (!$context->hasData('uploaded_file') || !$context->getData('uploaded_file') instanceof UploadedFile) {
             throw new MediaException('The uploaded_file value is not valid');
         }
-        $uploadedFile = $context->getValue('uploaded_file');
+        $uploadedFile = $context->getData('uploaded_file');
         $media = $this->mediaRepository->create();
 
-        if ($context->hasValue('media_type')) {
-            $media->setType($context->getValue('media_type'));
+        if ($context->hasData('media_type')) {
+            $media->setType($context->getData('media_type'));
         }
         $this->uploader->upload($uploadedFile, $media);
         $this->mediaRepository->add($media);
@@ -52,16 +54,16 @@ class UploadDataSource implements DataSourceInterface
             throw new MediaException('The context is not supported by the datasource');
         }
 
-        if (!$context->hasValue('uploaded_files') || !is_array($context->getValue('uploaded_files'))) {
+        if (!$context->hasData('uploaded_files') || !\is_array($context->getData('uploaded_files'))) {
             throw new MediaException('The uploaded_files value is not valid');
         }
         $mediaCollection = [];
 
-        foreach ($context->getValue('uploaded_files') as $uploadedFile) {
+        foreach ($context->getData('uploaded_files') as $uploadedFile) {
             $media = $this->mediaRepository->create();
 
-            if ($context->hasValue('media_type')) {
-                $media->setType($context->getValue('media_type'));
+            if ($context->hasData('media_type')) {
+                $media->setType($context->getData('media_type'));
             }
             $this->uploader->upload($uploadedFile, $media);
             $this->mediaRepository->add($media);

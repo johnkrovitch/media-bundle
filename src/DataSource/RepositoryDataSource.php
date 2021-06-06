@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DataSource;
 
 use JK\MediaBundle\DataSource\Context\DataSourceContext;
@@ -23,21 +25,21 @@ class RepositoryDataSource implements DataSourceInterface
 
     public function get(DataSourceContext $context): MediaInterface
     {
-        if (!$context->hasValue('media_id')) {
+        if (!$context->hasData('media_id')) {
             throw new MediaException('The parameter "%s" is missing from the media context');
         }
 
-        return $this->mediaRepository->get($context->getValue('media_id'));
+        return $this->mediaRepository->get($context->getData('media_id'));
     }
 
     public function getCollection(DataSourceContext $context): array
     {
-        if (!$context->hasValue('media_ids')) {
+        if (!$context->hasData('media_ids')) {
             throw new MediaException('The parameter "%s" is missing from the media context');
         }
 
         return $this->mediaRepository->findBy([
-            'id' => $context->getValue('media_ids'),
+            'id' => $context->getData('media_ids'),
         ]);
     }
 }

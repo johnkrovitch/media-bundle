@@ -9,9 +9,9 @@ services:
         arguments:
             $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
             $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-        tags: [ { name: jk_media.datasource, datasource_name: upload, priority: -255 } ]
+        tags: [ { name: jk_media.datasource, datasource_name: computer, priority: -255 } ]
 
     JK\MediaBundle\DataSource\RepositoryDataSource:
         arguments:
             $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-        tags: [ { name: jk_media.datasource, datasource_name: computer, priority: -255 } ]
+        tags: [ { name: jk_media.datasource, datasource_name: gallery, priority: -255 } ]

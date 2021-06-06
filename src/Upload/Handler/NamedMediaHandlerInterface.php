@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Upload\Handler;
 
 interface NamedMediaHandlerInterface

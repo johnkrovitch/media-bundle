@@ -2,7 +2,7 @@
 
 namespace JK\MediaBundle\Tests\DataSource;
 
-use JK\MediaBundle\DataSource\Context\ArrayContext;
+use JK\MediaBundle\DataSource\Context\FormContext;
 use JK\MediaBundle\DataSource\Context\DataSourceContext;
 use JK\MediaBundle\DataSource\RepositoryDataSource;
 use JK\MediaBundle\Entity\MediaInterface;
@@ -31,10 +31,10 @@ class RepositoryDataSourceTest extends TestCase
 
     public function supportsDataProvider(): iterable
     {
-        $context = new ArrayContext(MediaInterface::DATASOURCE_GALLERY, []);
+        $context = new FormContext(MediaInterface::DATASOURCE_GALLERY, []);
         yield [$context, true];
 
-        $context = new ArrayContext('my_context', []);
+        $context = new FormContext('my_context', []);
         yield [$context, false];
     }
 
