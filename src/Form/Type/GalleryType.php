@@ -10,11 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GalleryType extends AbstractType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
                 'attr' => [
+                    '',
                     'class' => 'media-gallery-input',
                 ],
                 'multiple' => false,
@@ -23,7 +24,7 @@ class GalleryType extends AbstractType
         ;
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return HiddenType::class;
     }

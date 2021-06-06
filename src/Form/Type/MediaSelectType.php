@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\DataSource\DataSourceRegistryInterface;
+use JK\MediaBundle\DataSource\FormDataSourceInterface;
 use JK\MediaBundle\Validation\Constraints\UploadTypeConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,23 +29,19 @@ class MediaSelectType extends AbstractType
             ->add('datasource', ChoiceType::class, [
                 'attr' => [
                     'class' => 'media-upload-type',
+                    'data-controller' => 'media-select',
                 ],
                 'choices' => $this->buildChoices(),
                 'choice_attr' => function ($choice, $key, $value) {
                     return [
                         'class' => 'form-check-input',
+                        'data-action' => 'showDataSource',
+                        'data-target' => 'media-datasource-'.$value,
                     ];
                 },
                 'expanded' => true,
                 'label' => 'jk_media.media.datasource',
                 'help' => 'jk_media.media.datasource_help'
-            ])
-            ->add('upload', FileType::class, [
-                'attr' => [
-                    'class' => MediaType::UPLOAD_FROM_COMPUTER,
-                ],
-                'label' => false,
-                'required' => false,
             ])
             ->add('gallery', HiddenType::class, [
                 'attr' => [
@@ -52,6 +49,12 @@ class MediaSelectType extends AbstractType
                 ],
             ])
         ;
+
+        foreach ($this->dataSources as $dataSource) {
+            if ($dataSource instanceof FormDataSourceInterface) {
+                $builder->add($dataSource->getFormType());
+            }
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
