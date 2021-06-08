@@ -1,6 +1,12 @@
 version: '3.5'
 
 services:
+#    php:
+#        build:
+#            context: .docker/php
+#        depends_on:
+#            - db
+
     db:
         image: mariadb:10.5
         volumes:
@@ -12,3 +18,6 @@ services:
             MARIADB_PASSWORD: media
         ports:
             - 3306:3306
+
+#    js:
+#        image: node:stretch-slim

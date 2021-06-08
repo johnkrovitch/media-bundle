@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Action\TinyMce;
 
-use JK\MediaBundle\Form\Type\MediaSelectType;
+use JK\MediaBundle\Form\Type\SelectType;
 use JK\MediaBundle\Handler\Form\AddImageHandler;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +37,7 @@ class GetImageModal
 
     public function __invoke(Request $request): Response
     {
-        $form = $this->formFactory->create(MediaSelectType::class);
+        $form = $this->formFactory->create(SelectType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

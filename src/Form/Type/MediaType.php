@@ -16,9 +16,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediaType extends AbstractType
 {
-    public const UPLOAD_FROM_COMPUTER = 'upload_from_computer';
-    public const CHOOSE_FROM_COLLECTION = 'choose_from_collection';
-
     private RouterInterface $router;
 
     public function __construct(RouterInterface $router)

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Form\Type;
 
-use JK\MediaBundle\Validation\Constraints\UploadTypeConstraint;
+use JK\MediaBundle\Validation\Constraints\SelectConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -50,7 +50,7 @@ class OldMediaEmbedType extends AbstractType
                     'class' => 'media-embed-form',
                 ],
                 'constraints' => [
-                    new UploadTypeConstraint(),
+                    new SelectConstraint(),
                 ],
                 'label' => false,
             ])

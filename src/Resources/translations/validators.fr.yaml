@@ -1,0 +1,4 @@
+jk_media:
+    select:
+        missing_uploaded_file: Le fichier uploadé est introuvable
+        missing_gallery_image: La sélection dans la gallerie d'image est vide

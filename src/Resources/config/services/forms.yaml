@@ -8,10 +8,23 @@ services:
     JK\MediaBundle\Form\Type\TinyMceType:
         tags: ['form.type']
 
-    JK\MediaBundle\Form\Type\MediaSelectType:
-        arguments:
-            $dataSources: '@JK\MediaBundle\DataSource\DataSourceRegistryInterface'
+    JK\MediaBundle\Form\Type\SelectType:
         tags: ['form.type']
+
+    JK\MediaBundle\Form\Type\MediaUploadType:
+        tags:
+            - {name: form.type}
+            - {name: jk_media.datasource_form, datasource: computer}
+
+    JK\MediaBundle\Form\Type\GalleryType:
+        tags:
+            - {name: form.type}
+            - {name: jk_media.datasource_form, datasource: gallery}
+
+#    JK\MediaBundle\Form\Type\DataSourceCollectionType:
+#        arguments:
+#            $dataSourceTypes: [] # see compiler pass
+#        tags: ['form.type']
 
     ### Form Transformers ###
     JK\MediaBundle\Form\Transformer\JQueryUploadTransformer:
@@ -26,3 +39,7 @@ services:
             - '@JK\MediaBundle\Repository\MediaRepository'
             - '@JK\MediaBundle\Factory\MediaFactory'
 
+
+    ### Form Handlers ###
+    JK\MediaBundle\Form\Handler\SelectFormHandlerInterface: '@JK\MediaBundle\Form\Handler\SelectFormHandler'
+    JK\MediaBundle\Form\Handler\SelectFormHandler: ~

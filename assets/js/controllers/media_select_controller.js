@@ -6,5 +6,7 @@ export default class extends Controller {
     
     }
     
-    
+    showDataSource(event) {
+        console.log(event);
+    }
 };

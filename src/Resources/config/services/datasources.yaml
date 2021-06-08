@@ -1,17 +1,17 @@
-services:
-    JK\MediaBundle\DataSource\DataSourceRegistryInterface: '@JK\MediaBundle\DataSource\DataSourceInterface'
-    JK\MediaBundle\DataSource\DataSourceInterface:
-        class: JK\MediaBundle\DataSource\CompositeDataSource
-        arguments:
-            $dataSources: [] # see compiler pass
-
-    JK\MediaBundle\DataSource\UploadDataSource:
-        arguments:
-            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
-            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-        tags: [ { name: jk_media.datasource, datasource_name: computer, priority: -255 } ]
-
-    JK\MediaBundle\DataSource\RepositoryDataSource:
-        arguments:
-            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-        tags: [ { name: jk_media.datasource, datasource_name: gallery, priority: -255 } ]
+#services:
+#    JK\MediaBundle\DataSource\DataSourceRegistryInterface: '@JK\MediaBundle\DataSource\DataSourceInterface'
+#    JK\MediaBundle\DataSource\DataSourceInterface:
+#        class: JK\MediaBundle\DataSource\CompositeDataSource
+#        arguments:
+#            $dataSources: [] # see compiler pass
+#
+#    JK\MediaBundle\DataSource\UploadDataSource:
+#        arguments:
+#            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
+#            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+#        tags: [ { name: jk_media.datasource, datasource: computer, priority: -255 } ]
+#
+#    JK\MediaBundle\DataSource\RepositoryDataSource:
+#        arguments:
+#            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+#        tags: [ { name: jk_media.datasource, datasourcee: gallery, priority: -255 } ]

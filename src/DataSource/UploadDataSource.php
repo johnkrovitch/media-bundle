@@ -7,7 +7,7 @@ namespace JK\MediaBundle\DataSource;
 use JK\MediaBundle\DataSource\Context\DataSourceContext;
 use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Exception\MediaException;
-use JK\MediaBundle\Form\Type\UploadType;
+use JK\MediaBundle\Form\Type\MediaUploadType;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use JK\MediaBundle\Upload\Uploader\UploaderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -77,6 +77,6 @@ class UploadDataSource implements FormDataSourceInterface
 
     public function getFormType(): string
     {
-        return UploadType::class;
+        return MediaUploadType::class;
     }
 }

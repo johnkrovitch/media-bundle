@@ -6,7 +6,8 @@ namespace JK\MediaBundle\Action\Media;
 
 use JK\MediaBundle\DataSource\Context\FormContext;
 use JK\MediaBundle\DataSource\DataSourceInterface;
-use JK\MediaBundle\Form\Type\MediaSelectType;
+use JK\MediaBundle\Form\Handler\SelectFormHandlerInterface;
+use JK\MediaBundle\Form\Type\SelectType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,26 +18,32 @@ class SelectAction
 {
     private FormFactoryInterface $formFactory;
     private Environment $environment;
-    private DataSourceInterface $dataSource;
+    private SelectFormHandlerInterface $formHandler;
 
     public function __construct(
         FormFactoryInterface $formFactory,
-        DataSourceInterface $dataSource,
-        Environment $environment
+        Environment $environment,
+        SelectFormHandlerInterface $formHandler
     ) {
         $this->formFactory = $formFactory;
         $this->environment = $environment;
-        $this->dataSource = $dataSource;
+        $this->formHandler = $formHandler;
     }
 
     public function __invoke(Request $request): Response
     {
         $mediaType = $request->get('type');
-        $form = $this->formFactory->create(MediaSelectType::class, ['mediaType' => $mediaType]);
+        $form = $this->formFactory->create(SelectType::class, ['mediaType' => $mediaType]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $media = $this->formHandler->handle(
+                $data['selectType'],
+                $mediaType,
+                $data['file'] ?? null,
+                $data['gallery'] ?? [],
+            );
             $context = new FormContext($data['uploadType'], [
                 'uploaded_file' => $data['file'] ?? null,
                 'gallery_media_id' => $data['gallery'] ?? null,

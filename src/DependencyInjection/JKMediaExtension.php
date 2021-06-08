@@ -36,9 +36,8 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
         $resolvingBag = $container->getParameterBag();
         $configs = $resolvingBag->resolveValue($configs);
         $config = $this->processConfiguration(new Configuration(), $configs);
+
         $container->setParameter('jk_media.upload_path', $config['upload_path']);
-        $container->setParameter('jk_media.mapping', $config['mapping']);
-        $container->setParameter('jk_media.admin_bundle_enabled', \array_key_exists('LAGAdminBundle', $container->getParameter('kernel.bundles')));
 
         $container->prependExtensionConfig('twig', [
             'form_themes' => ['@JKMedia/form/theme.html.twig'],

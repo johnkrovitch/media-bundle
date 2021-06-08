@@ -109,6 +109,13 @@
     </div>
 {% endblock %}
 
+{% block media_upload_row %}
+    <div data-controller="media-upload" class="hide">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
 {#{% block jquery_upload_widget %}#}
 {#    <div class="media-form-container">#}
 {#        <div class="media-form-preview">#}

@@ -7,7 +7,7 @@ services:
         arguments:
             $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
             $environment: '@Twig\Environment'
-            $dataSource: '@JK\MediaBundle\DataSource\DataSourceInterface'
+            $formHandler: '@JK\MediaBundle\Form\Handler\SelectFormHandlerInterface'
 
 
 
