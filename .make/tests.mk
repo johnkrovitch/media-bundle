@@ -20,14 +20,14 @@ php-cs-fixer.install:
 	mv php-cs-fixer bin
 
 php-cs-fixer.run:
-	bin/php-cs-fixer fix
+	bin/php-cs-fixer fix --allow-risky=yes
 
 php-cs-fixer.ci:
-	bin/php-cs-fixer fix --dry-run --using-cache=no --verbose
+	bin/php-cs-fixer fix --dry-run --using-cache=no --verbose --allow-risky=yes
 
 # PHPStan
 phpstan.run:
-	bin/phpstan analyse --level=2 src tests
+	bin/phpstan analyse --level=2 src
 
 # Functional tests
 .PHONY: tests.functional.install
