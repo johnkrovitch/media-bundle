@@ -2,3 +2,10 @@ jk_media:
     upload_path: '%kernel.project_dir%/public/uploads'
     mapping:
         article_thumbnail: articles/thumbnails
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+framework:
+    profiler: { only_exceptions: false }

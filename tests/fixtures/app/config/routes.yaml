@@ -1,0 +1,13 @@
+homepage:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: homepage.html.twig
+
+media_form:
+    path: /media/form
+    controller: App\Controller\FormAction
+
+jk_media:
+    resource: '@JKMediaBundle/Resources/config/routing/routing.yaml'
+    prefix: /

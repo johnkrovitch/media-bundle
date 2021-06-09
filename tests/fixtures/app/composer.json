@@ -7,11 +7,11 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "symfony/console": "5.2.*",
+        "../../../vendor/symfony/console": "5.2.*",
         "symfony/dotenv": "5.2.*",
         "symfony/flex": "^1.3.1",
-        "symfony/framework-bundle": "5.2.*",
-        "symfony/yaml": "5.2.*"
+        "../../../vendor/symfony/framework-bundle": "5.2.*",
+        "../../../vendor/symfony/yaml": "5.2.*"
     },
     "require-dev": {
     },
@@ -33,9 +33,9 @@
         }
     },
     "replace": {
-        "symfony/polyfill-ctype": "*",
+        "../../../vendor/symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*"
+        "../../../vendor/symfony/polyfill-php72": "*"
     },
     "scripts": {
         "auto-scripts": {

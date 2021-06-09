@@ -11,8 +11,6 @@ class BlogEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('media', MediaType::class, [
-
-            ]);
+            ->add('media', MediaType::class);
     }
 }
