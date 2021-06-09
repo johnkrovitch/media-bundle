@@ -19,5 +19,6 @@ return $config
         'elseif' => true,
         'declare_strict_types' => true,
     ])
+    ->setCacheFile('var/.php-cs-fixer.cache')
     ->setFinder($finder)
 ;
