@@ -2,37 +2,30 @@
 
 namespace JK\MediaBundle\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
-use Exception;
+use Doctrine\Persistence\ManagerRegistry;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
-use JK\Repository\AbstractRepository;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 
-class MediaRepository extends AbstractRepository implements MediaRepositoryInterface
+class MediaRepository extends ServiceEntityRepository implements MediaRepositoryInterface
 {
-    public function getEntityClass(): string
+    public function __construct(ManagerRegistry $registry)
     {
-        return Media::class;
+        parent::__construct($registry, Media::class);
     }
 
-    /**
-     * Return a new instance of the configured Media class.
-     *
-     * @throws Exception
-     */
+    public function add(MediaInterface $media): void
+    {
+        $this->_em->persist($media);
+        $this->_em->flush();
+    }
+
     public function create(): MediaInterface
     {
-        $className = $this->getClassName();
-
-        $media = new $className();
-
-        if (!$media instanceof MediaInterface) {
-            throw new Exception('Media class '.$className.' should extends '.MediaInterface::class);
-        }
-
-        return $media;
+        return new Media();
     }
 
     public function findAll(): Collection
@@ -50,7 +43,7 @@ class MediaRepository extends AbstractRepository implements MediaRepositoryInter
             ->addOrderBy('media.updatedAt', 'DESC')
         ;
 
-        $adapter = new DoctrineORMAdapter($queryBuilder->getQuery(), false);
+        $adapter = new QueryAdapter($queryBuilder->getQuery(), false);
         $pager = new Pagerfanta($adapter);
         $pager->setMaxPerPage($maxPerPage);
         $pager->setCurrentPage($page);

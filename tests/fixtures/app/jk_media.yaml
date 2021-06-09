@@ -1,0 +1,4 @@
+jk_media:
+    upload_path: '%kernel.project_dir%/public/uploads'
+    mapping:
+        article_thumbnail: articles/thumbnails

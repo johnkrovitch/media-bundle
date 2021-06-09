@@ -1,24 +1,12 @@
 services:
     ### Form Types ###
-#    JK\MediaBundle\Form\Type\JQueryUploadType:
-#        class: JK\MediaBundle\Form\Type\JQueryUploadType
-#        arguments:
-#            - '@oneup_uploader.templating.uploader_helper'
-#            - '@JK\MediaBundle\Form\Transformer\JQueryUploadTransformer'
-#        tags:
-#            - {name: form.type}
-
     JK\MediaBundle\Form\Type\MediaType:
-        class: JK\MediaBundle\Form\Type\MediaType
         arguments:
-            - '@JK\MediaBundle\Form\Transformer\MediaTransformer'
-            - '@router'
-        tags:
-            - {name: form.type}
+            $router: '@router'
+        tags: ['form.type']
 
     JK\MediaBundle\Form\Type\TinyMceType:
-        tags:
-            - {name: form.type}
+        tags: ['form.type']
 
     ### Form Transformers ###
     JK\MediaBundle\Form\Transformer\JQueryUploadTransformer:

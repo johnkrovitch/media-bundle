@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+/** @deprecated  */
 class AddGalleryHandler
 {
     /**
@@ -33,7 +34,7 @@ class AddGalleryHandler
             'id' => explode(',', $data),
         ]);
 
-        return new Response($this->environment->render('@JKMedia/Gallery/tinymce.content.html.twig', [
+        return new Response($this->environment->render('render.html.twig', [
             'mediaList' => $medias,
         ]));
     }

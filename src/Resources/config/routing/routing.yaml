@@ -17,6 +17,6 @@ media.gallery_modal:
     path: /media/gallery/modal
     controller: JK\MediaBundle\Action\Gallery\ModalAction
 
-media.gallery.content:
-    path: /media/gallery/content
-    controller: JK\MediaBundle\Action\Gallery\ShowGalleryAction
+media.gallery_render:
+    path: /media/gallery/render
+    controller: JK\MediaBundle\Action\Gallery\RenderAction

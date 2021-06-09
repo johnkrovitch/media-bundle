@@ -6,19 +6,13 @@ use JK\MediaBundle\Assets\Helper\AssetsHelper;
 use JK\MediaBundle\Upload\Uploader\UploaderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UploadMediaAjaxAction
+class UploadAction
 {
-    /**
-     * @var UploaderInterface
-     */
-    private $uploader;
-
-    /**
-     * @var AssetsHelper
-     */
-    private $helper;
+    private UploaderInterface $uploader;
+    private AssetsHelper $helper;
 
     public function __construct(UploaderInterface $uploader, AssetsHelper $helper)
     {
@@ -26,14 +20,12 @@ class UploadMediaAjaxAction
         $this->helper = $helper;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         if (!$request->files->has('file') || !$request->request->has('type')) {
             throw new NotFoundHttpException('File is invalid or type is not provided');
         }
-        $file = $request->files->get('file');
-        $type = $request->request->get('type');
-        $media = $this->uploader->upload($file, $type);
+        $media = $this->uploader->upload($request->files->get('file'), $request->request->get('type'));
         $path = $this->helper->getMediaPath($media);
 
         return new JsonResponse([

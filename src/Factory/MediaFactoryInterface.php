@@ -5,6 +5,7 @@ namespace JK\MediaBundle\Factory;
 use JK\MediaBundle\Entity\MediaInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
+/** @deprecated  */
 interface MediaFactoryInterface
 {
     /**

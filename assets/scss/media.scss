@@ -1,6 +1,9 @@
-@import "partials/gallery";
-@import "partials/modal";
+//@import "partials/gallery";
+//@import "partials/modal";
 
-.hidden {
+@import "components/gallery";
+@import "components/modal";
+
+.hidden, .hide {
   display: none;
 }
