@@ -26,20 +26,6 @@ services:
 #            $dataSourceTypes: [] # see compiler pass
 #        tags: ['form.type']
 
-    ### Form Transformers ###
-    JK\MediaBundle\Form\Transformer\JQueryUploadTransformer:
-        class: JK\MediaBundle\Form\Transformer\JQueryUploadTransformer
-        arguments:
-            - '@JK\MediaBundle\Repository\MediaRepository'
-            - '@JK\MediaBundle\Factory\MediaFactory'
-
-    JK\MediaBundle\Form\Transformer\MediaTransformer:
-        class: JK\MediaBundle\Form\Transformer\MediaTransformer
-        arguments:
-            - '@JK\MediaBundle\Repository\MediaRepository'
-            - '@JK\MediaBundle\Factory\MediaFactory'
-
-
     ### Form Handlers ###
     JK\MediaBundle\Form\Handler\SelectFormHandlerInterface: '@JK\MediaBundle\Form\Handler\SelectFormHandler'
     JK\MediaBundle\Form\Handler\SelectFormHandler: ~

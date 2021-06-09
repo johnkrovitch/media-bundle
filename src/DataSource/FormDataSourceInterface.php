@@ -1,8 +1,8 @@
 <?php
 
-namespace JK\MediaBundle\DataSource;
+declare(strict_types=1);
 
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+namespace JK\MediaBundle\DataSource;
 
 interface FormDataSourceInterface extends DataSourceInterface
 {

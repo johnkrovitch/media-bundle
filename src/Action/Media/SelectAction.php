@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Action\Media;
 
-use JK\MediaBundle\DataSource\Context\FormContext;
-use JK\MediaBundle\DataSource\DataSourceInterface;
 use JK\MediaBundle\Form\Handler\SelectFormHandlerInterface;
 use JK\MediaBundle\Form\Type\SelectType;
+use JK\MediaBundle\Upload\Path\PathResolverInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,15 +18,18 @@ class SelectAction
     private FormFactoryInterface $formFactory;
     private Environment $environment;
     private SelectFormHandlerInterface $formHandler;
+    private PathResolverInterface $pathResolver;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         Environment $environment,
-        SelectFormHandlerInterface $formHandler
+        SelectFormHandlerInterface $formHandler,
+        PathResolverInterface $pathResolver
     ) {
         $this->formFactory = $formFactory;
         $this->environment = $environment;
         $this->formHandler = $formHandler;
+        $this->pathResolver = $pathResolver;
     }
 
     public function __invoke(Request $request): Response
@@ -38,28 +40,23 @@ class SelectAction
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $media = $this->formHandler->handle(
+            $mediaCollection = $this->formHandler->handle(
                 $data['selectType'],
                 $mediaType,
                 $data['file'] ?? null,
                 $data['gallery'] ?? [],
             );
-            $context = new FormContext($data['uploadType'], [
-                'uploaded_file' => $data['file'] ?? null,
-                'gallery_media_id' => $data['gallery'] ?? null,
-                'media_type' => $mediaType,
-            ]);
+            $content = ['members' => []];
 
-            if (!$this->dataSource->supports($context)) {
-                return new JsonResponse(['error' => 'The upload type is not supported'], Response::HTTP_UNPROCESSABLE_ENTITY);
+            foreach ($mediaCollection as $media) {
+                $content['members'][] = [
+                    'id' => $media->getId(),
+                    'name' => $media->getName(),
+                    'path' => $this->pathResolver->resolve($media->getFileName(), $media->getType()),
+                ];
             }
-            $media = $this->dataSource->get($context);
 
-            return new JsonResponse([
-                'id' => $media->getId(),
-                'name' => $media->getName(),
-                'path' => $media->getPath(),
-            ]);
+            return new JsonResponse($content);
         }
 
         return new Response($this->environment->render('@JKMedia/media/select.twig', [

@@ -11,11 +11,10 @@
     </div>
     <form action="{{ path('media.add_image_modal') }}"
           method="post"
-          enctype="multipart/form-data"
-          class="media-upload-form">
+          enctype="multipart/form-data">
         <div class="modal-body">
             <div class="row">
-                <div id="image-form-container" class="col-lg-12">
+                <div class="col-lg-12">
                     {{ form_errors(form) }}
 
                     <div class="form-group"

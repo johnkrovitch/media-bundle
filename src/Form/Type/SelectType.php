@@ -39,7 +39,7 @@ class SelectType extends AbstractType
                 },
                 'expanded' => true,
                 'label' => 'jk_media.media.datasource',
-                'help' => 'jk_media.media.datasource_help'
+                'help' => 'jk_media.media.datasource_help',
             ])
             ->add('upload', FileType::class, [
                 'label' => false,

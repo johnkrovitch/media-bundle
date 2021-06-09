@@ -10,7 +10,6 @@ use JK\MediaBundle\Exception\MediaException;
 use JK\MediaBundle\Form\Type\MediaUploadType;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use JK\MediaBundle\Upload\Uploader\UploaderInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadDataSource implements FormDataSourceInterface
