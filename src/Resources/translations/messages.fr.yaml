@@ -1,4 +1,4 @@
-media:
+jk_media:
     gallery_modal:
         title: Créer une gallerie d'images
         cancel: Annuler
@@ -29,3 +29,17 @@ media:
 
     modal:
         loading: Chargemet en cours...
+
+    media:
+        choose: Choisir un média
+        add: Ajouter un média
+        remove: Supprimer le média
+        restore: Restaurer le média supprimé
+        upload_from_computer: Uploader un fichier de l'ordinateur
+        choose_from_gallery: Choisir dans la gallerie
+        datasource: Choisir la source de votre média
+        datasource_help: Choisisez un média depuis la gallerie ou depuis votre ordinateur...
+
+    datasource:
+        computer: Choisir un média sur l'ordinateur
+        gallery: Choisr un média dans la gallerie
