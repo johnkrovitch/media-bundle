@@ -1,6 +1,6 @@
 services:
     JK\MediaBundle\Twig\Extension\MediaExtension:
         arguments:
-            $helper: '@JK\MediaBundle\Assets\Helper\AssetsHelper'
+            $pathResolver: '@JK\MediaBundle\Assets\Path\MediaPathResolverInterface'
         tags:
             - {name: twig.extension}
