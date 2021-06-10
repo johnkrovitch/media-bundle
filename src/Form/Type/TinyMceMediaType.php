@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\Form\Transformer\MediaTransformer;

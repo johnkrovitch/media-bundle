@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Transformer;
 
 use JK\MediaBundle\Entity\MediaInterface;
@@ -55,7 +57,7 @@ class JQueryUploadTransformer implements DataTransformerInterface
      */
     public function reverseTransform($data)
     {
-        if (0 === count($data) || !array_key_exists('id', $data) || !$data['id']) {
+        if (0 === \count($data) || !\array_key_exists('id', $data) || !$data['id']) {
             return null;
         }
 

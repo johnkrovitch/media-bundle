@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Assets\Helper;
 
 use Exception;
@@ -81,7 +83,7 @@ class AssetsHelper
      */
     public function getMediaPath(MediaInterface $media, $absolute = true, $cache = true, $mediaFilter = null)
     {
-        if (!array_key_exists($media->getType(), $this->assetsMapping)) {
+        if (!\array_key_exists($media->getType(), $this->assetsMapping)) {
             throw new Exception('No assets mapping found for media type '.$media->getType());
         }
 
@@ -128,7 +130,7 @@ class AssetsHelper
      */
     public function getMediaDirectory($mappingName)
     {
-        if (!array_key_exists($mappingName, $this->assetsMapping)) {
+        if (!\array_key_exists($mappingName, $this->assetsMapping)) {
             throw new Exception('No assets mapping found for media type '.$mappingName);
         }
 

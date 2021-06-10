@@ -5,7 +5,9 @@ namespace JK\MediaBundle\Tests\Kernel;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use JK\MediaBundle\JKMediaBundle;
 use JK\MediaBundle\Tests\DependencyInjection\PublicServicePass;
+use League\FlysystemBundle\FlysystemBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -19,20 +21,17 @@ class TestKernel extends Kernel
         $container->addCompilerPass(new PublicServicePass());
     }
 
-    public function registerBundles()
+    public function registerBundles(): array
     {
-        $bundles = [
-            // Dependencies
+        return [
             new FrameworkBundle(),
+            new SensioFrameworkExtraBundle(),
             new DoctrineBundle(),
             new TwigBundle(),
             new LiipImagineBundle(),
-
-            // My Bundle to test
+            new FlysystemBundle(),
             new JKMediaBundle(),
         ];
-
-        return $bundles;
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

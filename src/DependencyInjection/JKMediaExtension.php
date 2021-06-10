@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\DependencyInjection;
 
 use JK\MediaBundle\Form\Extension\TinyMceExtension;
@@ -70,6 +72,5 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
                     ->setAutowired(true)
             )
         ;
-
     }
 }

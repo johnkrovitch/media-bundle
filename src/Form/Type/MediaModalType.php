@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\Form\Transformer\ArrayToImageTransformer;
@@ -12,11 +14,11 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class MediaModalType extends AbstractType
 {
-    const ALIGNMENT_LEFT = 'left';
-    const ALIGNMENT_RIGHT = 'right';
-    const ALIGNMENT_CENTER = 'center';
-    const ALIGNMENT_NONE = 'none';
-    const ALIGNMENT_FIT_TO_WIDTH = 'fit_to_width';
+    public const ALIGNMENT_LEFT = 'left';
+    public const ALIGNMENT_RIGHT = 'right';
+    public const ALIGNMENT_CENTER = 'center';
+    public const ALIGNMENT_NONE = 'none';
+    public const ALIGNMENT_FIT_TO_WIDTH = 'fit_to_width';
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
