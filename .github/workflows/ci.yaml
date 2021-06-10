@@ -36,6 +36,9 @@ jobs:
             -   name: Install dependencies
                 run: composer install --no-interaction
 
+            -   name: Fix bug in CI
+                run: composer require symfony/translation
+
             -   name: Install yarn dependencies
                 run: yarn install --force
 
@@ -43,15 +46,10 @@ jobs:
                 run: yarn run encore production
             
             -   name: Run phpunit
-                run: bin/phpunit
+                run: make phpunit.run
             
             -   name: Run php-cs-fixer
-                run: php-cs-fixer fix --dry-run --using-cache=no --verbose --diff --allow-risky=yes --config .php-cs-fixer.dist.php
+                run: make php-cs-fixer.ci
             
             -   name: Run phpstan
-                run: make phpstan.analyse
-            
-            -   name: Upload code coverage to Scrutinizer CI
-                run: |
-                    wget https://scrutinizer-ci.com/ocular.phar
-                    php ocular.phar code-coverage:upload --format=php-clover var/phpunit/logs/clover.xml
+                run: make phpstan.run

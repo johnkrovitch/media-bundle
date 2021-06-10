@@ -19,8 +19,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('upload_path')->defaultValue('%kernel.project_dir%/public/uploads')->end()
                 ->arrayNode('mapping')
                     ->defaultValue([])
-                    ->scalarPrototype()
-                    ->end()
+                    ->scalarPrototype()->end()
                 ->end()
             ->end()
         ->end();

@@ -12,6 +12,8 @@ interface MediaRepositoryInterface extends ObjectRepository
 {
     public function add(MediaInterface $media): void;
 
+    public function get($id): MediaInterface;
+
     public function create(): MediaInterface;
 
     public function paginate($page = 1, $maxPerPage = 9): Pagerfanta;

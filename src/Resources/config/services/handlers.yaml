@@ -1,11 +1,11 @@
-services:
-    JK\MediaBundle\Handler\Form\AddImageHandler:
-        arguments:
-            $environment: '@Twig\Environment'
-            $repository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
-            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
-
-    JK\MediaBundle\Handler\Form\Tinymce\AddGalleryHandler:
-        arguments:
-            $environment: '@Twig\Environment'
-            $repository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+#services:
+#    JK\MediaBundle\Upload\Handler\MediaHandlerInterface: '@JK\MediaBundle\Upload\Handler\CompositeHandler'
+#    JK\MediaBundle\Upload\Handler\CompositeHandler:
+#        arguments:
+#            $handlers: !tagged_iterator media.handler
+#
+#    JK\MediaBundle\Upload\Handler\GalleryHandler:
+#        arguments:
+#            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+#        tags:
+#            - {name: media.handler, priority: 0}

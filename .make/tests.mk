@@ -23,7 +23,7 @@ php-cs-fixer.run:
 	bin/php-cs-fixer fix --allow-risky=yes
 
 php-cs-fixer.ci:
-	bin/php-cs-fixer fix --dry-run --using-cache=no --verbose --allow-risky=yes
+	php-cs-fixer fix --dry-run --using-cache=no --verbose --diff --allow-risky=yes --config .php-cs-fixer.dist.php
 
 # PHPStan
 phpstan.run:

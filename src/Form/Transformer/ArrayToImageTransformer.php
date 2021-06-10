@@ -9,6 +9,7 @@ use JK\MediaBundle\Form\Type\TinyMceImageEditType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+// TODO remove ?
 class ArrayToImageTransformer implements DataTransformerInterface
 {
     protected $excludedAttributes = [];
