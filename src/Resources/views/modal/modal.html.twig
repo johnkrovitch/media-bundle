@@ -1,0 +1,22 @@
+{# Every modules should use this modal as it should be only one modal at same time #}
+<div id="media-modal"
+     class="modal media-modal"
+     data-controller="media-modal"
+     tabindex="-1"
+     role="dialog">
+    <div class="modal-backdrop fade d-none"></div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            {# Ajax loaded content #}
+        </div>
+    </div>
+</div>
+
+
+<div class="d-none">
+    <div id="admin-loader" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">{{ 'media.modal.loading' | trans }}</span>
+        </div>
+    </div>
+</div>
