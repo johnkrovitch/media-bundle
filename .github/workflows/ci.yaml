@@ -53,8 +53,3 @@ jobs:
             
             -   name: Run phpstan
                 run: make phpstan.run
-            
-            -   name: Upload code coverage to Scrutinizer CI
-                run: |
-                    wget https://scrutinizer-ci.com/ocular.phar
-                    php ocular.phar code-coverage:upload --format=php-clover var/phpunit/logs/clover.xml
