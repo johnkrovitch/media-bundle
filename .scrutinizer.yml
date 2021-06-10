@@ -1,8 +1,0 @@
-tools:
-    external_code_coverage:
-        timeout: 2000
-        runs: 9
-
-filter:
-    excluded_paths:
-        - 'tests'
