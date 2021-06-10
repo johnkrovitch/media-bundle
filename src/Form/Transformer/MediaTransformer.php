@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Transformer;
 
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
-use JK\MediaBundle\Repository\MediaRepository;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
-use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 

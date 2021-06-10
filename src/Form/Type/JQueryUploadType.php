@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\Form\Transformer\JQueryUploadTransformer;
@@ -15,9 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @deprecated */
 class JQueryUploadType extends AbstractType
 {
-    const UPLOAD_TYPE_FROM_COMPUTER = 'upload.from_computer';
-    const UPLOAD_TYPE_FROM_LIBRARY = 'upload.from_library';
-    const UPLOAD_TYPE_FROM_URL = 'upload.from_url';
+    public const UPLOAD_TYPE_FROM_COMPUTER = 'upload.from_computer';
+    public const UPLOAD_TYPE_FROM_LIBRARY = 'upload.from_library';
+    public const UPLOAD_TYPE_FROM_URL = 'upload.from_url';
 
     /**
      * @var JQueryUploadTransformer

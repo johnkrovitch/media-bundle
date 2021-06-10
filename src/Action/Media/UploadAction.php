@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Action\Media;
 
 use JK\MediaBundle\Assets\Helper\AssetsHelper;

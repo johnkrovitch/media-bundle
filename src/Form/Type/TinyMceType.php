@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Form\Type;
 
 use Exception;
@@ -10,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TinyMceType extends AbstractType
 {
-    const ALLOWED_PLUGINS = [
+    public const ALLOWED_PLUGINS = [
         'advlist',
         'anchor',
         'autolink',
@@ -81,7 +83,7 @@ class TinyMceType extends AbstractType
                     ])
                     ->setNormalizer('plugins', function (Options $options, $value) {
                         foreach ($value as $plugin) {
-                            if (!in_array($plugin, self::ALLOWED_PLUGINS)) {
+                            if (!\in_array($plugin, self::ALLOWED_PLUGINS)) {
                                 throw new Exception('Invalid tinymce plugins '.$plugin);
                             }
                         }

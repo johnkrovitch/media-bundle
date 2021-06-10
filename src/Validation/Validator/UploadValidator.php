@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Validation\Validator;
 
 use JK\MediaBundle\Form\Type\MediaType;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JK\MediaBundle\Handler\Form\Tinymce;
 
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
