@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Entity\MediaInterface;
+use JK\MediaBundle\Exception\MediaException;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -23,6 +24,17 @@ class MediaRepository extends ServiceEntityRepository implements MediaRepository
     {
         $this->_em->persist($media);
         $this->_em->flush();
+    }
+
+    public function get($id): MediaInterface
+    {
+        $media = $this->find($id);
+
+        if (!$media) {
+            throw new MediaException(sprintf('The media "%s" does not exists', $id));
+        }
+
+        return $media;
     }
 
     public function create(): MediaInterface
