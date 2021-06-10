@@ -16,18 +16,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediaType extends AbstractType
 {
-    public const UPLOAD_FROM_COMPUTER = 'upload_from_computer';
-    public const CHOOSE_FROM_COLLECTION = 'choose_from_collection';
-
     private RouterInterface $router;
-
-    public static function getUploadChoices(): array
-    {
-        return [
-            'cms.media.upload_from_computer' => self::UPLOAD_FROM_COMPUTER,
-            'cms.media.choose_from_collection' => self::CHOOSE_FROM_COLLECTION,
-        ];
-    }
 
     public function __construct(RouterInterface $router)
     {
@@ -68,12 +57,12 @@ class MediaType extends AbstractType
                 'row_attr' => [
                     'data-controller' => 'media-form',
                     'data-target' => '.media-identifier',
-                    'data-url' => $this->router->generate('media.upload_ajax'),
+                    'data-url' => $this->router->generate('jk_media.media.select'),
                 ],
                 'by_reference' => true,
                 'data_class' => Media::class,
-                'label' => 'media.form.label',
-                'help' => 'media.form.help',
+                'label' => 'jk_media.form.label',
+                'help' => 'jk_media.form.help',
                 'upload_type' => null,
             ])
             ->addNormalizer('row_attr', function (Options $options, $value) {
