@@ -36,6 +36,9 @@ jobs:
             -   name: Install dependencies
                 run: composer install --no-interaction
 
+            -   name: Fix bug in CI
+                run: composer require symfony/translation
+
             -   name: Install yarn dependencies
                 run: yarn install --force
 
