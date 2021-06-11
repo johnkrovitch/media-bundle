@@ -53,3 +53,6 @@ jobs:
             
             -   name: Run phpstan
                 run: make phpstan.run
+
+            -   name: Check for dumps
+                run: make var-dump-checker.run
