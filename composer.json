@@ -13,6 +13,7 @@
     "require": {
         "php": ">=8.0",
         "ext-gd": "*",
+        "ext-json": "*",
         "johnkrovitch/configuration": "^2.1",
         "johnkrovitch/orm-pack": "^3.0",
         "league/flysystem-bundle": "^2.0",
@@ -30,12 +31,12 @@
         "symfony/yaml": "^5.2"
     },
     "require-dev": {
-        "ext-json": "*",
         "behat/behat": "^3.8",
         "behat/mink-extension": "^2.3",
         "friendsofphp/php-cs-fixer": "^3.0",
         "nyholm/symfony-bundle-test": "^1.7",
-        "phpstan/phpstan": "^0.12.2",
+        "php-parallel-lint/php-var-dump-check": "^0.5",
+        "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "^9.5",
         "robertfausk/behat-panther-extension": "^1.0",
         "sensio/framework-extra-bundle": "^6.1",

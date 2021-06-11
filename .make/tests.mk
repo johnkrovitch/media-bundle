@@ -36,3 +36,8 @@ tests.functional.install:
 
 tests.functional.run:
 	echo "WIP"
+
+# Dumps checker
+.PHONY: var-dump-checker.run
+var-dump-checker.run:
+	bin/var-dump-check --symfony --exclude vendor src

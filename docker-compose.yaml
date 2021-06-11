@@ -1,11 +1,23 @@
 version: '3.5'
 
 services:
-#    php:
-#        build:
-#            context: .docker/php
-#        depends_on:
-#            - db
+    php:
+        build:
+            context: .docker/php
+        environment:
+            DATABASE_URL: mysql://media:media@db/media
+        volumes:
+            - ./src:/var/www/app/bundle/src
+            - ./.docker/php/app/composer.json:/var/www/app/composer.json
+            - ./.docker/php/app/config/packages/jk_media.yaml:/var/www/app/config/packages/jk_media.yaml
+            - ./.docker/php/app/config/routes.yaml:/var/www/app/config/routes.yaml
+            - ./.docker/php/app/config/bundles.php:/var/www/app/config/bundles.php
+            - ./.docker/php/app/templates:/var/www/app/templates
+        ports:
+            - 8000:8000
+        depends_on:
+            - db
+        command: symfony serve --no-tls
 
     db:
         image: mariadb:10.5
@@ -18,6 +30,3 @@ services:
             MARIADB_PASSWORD: media
         ports:
             - 3306:3306
-
-#    js:
-#        image: node:stretch-slim
