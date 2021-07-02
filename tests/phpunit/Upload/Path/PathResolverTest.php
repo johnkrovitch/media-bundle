@@ -20,8 +20,8 @@ class PathResolverTest extends TestCase
      */
     public function testResolve(string $fileName, ?string $type, string $expectedResult): void
     {
-        $resolver = new PathResolver('/path/upload', [
-            'my_type' => 'type_directory',
+        $resolver = new PathResolver([
+            'my_type' => 'my-directory',
         ]);
 
         if ($type === 'wrong') {
@@ -34,10 +34,10 @@ class PathResolverTest extends TestCase
     public function resolveDataProvider(): array
     {
         return [
-            ['My File.png', null, '^\/path\/upload\/my_file_.*.png^'],
-            ['My File', null, '^\/path\/upload\/my_file_.*^'],
-            ['My File.png', 'my_type', '^\/path\/upload\/my_file_.*.png^'],
-            ['My File.png', 'wrong', '^\/path\/upload\/my_file_.*.png^'],
+            ['My File.png', null, '^\/my_file_.*.png^'],
+            ['My File', null, '^\/my_file_.*^'],
+            ['My File.png', 'my_type', '^\/my-directory/my_file_.*.png^'],
+            ['My File.png', 'wrong', '^\/my-directory/my_file_.*.png^'],
         ];
     }
 }

@@ -2,7 +2,6 @@ services:
     JK\MediaBundle\Upload\Path\PathResolverInterface: '@JK\MediaBundle\Upload\Path\PathResolver'
     JK\MediaBundle\Upload\Path\PathResolver:
         arguments:
-            $directory: '%jk_media.upload_path%'
             $mapping: '%jk_media.mapping%'
 
     JK\MediaBundle\Upload\Uploader\UploaderInterface: '@JK\MediaBundle\Upload\Uploader\Uploader'
@@ -10,6 +9,7 @@ services:
         class: JK\MediaBundle\Upload\Uploader\Uploader
         autowire: true
         arguments:
+            $publicPath: '%jk_media.public_path%'
             $pathResolver: '@JK\MediaBundle\Upload\Path\PathResolverInterface'
             $mediaStorage: '@media.storage'
             $eventDispatcher: '@event_dispatcher'

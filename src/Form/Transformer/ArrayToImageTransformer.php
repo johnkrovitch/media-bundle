@@ -61,7 +61,7 @@ class ArrayToImageTransformer implements DataTransformerInterface
                 $data['alignment'] = MediaModalType::ALIGNMENT_RIGHT;
             } elseif ('pull-'.MediaModalType::ALIGNMENT_CENTER === $data['class']) {
                 $data['alignment'] = MediaModalType::ALIGNMENT_CENTER;
-            } elseif ('pull-'.MediaModalType::ALIGNMENT_CENTER === $data['class']) {
+            } elseif ('pull-'.MediaModalType::ALIGNMENT_NONE === $data['class']) {
                 $data['alignment'] = MediaModalType::ALIGNMENT_NONE;
             }
         }
