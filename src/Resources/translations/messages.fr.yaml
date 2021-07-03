@@ -10,6 +10,7 @@ jk_media:
         add: Ajouter une gallerie
         loading_in_progress: Chargement en cours...
         open: Ouvrir
+        no_media: Aucun média dans la gallerie
 
     image:
         add: Ajouter une image
@@ -42,4 +43,5 @@ jk_media:
 
     datasource:
         computer: Choisir un média sur l'ordinateur
+        computer_help: Vous pouvez choisir des médias sur votre ordinateur
         gallery: Choisr un média dans la gallerie

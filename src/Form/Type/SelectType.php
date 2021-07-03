@@ -8,7 +8,6 @@ use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Validation\Constraints\SelectConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,16 +15,13 @@ class SelectType extends AbstractType
 {
     public function getBlockPrefix(): string
     {
-        return 'jk_media_';
+        return 'jk_media_select';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('selectType', ChoiceType::class, [
-                'row_attr' => [
-                    'data-controller' => 'media-select',
-                ],
                 'choices' => [
                     'jk_media.datasource.computer' => MediaInterface::DATASOURCE_COMPUTER,
                     'jk_media.datasource.gallery' => MediaInterface::DATASOURCE_GALLERY,
@@ -34,23 +30,21 @@ class SelectType extends AbstractType
                     return [
                         'class' => 'form-check-input',
                         'data-action' => 'media-select#showDataSource',
-                        'data-target' => 'media-datasource-'.$value,
+                        'data-target' => '.media-datasource-'.$value,
                     ];
                 },
                 'expanded' => true,
                 'label' => 'jk_media.media.datasource',
                 'help' => 'jk_media.media.datasource_help',
             ])
-            ->add('upload', FileType::class, [
-                'label' => false,
-                'required' => false,
+            ->add('upload', UploadType::class, [
                 'row_attr' => [
-                    'class' => 'hide',
+                    'class' => 'hide media-datasource-'.MediaInterface::DATASOURCE_COMPUTER,
                 ],
             ])
             ->add('gallery', GalleryType::class, [
                 'row_attr' => [
-                    'class' => 'hide',
+                    'class' => 'hide media-datasource-'.MediaInterface::DATASOURCE_GALLERY,
                 ],
             ])
         ;
@@ -59,9 +53,11 @@ class SelectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('constraints', [new SelectConstraint()])
-            ->setDefault('label', false)
-
+            ->setDefaults([
+                'attr' => ['data-controller' => 'media-select'],
+                'constraints' => [new SelectConstraint()],
+                'label' => false,
+            ])
             ->define('media_type')
             ->allowedTypes('string', 'null')
         ;

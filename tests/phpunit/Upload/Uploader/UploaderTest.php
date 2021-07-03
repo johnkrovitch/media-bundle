@@ -33,7 +33,7 @@ class UploaderTest extends TestCase
             ->expects($this->once())
             ->method('resolve')
             ->with('My Media.jpg', 'my_type')
-            ->willReturn('/custom/upload/path/my_media.jpg')
+            ->willReturn('custom/path/my_media.jpg')
         ;
         $media = new Media();
 
@@ -42,7 +42,7 @@ class UploaderTest extends TestCase
             ->expects($this->exactly(2))
             ->method('dispatch')
             ->willReturnCallback(function (MediaEvent $event, string $eventName) {
-                $this->assertEquals('/custom/upload/path/my_media.jpg', $event->getMedia()->getPath());
+                $this->assertEquals('/uploads/custom/path/my_media.jpg', $event->getMedia()->getPath());
                 $this->assertEquals('my_type', $event->getMedia()->getType());
                 $this->assertEquals('My Media', $event->getMedia()->getName());
                 $this->assertEquals('', $event->getMedia()->getDescription());
@@ -56,7 +56,7 @@ class UploaderTest extends TestCase
             ->mediaStorage
             ->expects($this->once())
             ->method('write')
-            ->with('/custom/upload/path/my_media.jpg')
+            ->with('custom/path/my_media.jpg')
         ;
 
         $uploadedFile = new UploadedFile(__DIR__.'/../../../fixtures/My Media.jpg', 'My Media.jpg');
@@ -70,6 +70,7 @@ class UploaderTest extends TestCase
         $this->mediaStorage = $this->createMock(FilesystemOperator::class);
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $this->uploader = new Uploader(
+            '/uploads',
             $this->pathResolver,
             $this->mediaStorage,
             $this->eventDispatcher

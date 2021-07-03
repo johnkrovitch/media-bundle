@@ -23,6 +23,11 @@ class MediaType extends AbstractType
         $this->router = $router;
     }
 
+    public function getBlockPrefix(): string
+    {
+        return 'jk_media';
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

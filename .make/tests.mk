@@ -27,7 +27,7 @@ php-cs-fixer.ci:
 
 # PHPStan
 phpstan.run:
-	bin/phpstan analyse --level=2 src
+	bin/phpstan analyse --level=5 src
 
 # Functional tests
 .PHONY: tests.functional.install

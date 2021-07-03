@@ -7,7 +7,7 @@ namespace JK\MediaBundle\Assets\Path;
 use JK\MediaBundle\Entity\MediaInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 
-class MediaPathResolver implements MediaPathResolverInterface
+class PublicPathResolver implements PublicPathResolverInterface
 {
     private CacheManager $cacheManager;
 

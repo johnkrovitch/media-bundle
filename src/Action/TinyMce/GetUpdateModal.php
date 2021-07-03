@@ -30,7 +30,7 @@ class GetUpdateModal
 
     public function __invoke(Request $request)
     {
-        $data = $request->query->get('attributes', []);
+        $data = $request->query->get('attributes') ?: [];
         $form = $this->formFactory->create(TinyMceImageEditType::class, $data);
         $form->handleRequest($request);
 

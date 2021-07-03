@@ -4,24 +4,40 @@ import events from "../events/events";
 export default class extends Controller {
     connect() {
         const value = this.getValue();
-    
+        
         if (!value) {
             this.hideRemoveLink();
             this.hideRestoreLink();
             this.showAddLink();
-        }
-    }
+        }}
     
     addMedia(event) {
         window.dispatchEvent(new CustomEvent(events.MODAL_OPEN, {
             detail: {url: this.element.dataset.url}
         }));
-        event.stopPropagation();
+        window.addEventListener(events.MEDIA_SELECT, event => {
+            this.setValue(event.detail.id);
+            this.hideAddLink();
+            this.showRemoveLink();
+            this.setImagePath(event.detail.path);
+            window.dispatchEvent(new CustomEvent(events.MODAL_CLOSE));
+        });
+        event.preventDefault();
     }
     
     removeMedia() {
         this.setValue('');
         this.hideRemoveLink();
+    }
+    
+    setImagePath(path) {
+        const image = this.getImage()
+        image.src = path;
+        image.classList.remove('hide');
+    }
+    
+    getImage() {
+        return this.element.querySelector('.media-target');
     }
     
     getTarget() {

@@ -9,12 +9,10 @@ use function Symfony\Component\String\u;
 
 class PathResolver implements PathResolverInterface
 {
-    private string $directory;
     private array $mapping;
 
-    public function __construct(string $directory, array $mapping = [])
+    public function __construct(array $mapping = [])
     {
-        $this->directory = $directory;
         $this->mapping = $mapping;
     }
 
@@ -22,13 +20,13 @@ class PathResolver implements PathResolverInterface
     {
         $extension = u($originalFileName)->afterLast('.')->toString();
         $fileName = u($originalFileName)->beforeLast('.')->snake()->toString();
-        $uploadDirectory = u($this->directory)->ensureEnd('/');
+        $uploadDirectory = u('/');
 
         if ($type !== null) {
             if (!\array_key_exists($type, $this->mapping)) {
                 throw new MediaException(sprintf('Unable to find a directory mapping for media type "%s"', $type));
             }
-            $uploadDirectory->append($this->mapping[$type]);
+            $uploadDirectory = $uploadDirectory->append($this->mapping[$type]);
         }
 
         return $uploadDirectory

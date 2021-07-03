@@ -6,16 +6,25 @@ services:
         tags: ['controller.service_arguments']
         arguments:
             $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
-            $environment: '@Twig\Environment'
+            $environment: '@twig'
             $formHandler: '@JK\MediaBundle\Form\Handler\SelectFormHandlerInterface'
             $pathResolver: '@JK\MediaBundle\Upload\Path\PathResolverInterface'
 
+    JK\MediaBundle\Action\Upload\EndpointAction:
+        arguments:
+            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
+            $validator: '@validator'
+            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+        tags: ['controller.service_arguments']
 
 
 
 
 
 
+
+
+    # TODO
 
 
 

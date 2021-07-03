@@ -14,6 +14,8 @@ interface MediaInterface
 
     public function getId(): ?int;
 
+    public function getIdentifier(): string;
+
     public function getDescription(): string;
 
     public function setDescription(string $description): void;
@@ -49,6 +51,4 @@ interface MediaInterface
     public function getPath(): string;
 
     public function setPath(string $path): void;
-
-    public function getIdentifier(): string;
 }

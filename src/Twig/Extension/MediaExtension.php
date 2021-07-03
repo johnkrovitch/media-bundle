@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Twig\Extension;
 
-use JK\MediaBundle\Assets\Path\MediaPathResolverInterface;
+use JK\MediaBundle\Assets\Path\PublicPathResolverInterface;
 use JK\MediaBundle\Entity\MediaInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class MediaExtension extends AbstractExtension
 {
-    private MediaPathResolverInterface $pathResolver;
+    private PublicPathResolverInterface $pathResolver;
 
     public function getFunctions(): array
     {
@@ -20,7 +20,7 @@ class MediaExtension extends AbstractExtension
         ];
     }
 
-    public function __construct(MediaPathResolverInterface $pathResolver)
+    public function __construct(PublicPathResolverInterface $pathResolver)
     {
         $this->pathResolver = $pathResolver;
     }

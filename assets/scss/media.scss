@@ -1,9 +1,8 @@
-//@import "partials/gallery";
-//@import "partials/modal";
+@import "partials/media-select";
 
 @import "components/gallery";
 @import "components/modal";
 
 .hidden, .hide {
-  display: none;
+  display: none !important;
 }

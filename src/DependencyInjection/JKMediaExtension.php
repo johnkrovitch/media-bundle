@@ -24,6 +24,7 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('jk_media.upload_path', $config['upload_path']);
+        $container->setParameter('jk_media.public_path', $config['public_path']);
         $container->setParameter('jk_media.mapping', $config['mapping']);
         $container->setParameter('jk_media.admin_bundle_enabled', \array_key_exists('LAGAdminBundle', $container->getParameter('kernel.bundles')));
 
@@ -49,6 +50,15 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
                     'options' => [
                         'directory' => $config['upload_path'],
                     ],
+                ],
+            ],
+        ]);
+        $container->prependExtensionConfig('stof_doctrine_extensions', [
+            'orm' => [
+                'default' => [
+                    'tree' => true,
+                    'timestampable' => true,
+                    'sluggable' => true,
                 ],
             ],
         ]);

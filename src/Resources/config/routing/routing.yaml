@@ -1,3 +1,9 @@
+# Upload
+jk_media.media.upload:
+    path: /media/upload
+    methods: [post]
+    controller: JK\MediaBundle\Action\Upload\EndpointAction
+
 # Media Modal
 media.add_image_modal:
     path: /media/add-image

@@ -13,6 +13,8 @@ services:
             - ./.docker/php/app/config/routes.yaml:/var/www/app/config/routes.yaml
             - ./.docker/php/app/config/bundles.php:/var/www/app/config/bundles.php
             - ./.docker/php/app/templates:/var/www/app/templates
+            - ./.docker/php/app/src/Controller:/var/www/app/src/Controller
+            - ./.docker/php/app/src/Form:/var/www/app/src/Form
         ports:
             - 8000:8000
         depends_on:

@@ -1,5 +1,5 @@
 services:
-    JK\MediaBundle\Assets\Path\MediaPathResolverInterface: '@JK\MediaBundle\Assets\Path\MediaPathResolver'
-    JK\MediaBundle\Assets\Path\MediaPathResolver:
+    JK\MediaBundle\Assets\Path\PublicPathResolverInterface: '@JK\MediaBundle\Assets\Path\PublicPathResolver'
+    JK\MediaBundle\Assets\Path\PublicPathResolver:
         arguments:
             $cacheManager: '@liip_imagine.cache.manager'
