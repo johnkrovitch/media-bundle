@@ -3,11 +3,12 @@ version: '3.5'
 services:
     php:
         build:
-            context: .docker/php
+            context: .
         environment:
             DATABASE_URL: mysql://media:media@db/media
         volumes:
             - ./src:/var/www/app/bundle/src
+            - ./.docker/app:/var/www/app/
             - ./.docker/php/app/composer.json:/var/www/app/composer.json
             - ./.docker/php/app/config/packages/jk_media.yaml:/var/www/app/config/packages/jk_media.yaml
             - ./.docker/php/app/config/routes.yaml:/var/www/app/config/routes.yaml
@@ -15,20 +16,21 @@ services:
             - ./.docker/php/app/templates:/var/www/app/templates
             - ./.docker/php/app/src/Controller:/var/www/app/src/Controller
             - ./.docker/php/app/src/Form:/var/www/app/src/Form
+            - .docker/php/entrypoint.sh:/usr/bin/entrypoint.sh
+        entrypoint: /usr/bin/entrypoint.sh
         ports:
-            - 8000:8000
+            - '8000:8000'
         depends_on:
             - db
-        command: symfony serve --no-tls
 
     db:
         image: mariadb:10.5
         volumes:
-            - ./var/data:/var/lib/mysql
+            - ./.docker/mysql/media:/var/lib/mysql
         environment:
             MARIADB_ROOT_PASSWORD: 'password'
             MARIADB_DATABASE: media
             MARIADB_USER: media
             MARIADB_PASSWORD: media
         ports:
-            - 3306:3306
+            - '3306:3306'

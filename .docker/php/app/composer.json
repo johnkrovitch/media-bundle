@@ -45,6 +45,7 @@
         "symfony/phpunit-bridge": "^5.2"
     },
     "config": {
+        "bin-dir": "bin",
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
