@@ -6,6 +6,7 @@ namespace JK\MediaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 
+// TODO remove ?
 class MediaFullType extends AbstractType
 {
 }

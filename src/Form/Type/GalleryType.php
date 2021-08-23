@@ -8,6 +8,8 @@ use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -38,6 +40,16 @@ class GalleryType extends AbstractType
             ->setAllowedTypes('max_per_page', 'integer')
             ->setAllowedTypes('page', 'integer')
         ;
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options): void
+    {
+        $view->vars['row_attr']['data-controller'] = 'media-gallery';
+
+        if (empty($view->vars['row_attr']['class'])) {
+            $view->vars['row_attr']['class'] = '';
+        }
+        $view->vars['row_attr']['class'] .= ' media-gallery';
     }
 
     public function getBlockPrefix(): string
