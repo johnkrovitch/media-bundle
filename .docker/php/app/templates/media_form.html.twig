@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    {{ dump(data) }}
     {{ form_start(form) }}
+    {{ form_errors(form) }}
     {{ form_row(form) }}
     <input type="submit"/>
     {{ form_end(form) }}

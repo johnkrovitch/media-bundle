@@ -23,9 +23,15 @@ class FormAction
     {
         $form = $this->formFactory->create(BlogEntryType::class);
         $form->handleRequest($request);
+        $data = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+        }
 
         return new Response($this->environment->render('media_form.html.twig', [
             'form' => $form->createView(),
+            'data' => $data,
         ]));
     }
 }

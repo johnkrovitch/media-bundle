@@ -8,7 +8,8 @@ const events = {
     TINYMCE_GALLERY_ADD: 'tinymce-add-gallery',
     TINYMCE_INSERT_CONTENT: 'tinymce-insert-content',
     
-    MEDIA_SELECT: 'media-select'
+    MEDIA_SELECT: 'media-select',
+    MEDIA_DATASOURCE_SHOW: 'media-select.datasource.show'
 };
 
 export default events;

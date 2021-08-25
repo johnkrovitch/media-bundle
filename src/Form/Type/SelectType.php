@@ -39,12 +39,12 @@ class SelectType extends AbstractType
             ])
             ->add('upload', UploadType::class, [
                 'row_attr' => [
-                    'class' => 'hide media-datasource-'.MediaInterface::DATASOURCE_COMPUTER,
+                    'class' => 'hide media-datasource media-datasource-'.MediaInterface::DATASOURCE_COMPUTER,
                 ],
             ])
             ->add('gallery', GalleryType::class, [
                 'row_attr' => [
-                    'class' => 'hide media-datasource-'.MediaInterface::DATASOURCE_GALLERY,
+                    'class' => 'hide media-datasource media-datasource-'.MediaInterface::DATASOURCE_GALLERY,
                 ],
             ])
         ;
