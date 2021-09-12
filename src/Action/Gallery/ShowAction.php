@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class ModalAction
+class ShowAction
 {
     private Environment $environment;
     private MediaRepositoryInterface $repository;
@@ -24,7 +24,7 @@ class ModalAction
     {
         $medias = $this->repository->paginate((int) $request->get('page', 1));
 
-        return new Response($this->environment->render('@JKMedia/Gallery/modal.html.twig', [
+        return new Response($this->environment->render('@JKMedia/media/gallery.twig', [
             'medias' => $medias,
         ]));
     }

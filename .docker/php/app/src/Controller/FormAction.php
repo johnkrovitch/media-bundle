@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\Type\BlogEntryType;
+use JK\MediaBundle\Repository\MediaRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,13 +11,12 @@ use Twig\Environment;
 
 class FormAction
 {
-    private FormFactoryInterface $formFactory;
-    private Environment $environment;
-
-    public function __construct(FormFactoryInterface $formFactory, Environment $environment)
+    public function __construct(
+        private FormFactoryInterface $formFactory,
+        private Environment $environment,
+        private MediaRepositoryInterface $mediaRepository,
+    )
     {
-        $this->formFactory = $formFactory;
-        $this->environment = $environment;
     }
 
     public function __invoke(Request $request): Response
@@ -27,6 +27,9 @@ class FormAction
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            dump($data);
+            die;
+            $this->mediaRepository->add($data);
         }
 
         return new Response($this->environment->render('media_form.html.twig', [

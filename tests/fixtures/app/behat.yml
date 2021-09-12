@@ -1,0 +1,14 @@
+extensions:
+    Robertfausk\Behat\PantherExtension: ~
+    Behat\MinkExtension:
+        javascript_session: javascript_with_all_options
+        sessions:
+            javascript_with_all_options:
+                panther:
+                    options: ~
+                    kernel_options:
+                        APP_ENV: dev
+                        APP_DEBUG: true
+                    manager_options:
+                        connection_timeout_in_ms: 5000
+                        request_timeout_in_ms: 120000

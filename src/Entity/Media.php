@@ -6,91 +6,67 @@ namespace JK\MediaBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JK\MediaBundle\Repository\MediaRepository;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @ORM\Table(name="cms_media")
- * @ORM\Entity(repositoryClass="JK\MediaBundle\Repository\MediaRepository")
- * @ORM\HasLifecycleCallbacks()
- *
- * @UniqueEntity("name")
- */
+#[ORM\Table(name: 'jk_media')]
+#[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media implements MediaInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     protected ?int $id;
 
-    /**
-     * @ORM\Column(type="uuid", nullable=false)
-     */
-    protected string $identifier;
+    #[ORM\Column(type: 'uuid')]
+    protected Uuid $identifier;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected string $name = '';
+    #[ORM\Column(type: 'string')]
+    protected string $name;
 
-    /**
-     * @ORM\Column(type="string", nullable=false)
-     */
+    #[ORM\Column(type: 'string')]
     protected string $path;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'string')]
     protected string $description = '';
 
-    /**
-     * @ORM\Column(type="string", nullable=true, name="fileName")
-     */
+    #[ORM\Column(type: 'string')]
     protected string $fileName = '';
 
-    /**
-     * @ORM\Column(type="string", nullable=true, name="fileType")
-     */
+    #[ORM\Column(type: 'string')]
     protected string $fileType = '';
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected string $type = MediaInterface::TYPE_ARTICLE_THUMBNAIL;
+    #[ORM\Column(type: 'string')]
+    protected string $type = MediaInterface::MEDIA_TYPE_DEFAULT;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer')]
     protected ?int $size;
 
-    /**
-     * @ORM\Column(type="datetime", name="createdAt")
-     * @Gedmo\Timestampable(on="create")
-     */
+    #[ORM\Column(type: 'datetime')]
     protected DateTime $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", name="updatedAt"))
-     * @Gedmo\Timestampable(on="update")
-     */
+    #[ORM\Column(type: 'datetime')]
     protected DateTime $updatedAt;
 
     public function __construct()
     {
-        $this->identifier = Uuid::v4()->toRfc4122();
+        $this->identifier = Uuid::v4();
+        $this->createdAt = new DateTime();
+        $this->updatedAt = new DateTime();
+    }
+
+    public function isValid(): bool
+    {
+        return isset($this->path)
+            && $this->path
+            && isset($this->type)
+            && $this->type
+        ;
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getName(): string
@@ -185,6 +161,11 @@ class Media implements MediaInterface
 
     public function getIdentifier(): string
     {
-        return $this->identifier;
+        return $this->identifier->toRfc4122();
+    }
+
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = new Uuid($identifier);
     }
 }

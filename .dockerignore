@@ -1,3 +1,2 @@
 .docker/mysql
-.docker/app
 .dockerignore

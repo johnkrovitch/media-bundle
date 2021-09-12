@@ -26,9 +26,11 @@ export default class extends Controller {
         
         client.post(this.element.dataset.target, formData, config)
             .then(response => {
-                window.dispatchEvent(new CustomEvent(events.MEDIA_SELECT, {
-                    detail: response.data
-                }));
+                if (response.data.id && response.data.path) {
+                    window.dispatchEvent(new CustomEvent(events.MEDIA_SELECT, {
+                        detail: response.data
+                    }));
+                }
             })
             .catch(error => {
                 if (error.response.status === 422) {

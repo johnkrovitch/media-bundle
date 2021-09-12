@@ -7,9 +7,8 @@ namespace JK\MediaBundle\Form\Handler;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use JK\MediaBundle\Entity\MediaInterface;
-use JK\MediaBundle\Exception\MediaException;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
-use JK\MediaBundle\Upload\Uploader\UploaderInterface;
+use JK\MediaBundle\Upload\UploaderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class SelectFormHandler implements SelectFormHandlerInterface
@@ -23,9 +22,9 @@ class SelectFormHandler implements SelectFormHandlerInterface
         $this->mediaRepository = $mediaRepository;
     }
 
-    public function handle(string $selectType, ?string $mediaType, ?UploadedFile $file, array $gallery = []): Collection
+    public function handle(?UploadedFile $file, mixed $mediaCollection): Collection
     {
-        if ($selectType === MediaInterface::DATASOURCE_COMPUTER) {
+        if ($file) {
             $media = $this->mediaRepository->create();
             $this->uploader->upload($file, $media);
             $this->mediaRepository->add($media);
@@ -33,12 +32,10 @@ class SelectFormHandler implements SelectFormHandlerInterface
             return new ArrayCollection([$media]);
         }
 
-        if ($selectType === MediaInterface::DATASOURCE_GALLERY) {
-            $results = $this->mediaRepository->findBy(['id' => $gallery]);
-
-            return new ArrayCollection($results);
+        if ($mediaCollection instanceof MediaInterface) {
+            $mediaCollection = new ArrayCollection([$mediaCollection]);
         }
 
-        throw new MediaException(sprintf('The select type "%s" is not handled', $mediaType));
+        return $mediaCollection;
     }
 }

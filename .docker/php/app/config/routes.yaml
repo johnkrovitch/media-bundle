@@ -9,5 +9,5 @@ media_form:
     controller: App\Controller\FormAction
 
 jk_media:
-    resource: '@JKMediaBundle/Resources/config/routing/routing.yaml'
+    resource: '@JKMediaBundle/Resources/config/routing/routes.yaml'
     prefix: /

@@ -6,15 +6,15 @@ namespace JK\MediaBundle\Repository;
 
 use Doctrine\Persistence\ObjectRepository;
 use JK\MediaBundle\Entity\MediaInterface;
-use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 
 interface MediaRepositoryInterface extends ObjectRepository
 {
     public function add(MediaInterface $media): void;
 
-    public function get($id): MediaInterface;
+    public function get($identifier): MediaInterface;
 
     public function create(): MediaInterface;
 
-    public function paginate($page = 1, $maxPerPage = 9): Pagerfanta;
+    public function paginate($page = 1, $maxPerPage = 9): PagerfantaInterface;
 }

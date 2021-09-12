@@ -43,5 +43,5 @@ jk_media:
 
     datasource:
         computer: Choisir un média sur l'ordinateur
-        computer_help: Vous pouvez choisir des médias sur votre ordinateur
-        gallery: Choisr un média dans la gallerie
+        computer_help: Vous pouvez choisir un média sur votre ordinateur
+        gallery: Choisir un média dans la gallerie

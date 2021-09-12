@@ -24,6 +24,7 @@ class ListAction
     {
         $medias = $this->repository->paginate((int) $request->get('page', 1));
 
+        // TODO
         return new Response($this->environment->render('@JKMedia/Gallery/modal.html.twig', [
             'medias' => $medias,
         ]));

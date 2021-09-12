@@ -7,30 +7,34 @@ export default class extends Controller {
         this.element.querySelectorAll('.pagination a').forEach(element => {
             element.addEventListener('click', event => {
                 event.preventDefault();
-                this.load(element.href);
+                this.element.dispatchEvent(new CustomEvent('load', {
+                    detail: {
+                        url: element.href
+                    }
+                }))
             });
         });
     }
     
     load(url) {
-        window.dispatchEvent(new CustomEvent(events.MODAL_LOAD, {
-           detail: {
-               url: url,
-           }
-        }));
+        client.get(url).then(response => {
+            this.element.innerHTML = response.data
+        })
     }
     
     select(event) {
-        const mediaId = event.currentTarget.dataset.id;
-        let ids = this.getMediaIds();
-        this.hideError();
-    
-        if (ids.indexOf(mediaId) !== -1) {
-            return this.unselect(event);
+        if (!this.isMultiple()) {
+            this.element.querySelectorAll('.card').forEach(element => element.classList.remove('selected'));
         }
-        ids.push(mediaId);
-        event.currentTarget.classList.add('selected');
-        this.setMediaIds(ids);
+    
+        const input = event.currentTarget.querySelector('input');
+        input.checked = !input.checked
+    
+        if (input.checked) {
+            event.currentTarget.classList.add('selected');
+        } else {
+            event.currentTarget.classList.remove('selected');
+        }
     }
     
     unselect(event) {
@@ -42,13 +46,14 @@ export default class extends Controller {
         this.setMediaIds(ids);
     }
     
+    isMultiple() {
+        return this.element.dataset.multiple || false;
+    }
+    
     insertContent(event) {
         event.preventDefault();
         const ids = this.getMediaIds();
-    
-        if (ids.length === 0) {
-            return this.showError();
-        }
+        
         client.get(this.element.dataset.renderUrl + '?ids=' + ids.join(',')).then(response => {
             window.dispatchEvent(new CustomEvent(events.TINYMCE_INSERT_CONTENT, {
                 detail: response.data
@@ -71,13 +76,5 @@ export default class extends Controller {
     
     setMediaIds(ids) {
         this.element.dataset.mediaIds = ids.join(',');
-    }
-    
-    showError() {
-        this.element.querySelector('.error-message').classList.remove('d-none');
-    }
-    
-    hideError() {
-        this.element.querySelector('.error-message').classList.add('d-none');
     }
 }

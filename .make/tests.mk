@@ -12,7 +12,7 @@ phpunit.run:
 	bin/phpunit
 	@echo "Results file generated file://$(shell pwd)/var/phpunit/coverage/index.html"
 
-.PHONY: php-cs-fixer.install php-cs-fixer.run phpstan.run
+.PHONY: php-cs-fixer.install php-cs-fixer.run phpstan.run cs.fix
 # php-cs-fixer
 php-cs-fixer.install:
 	curl -L https://cs.symfony.com/download/php-cs-fixer-v2.phar -o php-cs-fixer
@@ -21,6 +21,9 @@ php-cs-fixer.install:
 
 php-cs-fixer.run:
 	bin/php-cs-fixer fix --allow-risky=yes
+
+cs.fix:
+	bin/php-cs-fixer fix --allow-risky=yes --diff
 
 php-cs-fixer.ci:
 	php-cs-fixer fix --dry-run --using-cache=no --verbose --diff --allow-risky=yes --config .php-cs-fixer.dist.php

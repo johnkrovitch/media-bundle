@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Action\Media;
 
+use JK\MediaBundle\Assets\Path\PublicPathResolverInterface;
 use JK\MediaBundle\Form\Handler\SelectFormHandlerInterface;
 use JK\MediaBundle\Form\Type\SelectType;
-use JK\MediaBundle\Upload\Path\PathResolverInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,44 +15,29 @@ use Twig\Environment;
 
 class SelectAction
 {
-    private FormFactoryInterface $formFactory;
-    private Environment $environment;
-    private SelectFormHandlerInterface $formHandler;
-    private PathResolverInterface $pathResolver;
-
     public function __construct(
-        FormFactoryInterface $formFactory,
-        Environment $environment,
-        SelectFormHandlerInterface $formHandler,
-        PathResolverInterface $pathResolver
+        private FormFactoryInterface $formFactory,
+        private Environment $environment,
+        private SelectFormHandlerInterface $formHandler,
+        private PublicPathResolverInterface $pathResolver
     ) {
-        $this->formFactory = $formFactory;
-        $this->environment = $environment;
-        $this->formHandler = $formHandler;
-        $this->pathResolver = $pathResolver;
     }
 
     public function __invoke(Request $request): Response
     {
-        $mediaType = $request->get('type');
-        $form = $this->formFactory->create(SelectType::class, ['mediaType' => $mediaType]);
+        $form = $this->formFactory->create(SelectType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $mediaCollection = $this->formHandler->handle(
-                $data['selectType'],
-                $mediaType,
-                $data['file'] ?? null,
-                $data['gallery'] ?? [],
-            );
+            $mediaCollection = $this->formHandler->handle($data['upload'], $data['gallery']);
             $content = ['members' => []];
 
             foreach ($mediaCollection as $media) {
                 $content['members'][] = [
-                    'id' => $media->getId(),
+                    'id' => (string) $media->getIdentifier(),
                     'name' => $media->getName(),
-                    'path' => $this->pathResolver->resolve($media->getFileName(), $media->getType()),
+                    'path' => $this->pathResolver->resolve($media),
                 ];
             }
 
@@ -61,6 +46,7 @@ class SelectAction
 
         return new Response($this->environment->render('@JKMedia/media/select.twig', [
             'form' => $form->createView(),
+            'hasErrors' => $form->getErrors(true)->count() > 0,
         ]), $form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
     }
 }

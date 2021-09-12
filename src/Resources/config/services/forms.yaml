@@ -2,23 +2,14 @@ services:
     ### Form Types ###
     JK\MediaBundle\Form\Type\MediaType:
         arguments:
-            $router: '@router'
+            $transformer: '@JK\MediaBundle\Form\Transformer\MediaTransformer'
         tags: ['form.type']
 
-    JK\MediaBundle\Form\Type\TinyMceType:
-        tags: ['form.type']
+#    JK\MediaBundle\Form\Type\TinyMceType:
+#        tags: ['form.type']
 
     JK\MediaBundle\Form\Type\SelectType:
         tags: ['form.type']
-
-    JK\MediaBundle\Form\Type\MediaUploadType:
-        tags:
-            - {name: form.type}
-
-    JK\MediaBundle\Form\Type\UploadType:
-        arguments:
-            $router: '@router'
-        tags: [form.type]
 
     JK\MediaBundle\Form\Type\GalleryType:
         arguments:
@@ -27,13 +18,14 @@ services:
         tags:
             - {name: form.type}
 
-#    JK\MediaBundle\Form\Type\DataSourceCollectionType:
-#        arguments:
-#            $dataSourceTypes: [] # see compiler pass
-#        tags: ['form.type']
-
     ### Form Handlers ###
     JK\MediaBundle\Form\Handler\SelectFormHandlerInterface: '@JK\MediaBundle\Form\Handler\SelectFormHandler'
     JK\MediaBundle\Form\Handler\SelectFormHandler:
-        $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
-        $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+        arguments:
+            $uploader: '@JK\MediaBundle\Upload\UploaderInterface'
+            $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+
+    ### Transformers ###
+    JK\MediaBundle\Form\Transformer\MediaTransformer:
+        arguments:
+            $repository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'

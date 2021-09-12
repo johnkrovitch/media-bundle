@@ -1,21 +1,31 @@
-div[data-controller="media-gallery"] {
+div[data-controller="jk-media-gallery"] {
   .card {
-    margin-bottom: 20px;
+    //margin-bottom: 20px;
     cursor: pointer;
 
     &.selected {
-      border: 1px solid blue;
+      border: 1px solid #007bff;
     }
 
     img {
-      max-height: 100px;
+      //max-height: 100px;
+      cursor: pointer;
     }
   }
+
 
   div.pagination {
     justify-content: center;
   }
+
+  .pager {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    width: 100%;
+  }
 }
+
 
 //.cms-media-image.selected {
 //  opacity: 0.4;

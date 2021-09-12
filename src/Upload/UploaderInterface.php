@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JK\MediaBundle\Upload\Uploader;
+namespace JK\MediaBundle\Upload;
 
 use JK\MediaBundle\Entity\MediaInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

@@ -7,7 +7,8 @@ namespace JK\MediaBundle\Upload\Path;
 use JK\MediaBundle\Exception\MediaException;
 use function Symfony\Component\String\u;
 
-class PathResolver implements PathResolverInterface
+/** @deprecated  */
+class RelativePathResolver implements RelativePathResolverInterface
 {
     private array $mapping;
 

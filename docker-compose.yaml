@@ -8,14 +8,11 @@ services:
             DATABASE_URL: mysql://media:media@db/media
         volumes:
             - ./src:/var/www/app/bundle/src
-            - ./.docker/php/app/composer.json:/var/www/app/composer.json
-            - ./.docker/php/app/config/packages/jk_media.yaml:/var/www/app/config/packages/jk_media.yaml
-            - ./.docker/php/app/config/routes.yaml:/var/www/app/config/routes.yaml
-            - ./.docker/php/app/config/bundles.php:/var/www/app/config/bundles.php
-            - ./.docker/php/app/templates:/var/www/app/templates
-            - ./.docker/php/app/src/Controller:/var/www/app/src/Controller
-            - ./.docker/php/app/src/Form:/var/www/app/src/Form
-            - .docker/php/entrypoint.sh:/usr/bin/entrypoint.sh
+            - ./.docker/app:/var/www/app
+            - ./tests/fixtures/app/src/Controller:/var/www/app/src/Controller
+            - ./tests/fixtures/app/config/routes.yaml:/var/www/app/config/routes.yaml
+            - ./tests/fixtures/app/templates:/var/www/app/templates
+            - ./tests/fixtures/app/entrypoint.sh:/usr/bin/entrypoint.sh
         command: /usr/bin/entrypoint.sh
         ports:
             - '8000:8000'

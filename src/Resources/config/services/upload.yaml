@@ -1,15 +1,13 @@
 services:
-    JK\MediaBundle\Upload\Path\PathResolverInterface: '@JK\MediaBundle\Upload\Path\PathResolver'
-    JK\MediaBundle\Upload\Path\PathResolver:
+    JK\MediaBundle\Upload\Path\RelativePathResolverInterface: '@JK\MediaBundle\Upload\Path\RelativePathResolver'
+    JK\MediaBundle\Upload\Path\RelativePathResolver:
         arguments:
             $mapping: '%jk_media.mapping%'
 
-    JK\MediaBundle\Upload\Uploader\UploaderInterface: '@JK\MediaBundle\Upload\Uploader\Uploader'
-    JK\MediaBundle\Upload\Uploader\Uploader:
-        class: JK\MediaBundle\Upload\Uploader\Uploader
+    JK\MediaBundle\Upload\UploaderInterface: '@JK\MediaBundle\Upload\Uploader'
+    JK\MediaBundle\Upload\Uploader:
         autowire: true
         arguments:
-            $publicPath: '%jk_media.public_path%'
-            $pathResolver: '@JK\MediaBundle\Upload\Path\PathResolverInterface'
-            $mediaStorage: '@media.storage'
+            $pathGenerator: '@JK\MediaBundle\Path\Generator\PathGeneratorInterface'
+            $mediaStorage: '@jk_media.storage'
             $eventDispatcher: '@event_dispatcher'

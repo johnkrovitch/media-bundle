@@ -1,0 +1,5 @@
+services:
+    JK\MediaBundle\Path\Generator\PathGeneratorInterface: '@JK\MediaBundle\Path\Generator\PathGenerator'
+    JK\MediaBundle\Path\Generator\PathGenerator:
+        arguments:
+            $mapping: '%jk_media.mapping%'
