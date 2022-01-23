@@ -44,7 +44,7 @@ class SelectAction
             return new JsonResponse($content);
         }
 
-        return new Response($this->environment->render('@JKMedia/media/select.twig', [
+        return new Response($this->environment->render('@JKMedia/media/select.html.twig', [
             'form' => $form->createView(),
             'hasErrors' => $form->getErrors(true)->count() > 0,
         ]), $form->isSubmitted() ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
