@@ -12,6 +12,10 @@ media_update:
     path: /media/{identifier}/update
     controller: App\Controller\Media\UpdateAction
 
+media_gallery:
+    path: /media/gallery
+    controller: App\Controller\Gallery\IndexAction
+
 jk_media:
     resource: '@JKMediaBundle/Resources/config/routing/routes.yaml'
     prefix: /

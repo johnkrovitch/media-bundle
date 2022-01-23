@@ -37,7 +37,7 @@ class SelectAction
                 $content['members'][] = [
                     'id' => (string) $media->getIdentifier(),
                     'name' => $media->getName(),
-                    'path' => $this->pathResolver->resolve($media),
+                    'path' => $this->pathResolver->resolve($media, $media->getType()),
                 ];
             }
 
