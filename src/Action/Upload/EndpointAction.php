@@ -42,7 +42,7 @@ class EndpointAction
         return new JsonResponse([
             'id' => $media->getId(),
             'name' => $media->getName(),
-            'path' => $this->publicPathResolver->resolve($media),
+            'path' => $this->publicPathResolver->resolve($media, $media->getType()),
         ], Response::HTTP_CREATED);
     }
 

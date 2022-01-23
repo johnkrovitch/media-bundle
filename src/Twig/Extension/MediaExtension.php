@@ -29,8 +29,8 @@ class MediaExtension extends AbstractExtension
     /**
      * Return the path to a media according to its type.
      */
-    public function getMediaPath(MediaInterface $media): string
+    public function getMediaPath(MediaInterface $media, ?string $filter = null): string
     {
-        return $this->pathResolver->resolve($media);
+        return $this->pathResolver->resolve($media, $filter ?: $media->getType());
     }
 }

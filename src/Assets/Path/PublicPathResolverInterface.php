@@ -16,5 +16,5 @@ interface PublicPathResolverInterface
     /**
      * Resolve a public path for a media using its type as the LiipImagine filter.
      */
-    public function resolve(MediaInterface $media): string;
+    public function resolve(MediaInterface $media, string $filter): string;
 }

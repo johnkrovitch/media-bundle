@@ -71,9 +71,10 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
                 ],
             ],
             'filter_sets' => [
-                'jk_media' => [
+                'jk_media' => [],
+                'jk_media_thumbnail' => [
                     'filters' => [
-                        'thumbnail' => ['size' => [200, 200]],
+                        'thumbnail' => ['size' => [100, 100], 'mode' => 'outbound'],
                     ],
                 ],
             ],

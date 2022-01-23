@@ -1,36 +1,39 @@
 {% block jk_media_gallery_row %}
-    <div {{ block('attributes') }} data-controller="jk-media-gallery">
-        <progress class="progress d-none"></progress>
-        {% set attr = form.vars.row_attr %}
+    <div class="media-gallery">
+        <div {{ block('attributes') }} data-controller="jk-media-gallery">
+            <progress class="progress d-none"></progress>
+            {% set attr = form.vars.row_attr %}
 
-        <div class="row row-cols-{{ form.vars.columns }}">
-            {% for child in form %}
-                {% set media = form.vars.media_collection[child.vars.value] %}
-                <div class="col">
-                    <div class="card h-100" data-action="click->jk-media-gallery#select">
-                        <img src="{{ asset(media.path)|imagine_filter(form.vars.media_filter) }}"
-                             alt="{{ media.description }}"
-                             height="200"
-                             width="168"
-                             class="card-img-top">
-                        <div class="card-body hide">
-                            {{ form_label(child) }}
-                            {{ form_widget(child) }}
+            <div class="row row-cols-{{ form.vars.columns }}">
+                {% for child in form %}
+                    {% set media = form.vars.media_collection[child.vars.value] %}
+                    <div class="col">
+                        <div class="card h-100"
+                             data-action="click->jk-media-gallery#select">
+                            <img src="{{ asset(media.path)|imagine_filter(form.vars.media_filter) }}"
+                                 alt="{{ media.description }}"
+                                 height="200"
+                                 width="168"
+                                 class="card-img-top">
+                            <div class="card-body hide">
+                                {{ form_label(child) }}
+                                {{ form_widget(child) }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
 
-        {% if form.children|length > 0 %}
-            <div class="pager">
-                {{ pagerfanta(pager) }}
-            </div>
-        {% else %}
-            <div>
-                <p class="text-center">{{ 'jk_media.gallery.no_media'|trans }}</p>
-            </div>
-        {% endif %}
+            {% if form.children|length > 0 %}
+                <div class="pager">
+                    {{ pagerfanta(pager) }}
+                </div>
+            {% else %}
+                <div>
+                    <p class="text-center">{{ 'jk_media.gallery.no_media'|trans }}</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
@@ -38,7 +41,11 @@
     <div class="progress hide">
         <div class="progress-bar"
              role="progressbar"
-             style="width: 0;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+             style="width: 0;"
+             aria-valuenow="0"
+             aria-valuemin="0"
+             aria-valuemax="100">0%
+        </div>
     </div>
     <div class="error-message hide text-danger"></div>
     {{ form_widget(form) }}
@@ -76,8 +83,10 @@
         </a>
 
         <div class="d-none">
-            <div id="admin-loader" class="text-center">
-                <div class="spinner-border text-primary" role="status">
+            <div id="admin-loader"
+                 class="text-center">
+                <div class="spinner-border text-primary"
+                     role="status">
                     <span class="sr-only">{{ 'jk_media.modal.loading' | trans }}</span>
                 </div>
             </div>
