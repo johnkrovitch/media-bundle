@@ -1,54 +1,53 @@
-<div class="modal-header">
-    <h4 class="modal-title">{{ 'jk_media.media.add'|trans }}</h4>
-    <button type="button"
-            class="btn close"
-            data-dismiss="modal"
-            aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<div data-controller="jk-media-select">
+    <div class="modal-header">
+        <h4 class="modal-title">{{ 'jk_media.media.add'|trans }}</h4>
+        <button type="button"
+                class="btn close"
+                data-dismiss="modal"
+                aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-{{ form_start(form, {
-    action: path('media.add_image_modal')
-}) }}
+    {{ form_start(form, {action: path('jk_media.media.select')}) }}
 
-<div class="modal-body">
-    <div class="row">
-        <div class="col-12">
-            {{ form_errors(form) }}
-            <span class="upload-message d-none"></span>
-
-            <div class="form-group">
-                {% for child in form.selectType.children %}
-                    <div class="form-check">
-                        {{ form_row(child) }}
-                    </div>
-                {% endfor %}
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="invalid-feedback {% if hasErrors %}show{% endif %}">
+                    {{ form_errors(form) }}
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active media-upload-link"
+                           href="#"
+                           data-target=".jk-media-upload-tab">{{ 'jk_media.image.upload_from_computer'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link media-gallery-link"
+                           href="#">{{ 'jk_media.image.choose_from_collection'|trans }}</a>
+                    </li>
+                </ul>
+                <div class="jk-media-upload-tab jk-tab">
+                    {{ form_row(form.upload) }}
+                </div>
+                <div class="jk-media-gallery-tab jk-tab hide">
+                    {{ form_row(form.gallery) }}
+                </div>
             </div>
         </div>
     </div>
-    <div class="row media-datasource-container">
-        <div class="col-12">
-            <div class="form-group">
-                {{ form_row(form.upload) }}
-            </div>
 
-            <div class="form-group">
-                {{ form_row(form.gallery) }}
-            </div>
-        </div>
+    <div class="modal-footer">
+        {{ form_rest(form) }}
+
+        <button type="button"
+                class="btn btn-default"
+                data-dismiss="modal">{{ 'jk_media.gallery_modal.cancel' | trans }}</button>
+        <input type="submit"
+               value="{{ 'jk_media.image.add' | trans }}"
+               class="btn btn-primary"/>
     </div>
+
+    {{ form_end(form) }}
 </div>
-
-<div class="modal-footer">
-    {{ form_rest(form) }}
-
-    <button type="button"
-            class="btn btn-default"
-            data-dismiss="modal">{{ 'jk_media.gallery_modal.cancel' | trans }}</button>
-    <input type="submit"
-           value="{{ 'jk_media.image.add' | trans }}"
-           class="btn btn-primary"/>
-</div>
-
-{{ form_end(form) }}

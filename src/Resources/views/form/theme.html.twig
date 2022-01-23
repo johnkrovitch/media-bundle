@@ -1,18 +1,36 @@
 {% block jk_media_gallery_row %}
-    <div class="media-gallery">
-        <progress
-            class="progress d-none"></progress>
+    <div {{ block('attributes') }} data-controller="jk-media-gallery">
+        <progress class="progress d-none"></progress>
         {% set attr = form.vars.row_attr %}
-        <div {{ block('attributes') }}>
-            {% for child in form.children %}
-                <div class="card">
-                    {{ form_label(child) }}
-                    {{ form_widget(child) }}
+
+        <div class="row row-cols-{{ form.vars.columns }}">
+            {% for child in form %}
+                {% set media = form.vars.media_collection[child.vars.value] %}
+                <div class="col">
+                    <div class="card h-100" data-action="click->jk-media-gallery#select">
+                        <img src="{{ asset(media.path)|imagine_filter(form.vars.media_filter) }}"
+                             alt="{{ media.description }}"
+                             height="200"
+                             width="168"
+                             class="card-img-top">
+                        <div class="card-body hide">
+                            {{ form_label(child) }}
+                            {{ form_widget(child) }}
+                        </div>
+                    </div>
                 </div>
-            {% else %}
-                <p>{{ 'jk_media.gallery.no_media'|trans }}</p>
             {% endfor %}
         </div>
+
+        {% if form.children|length > 0 %}
+            <div class="pager">
+                {{ pagerfanta(pager) }}
+            </div>
+        {% else %}
+            <div>
+                <p class="text-center">{{ 'jk_media.gallery.no_media'|trans }}</p>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -27,151 +45,43 @@
 {% endblock %}
 
 {% block jk_media_widget %}
-    <div class="media-form">
-        {% set media = form.vars.data %}
-        {% set hasValidMedia = media and media.id %}
+    <div class="media-form"
+         data-controller="jk-media-form"
+         data-target="#{{ form.identifier.vars.id }}"
+         data-url="{{ path('jk_media.media.select') }}">
+        {% set media = form.vars.value %}
 
-        {{ form_row(form.id) }}
-
-        {% if media and media.id != 0 %}
-            {% set url = media_path(media) %}
-        {% endif %}
+        {{ form_row(form.identifier) }}
 
         <a href="#"
            class="media-item cms-media-image-container"
-           data-toggle="modal"
-           data-target="#image-modal-{{ media.id|default('') }}">
-            <img src="{{ media.path|default('') }}"
+           data-toggle="modal">
+            <img src="{{ media_path(media) }}"
                  alt="{{ media.name|default('') }}"
                  width="50"
                  height="50"
-                 class="media-target {% if not media.path|default(false) %}hide{% endif %}"/>
+                 class="media-target img-fluid {% if not media.path|default(false) %}hide{% endif %}"/>
         </a>
 
         <a href="#"
-           data-action="media-form#removeMedia">
+           class="hide"
+           data-action="jk-media-form#removeMedia">
             {{ 'jk_media.media.remove'|trans }}
         </a>
 
         <a href="#"
-           data-action="media-form#restoreMedia">
-            {{ 'jk_media.media.restore'|trans }}
-        </a>
-
-        <a href="#"
-           data-action="media-form#addMedia">
+           class="hide"
+           data-action="jk-media-form#openMediaModal">
             {{ 'jk_media.media.add'|trans }}
         </a>
 
-        {# Image in huge size #}
-        {% include '@JKMedia/modal/image_full_size.html.twig' %}
-
-        <div class="cms-media-choice d-none">
-            <ul class="nav nav-tabs"
-                role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active"
-                       id="cms-upload-from-computer-tab"
-                       data-toggle="tab"
-                       href="#home"
-                       role="tab"
-                       aria-controls="home"
-                       aria-selected="true">
-                        {{ 'media.image.upload_from_computer' | trans }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       id="cms-upload-from-url"
-                       data-toggle="tab"
-                       href="#profile"
-                       role="tab"
-                       aria-controls="profile"
-                       aria-selected="false">
-                        {{ 'media.image.upload_from_url' | trans }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       id="cms-choose-from-gallery"
-                       data-toggle="tab"
-                       href="#contact"
-                       role="tab"
-                       aria-controls="contact"
-                       aria-selected="false">
-                        {{ 'media.image.choose_from_collection' | trans }}
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content"
-                 id="myTabContent">
-                <div class="tab-pane fade show active"
-                     id="home"
-                     role="tabpanel"
-                     aria-labelledby="cms-upload-from-computer-tab">
-                    {{ form_row(form.file) }}
-                </div>
-                <div class="tab-pane fade"
-                     id="profile"
-                     role="tabpanel"
-                     aria-labelledby="cms-upload-from-url">
-                    {{ form_row(form.url) }}
-                </div>
-                <div class="tab-pane fade"
-                     id="contact"
-                     role="tabpanel"
-                     aria-labelledby="cms-choose-from-gallery">
-                    <a href="#"
-                       class="cms-media-modal-link"
-                       data-toggle="modal"
-                       data-url="{{ path('media.gallery') }}"
-                       data-target="#cms-modal">
-                        {{ 'media.gallery.open' | trans }}
-                    </a>
+        <div class="d-none">
+            <div id="admin-loader" class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">{{ 'jk_media.modal.loading' | trans }}</span>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
-{#{% block media_upload_row %}#}
-{#    <div data-controller="media-upload" class="hide">#}
-{#        {{ form_label(form) }}#}
-{#        {{ form_widget(form) }}#}
-{#    </div>#}
-{#{% endblock %}#}
-
-{#{% block jquery_upload_widget %}#}
-{#    <div class="media-form-container">#}
-{#        <div class="media-form-preview">#}
-{#            {% if form.vars.data and form.vars.data.id and form.vars.data.type is defined %}#}
-{#                {% set mediaUrl = media_directory('media_gallery') %}#}
-{#                {% set mediaUrl = media_directory(form.vars.data.type) ~ '/' ~ form.vars.data.filename %}#}
-
-{#                <img src="{{ mediaUrl | imagine_filter('media_gallery') }}"#}
-{#                     class="media-target"#}
-{#                     alt="Uploaded image"/>#}
-{#                <br/>#}
-{#                <a href="#"#}
-{#                   class="remove-media"#}
-{#                   data-target="{{ form.vars.media_target }}">#}
-{#                    <i class="fa fa-remove"></i>#}
-{#                    {{ form.vars.remove_label | trans }}#}
-{#                </a>#}
-{#            {% else %}#}
-{#                <img src=""#}
-{#                     class="media-target"#}
-{#                     alt="Uploaded image"/>#}
-{#                <a href="#"#}
-{#                   class="remove-media hide"#}
-{#                   data-target="{{ form.vars.media_target }}">#}
-{#                    <i class="fa fa-remove"></i>#}
-{#                    Remove Media#}
-{#                </a>#}
-{#            {% endif %}#}
-{#        </div>#}
-{#        {{ block('form_widget') }}#}
-
-{#        {{ form_widget(form.upload_type) }}#}
-{#    </div>#}
-{#{% endblock %}#}

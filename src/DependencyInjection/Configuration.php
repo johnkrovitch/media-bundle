@@ -16,11 +16,18 @@ class Configuration implements ConfigurationInterface
         $treeBuilder
             ->getRootNode()
             ->children()
-                ->scalarNode('upload_path')->defaultValue('%kernel.project_dir%/public/uploads')->end()
-                ->scalarNode('public_path')->defaultValue('/uploads')->end()
+                ->scalarNode('upload_path')
+                    ->defaultValue('%kernel.project_dir%/public/media')
+                ->end()
+                ->scalarNode('public_path')
+                    ->defaultValue('media')
+                    ->treatNullLike('media')
+                ->end()
                 ->arrayNode('mapping')
-                    ->defaultValue([])
-                    ->scalarPrototype()->end()
+                    ->defaultValue([
+                        'jk_media' => '',
+                    ])->scalarPrototype()
+                    ->end()
                 ->end()
             ->end()
         ->end();

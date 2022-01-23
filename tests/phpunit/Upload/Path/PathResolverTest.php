@@ -4,15 +4,15 @@ namespace JK\MediaBundle\Tests\Upload\Path;
 
 use JK\MediaBundle\Exception\MediaException;
 use JK\MediaBundle\Tests\TestCase;
-use JK\MediaBundle\Upload\Path\PathResolver;
-use JK\MediaBundle\Upload\Path\PathResolverInterface;
+use JK\MediaBundle\Upload\Path\RelativePathResolver;
+use JK\MediaBundle\Upload\Path\RelativePathResolverInterface;
 
 class PathResolverTest extends TestCase
 {
     public function testService(): void
     {
-        $this->assertServiceExists(PathResolverInterface::class);
-        $this->assertServiceExists(PathResolver::class);
+        $this->assertServiceExists(RelativePathResolverInterface::class);
+        $this->assertServiceExists(RelativePathResolver::class);
     }
 
     /**
@@ -20,7 +20,7 @@ class PathResolverTest extends TestCase
      */
     public function testResolve(string $fileName, ?string $type, string $expectedResult): void
     {
-        $resolver = new PathResolver([
+        $resolver = new RelativePathResolver([
             'my_type' => 'my-directory',
         ]);
 

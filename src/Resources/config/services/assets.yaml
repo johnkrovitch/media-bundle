@@ -2,4 +2,5 @@ services:
     JK\MediaBundle\Assets\Path\PublicPathResolverInterface: '@JK\MediaBundle\Assets\Path\PublicPathResolver'
     JK\MediaBundle\Assets\Path\PublicPathResolver:
         arguments:
+            $publicPath: '%jk_media.public_path%'
             $cacheManager: '@liip_imagine.cache.manager'

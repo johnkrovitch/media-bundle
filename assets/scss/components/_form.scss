@@ -1,0 +1,10 @@
+.media-form {
+  a[data-action="jk-media-form#removeMedia"],
+  a[data-action="jk-media-form#openMediaModal"] {
+    padding-left: 10px;
+  }
+
+  .media-item {
+    text-decoration: none;
+  }
+}

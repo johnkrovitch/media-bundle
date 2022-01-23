@@ -20,13 +20,14 @@ class MediaExtension extends AbstractExtension
         ];
     }
 
-    public function __construct(PublicPathResolverInterface $pathResolver)
-    {
+    public function __construct(
+        PublicPathResolverInterface $pathResolver
+    ) {
         $this->pathResolver = $pathResolver;
     }
 
     /**
-     * Return the path to an media according to its type.
+     * Return the path to a media according to its type.
      */
     public function getMediaPath(MediaInterface $media): string
     {

@@ -11,6 +11,7 @@ use JK\MediaBundle\Entity\MediaInterface;
 use JK\MediaBundle\Exception\MediaException;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 
 class MediaRepository extends ServiceEntityRepository implements MediaRepositoryInterface
 {
@@ -25,12 +26,12 @@ class MediaRepository extends ServiceEntityRepository implements MediaRepository
         $this->_em->flush();
     }
 
-    public function get($id): MediaInterface
+    public function get($identifier): MediaInterface
     {
-        $media = $this->find($id);
+        $media = $this->findOneBy(['identifier' => $identifier]);
 
         if (!$media) {
-            throw new MediaException(sprintf('The media "%s" does not exists', $id));
+            throw new MediaException(sprintf('The media "%s" does not exists', $identifier));
         }
 
         return $media;
@@ -41,11 +42,11 @@ class MediaRepository extends ServiceEntityRepository implements MediaRepository
         return new Media();
     }
 
-    public function paginate($page = 1, $maxPerPage = 9): Pagerfanta
+    public function paginate($page = 1, $maxPerPage = 9): PagerfantaInterface
     {
         $queryBuilder = $this
             ->createQueryBuilder('media')
-            ->addOrderBy('media.updatedAt', 'DESC')
+            ->addOrderBy('media.createdAt', 'desc')
         ;
         $adapter = new QueryAdapter($queryBuilder, false);
         $pager = new Pagerfanta($adapter);

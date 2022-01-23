@@ -43,7 +43,6 @@ export default class Modal {
             .querySelector('body')
             .appendChild(backdrop)
         ;
-        // TODO close when clicking on backdrop
     }
     
     hide() {

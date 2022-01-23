@@ -8,13 +8,14 @@ services:
             $formFactory: '@Symfony\Component\Form\FormFactoryInterface'
             $environment: '@twig'
             $formHandler: '@JK\MediaBundle\Form\Handler\SelectFormHandlerInterface'
-            $pathResolver: '@JK\MediaBundle\Upload\Path\PathResolverInterface'
+            $pathResolver: '@JK\MediaBundle\Assets\Path\PublicPathResolverInterface'
 
     JK\MediaBundle\Action\Upload\EndpointAction:
         arguments:
-            $uploader: '@JK\MediaBundle\Upload\Uploader\UploaderInterface'
+            $uploader: '@JK\MediaBundle\Upload\UploaderInterface'
             $validator: '@validator'
             $mediaRepository: '@JK\MediaBundle\Repository\MediaRepositoryInterface'
+            $publicPathResolver: '@JK\MediaBundle\Assets\Path\PublicPathResolverInterface'
         tags: ['controller.service_arguments']
 
 
@@ -53,7 +54,7 @@ services:
             $environment: '@twig'
             $repository: '@JK\MediaBundle\Repository\MediaRepository'
 
-    JK\MediaBundle\Action\Gallery\ModalAction:
+    JK\MediaBundle\Action\Gallery\ShowAction:
         tags:
             - 'controller.service_arguments'
         arguments:

@@ -6,6 +6,7 @@ namespace JK\MediaBundle\Form\Type;
 
 use JK\MediaBundle\Entity\Media;
 use JK\MediaBundle\Repository\MediaRepositoryInterface;
+use Pagerfanta\PagerfantaInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
@@ -15,41 +16,62 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GalleryType extends AbstractType
 {
-    private MediaRepositoryInterface $mediaRepository;
-    private RequestStack $requestStack;
-
-    public function __construct(MediaRepositoryInterface $mediaRepository, RequestStack $requestStack)
-    {
-        $this->mediaRepository = $mediaRepository;
-        $this->requestStack = $requestStack;
+    public function __construct(
+        private MediaRepositoryInterface $mediaRepository,
+        private RequestStack $requestStack
+    ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $pager = $this->getPager();
         $resolver
             ->setDefaults([
-                'choices' => $this->buildChoices(),
+                'choices' => $pager->getCurrentPageResults(),
                 'choice_label' => 'name',
-                'choice_value' => 'id',
+                'choice_value' => 'identifier',
                 'data_class' => Media::class,
+                'expanded' => true,
                 'multiple' => false,
                 'max_per_page' => 9,
                 'page' => 1,
+                'pager' => $pager,
+                'placeholder' => false,
+                'required' => false,
+                'media_filter' => 'jk_media',
+                'columns' => 3,
             ])
+            ->setAllowedValues('expanded', [true])
             ->setAllowedTypes('multiple', 'boolean')
             ->setAllowedTypes('max_per_page', 'integer')
             ->setAllowedTypes('page', 'integer')
+            ->setAllowedTypes('columns', 'integer')
         ;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
-        $view->vars['row_attr']['data-controller'] = 'media-gallery';
+        $view->vars['attr']['data-controller'] = 'jk-media-gallery';
+        $view->vars['attr']['data-multiple'] = $options['multiple'];
+        $view->vars['media_filter'] = $options['media_filter'];
 
         if (empty($view->vars['row_attr']['class'])) {
             $view->vars['row_attr']['class'] = '';
         }
-        $view->vars['row_attr']['class'] .= ' media-gallery';
+        $view->vars['columns'] = $options['columns'];
+
+        if (empty($view->vars['attr']['class'])) {
+            $view->vars['attr']['class'] = '';
+        }
+        $view->vars['attr']['class'] .= ' media-gallery';
+        $view->vars['pager'] = $options['pager'];
+
+        $data = [];
+
+        foreach ($options['pager']->getCurrentPageResults() as $media) {
+            $data[$media->getIdentifier()] = $media;
+        }
+        $view->vars['media_collection'] = $data;
     }
 
     public function getBlockPrefix(): string
@@ -62,11 +84,10 @@ class GalleryType extends AbstractType
         return ChoiceType::class;
     }
 
-    private function buildChoices(): iterable
+    private function getPager(): PagerfantaInterface
     {
         $request = $this->requestStack->getCurrentRequest();
-        $medias = $this->mediaRepository->paginate((int) $request->get('page', 1));
 
-        return $medias->getCurrentPageResults();
+        return $this->mediaRepository->paginate((int) $request->get('page', 1));
     }
 }

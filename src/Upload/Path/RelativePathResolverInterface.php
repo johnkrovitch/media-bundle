@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JK\MediaBundle\Upload\Path;
 
-interface PathResolverInterface
+interface RelativePathResolverInterface
 {
     /**
      * Return the path configured for the given media type. If none is provided, return the upload directory root.

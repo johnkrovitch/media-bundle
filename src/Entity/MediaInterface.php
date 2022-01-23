@@ -8,13 +8,17 @@ use DateTime;
 
 interface MediaInterface
 {
-    public const TYPE_ARTICLE_THUMBNAIL = 'article_thumbnail';
+    public const MEDIA_TYPE_DEFAULT = 'jk_media';
     public const DATASOURCE_COMPUTER = 'computer';
     public const DATASOURCE_GALLERY = 'gallery';
 
     public function getId(): ?int;
 
+    public function isValid(): bool;
+
     public function getIdentifier(): string;
+
+    public function setIdentifier(string $identifier): void;
 
     public function getDescription(): string;
 

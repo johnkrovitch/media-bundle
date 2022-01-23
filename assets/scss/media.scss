@@ -2,7 +2,12 @@
 
 @import "components/gallery";
 @import "components/modal";
+@import "components/form";
 
 .hidden, .hide {
   display: none !important;
+}
+
+.show {
+  display: block !important;
 }

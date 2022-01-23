@@ -43,9 +43,10 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
         $container->prependExtensionConfig('twig', [
             'form_themes' => ['@JKMedia/form/theme.html.twig'],
         ]);
+
         $container->prependExtensionConfig('flysystem', [
             'storages' => [
-                'media.storage' => [
+                'jk_media.storage' => [
                     'adapter' => 'local',
                     'options' => [
                         'directory' => $config['upload_path'],
@@ -53,14 +54,33 @@ class JKMediaExtension extends Extension implements PrependExtensionInterface
                 ],
             ],
         ]);
-        $container->prependExtensionConfig('stof_doctrine_extensions', [
-            'orm' => [
+
+        $container->prependExtensionConfig('liip_imagine', [
+            'loaders' => [
                 'default' => [
-                    'tree' => true,
-                    'timestampable' => true,
-                    'sluggable' => true,
+                    'flysystem' => [
+                        'filesystem_service' => 'jk_media.storage',
+                    ],
                 ],
             ],
+            'resolvers' => [
+                'default' => [
+                    'web_path' => [
+                        'web_root' => $container->getParameter('kernel.project_dir').'/public',
+                    ],
+                ],
+            ],
+            'filter_sets' => [
+                'jk_media' => [
+                    'filters' => [
+                        'thumbnail' => ['size' => [200, 200]],
+                    ],
+                ],
+            ],
+        ]);
+
+        $container->prependExtensionConfig('babdev_pagerfanta', [
+            'default_view' => 'twitter_bootstrap5',
         ]);
     }
 

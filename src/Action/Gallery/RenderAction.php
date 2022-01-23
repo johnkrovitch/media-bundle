@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+// TODO useful ?
 class RenderAction
 {
     private MediaRepositoryInterface $repository;
