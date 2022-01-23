@@ -24,8 +24,8 @@ class PublicPathResolver implements PublicPathResolverInterface
         ;
     }
 
-    public function resolve(MediaInterface $media): string
+    public function resolve(MediaInterface $media, string $filter): string
     {
-        return $this->cacheManager->getBrowserPath($media->getPath(), $media->getType());
+        return $this->cacheManager->getBrowserPath($media->getPath(), $filter);
     }
 }

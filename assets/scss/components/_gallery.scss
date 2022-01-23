@@ -1,21 +1,27 @@
-div[data-controller="jk-media-gallery"] {
+.media-gallery {
   .card {
-    //margin-bottom: 20px;
     cursor: pointer;
+    margin-left: 20px;
+    margin-right: 20px;
 
     &.selected {
       border: 1px solid #007bff;
     }
 
     img {
-      //max-height: 100px;
       cursor: pointer;
+    }
+
+    .media {
+      max-width: 100px;
+      max-height: 100px;
     }
   }
 
 
   div.pagination {
     justify-content: center;
+    margin-top: 20px;
   }
 
   .pager {

@@ -1,0 +1,14 @@
+<div class="media-gallery row">
+    {% for media in medias %}
+        <div class="card col">
+            <img src="{{ media_path(media, 'jk_media_thumbnail') }}"
+                 alt="{{ media.description }}"
+                 class="media card-img-top"/>
+            <p class="card-text">{{ media.name }}</p>
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+        {{ pagerfanta(medias) }}
+    </div>
+</div>
